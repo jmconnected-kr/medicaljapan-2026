@@ -23,7 +23,6 @@ services:
         name: Cache-Control
         value: public, max-age=0, must-revalidate
 
-    routes:
-      - type: rewrite
-        source: /404
-        destination: /404.html
+    # Static HTML site: Render automatically serves /404.html for missing pages
+    # No rewrite rules needed
+
