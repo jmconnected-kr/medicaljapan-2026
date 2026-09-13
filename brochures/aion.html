@@ -3,26 +3,433 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>아이온 (AION) · Company Brochure | Medical Japan 2026</title>
+<title>아이온 · Company Brochure | Medical Japan 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
 <link rel="stylesheet" href="brochure.css"/>
+<style>
+  :root{
+    --navy-900: #0A153F;
+    --navy-800: #0F1E5A;
+    --brand-cyan: #38B6E0;
+    --wine: #7A2438;
+    --gold-warm: #B8912F;
+  }
+
+  /* Company page — hero band */
+  .co-hero{
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 5mm;
+    margin: 4mm 0 5mm;
+    align-items: center;
+  }
+  .co-hero__text{ padding: 2mm 0; }
+  .co-hero__slogan{
+    font-family: var(--font-en); font-size: 8pt; font-weight: 700;
+    color: var(--purple-700); letter-spacing: .18em;
+    text-transform: uppercase; margin: 0 0 2mm;
+  }
+  .co-hero__headline{
+    font-size: 17pt; font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.3;
+    color: var(--ink-900); margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .co-hero__headline em{ font-style: normal; color: var(--purple-700); }
+  .co-hero__desc{
+    font-size: 9.5pt; color: var(--ink-700);
+    line-height: 1.7; margin: 0;
+    word-break: keep-all;
+  }
+  .co-hero__desc strong{ color: var(--ink-900); font-weight: 600; }
+  .co-hero__visual{
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, var(--lilac-25), var(--lilac-100));
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    padding: 4mm;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .co-hero__visual::before{
+    content: "";
+    position: absolute; top: -30%; right: -30%;
+    width: 80%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(184,145,47,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .co-hero__visual img{
+    width: 100%; height: 100%;
+    object-fit: contain;
+    position: relative; z-index: 1;
+  }
+
+  /* Company info grid */
+  .co-info-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5mm;
+    margin: 3mm 0 4mm;
+  }
+  .co-info-cell{
+    padding: 3.5mm 4mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3mm;
+  }
+  .co-info-cell__label{
+    font-family: var(--font-en);
+    font-size: 7pt; font-weight: 800;
+    color: var(--purple-700); letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: 1.5mm;
+  }
+  .co-info-cell__value{
+    font-size: 9.5pt; font-weight: 700;
+    color: var(--ink-900); letter-spacing: -0.015em;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .co-info-cell__value small{
+    display: block; font-family: var(--font-en);
+    font-size: 8pt; color: var(--ink-500);
+    font-weight: 500; margin-top: 1mm;
+  }
+
+  /* Key numbers strip */
+  .key-nums{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin: 4mm 0;
+  }
+  .key-nums__cell{
+    padding: 4mm;
+    background: linear-gradient(135deg, #0A153F 0%, var(--purple-800) 100%);
+    color: #fff;
+    border-radius: 3mm;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .key-nums__cell::before{
+    content: "";
+    position: absolute; top: -30%; right: -30%;
+    width: 60%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(245,166,35,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .key-nums__n{
+    font-family: var(--font-en); font-weight: 900;
+    font-size: 26pt; color: #F5A623;
+    letter-spacing: -0.03em; line-height: 1;
+    margin: 0;
+  }
+  .key-nums__n sup{ font-size: 11pt; margin-left: 1mm; }
+  .key-nums__l{
+    margin-top: 2mm; font-size: 8.5pt;
+    color: #fff; font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .key-nums__l small{
+    display: block; font-family: var(--font-en);
+    font-size: 7pt; color: rgba(255,255,255,.6);
+    font-weight: 500; margin-top: 1mm;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+
+  /* Product page layout - vertical (cane is tall) */
+  .product-page__hero{
+    display: grid;
+    grid-template-columns: 0.6fr 1fr;
+    gap: 5mm;
+    align-items: stretch;
+    margin: 4mm 0 4mm;
+  }
+  .product-page__img{
+    background: linear-gradient(135deg, #F6F2FE, #EDE7FB);
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    padding: 3mm;
+    position: relative;
+    overflow: hidden;
+    min-height: 105mm;
+  }
+  .product-page__img::after{
+    content: attr(data-tag);
+    position: absolute;
+    top: 3mm; left: 3mm;
+    padding: 1mm 3mm;
+    background: rgba(255,255,255,.9);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+  }
+  .product-page__img img{
+    width: 100%; height: 100%;
+    object-fit: contain;
+  }
+  /* Dual color variant image */
+  .product-page__img--dual{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+    padding: 5mm 3mm 3mm;
+  }
+  .product-page__img--dual .color-slot{
+    background: #fff;
+    border-radius: 2mm;
+    padding: 3mm;
+    display: grid; place-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-page__img--dual .color-slot img{
+    width: 100%; height: 100%;
+    object-fit: contain;
+  }
+  .product-page__img--dual .color-slot__label{
+    position: absolute; bottom: 2mm; left: 2mm; right: 2mm;
+    text-align: center;
+    font-family: var(--font-en); font-size: 6.5pt; font-weight: 700;
+    color: var(--ink-500); letter-spacing: .06em;
+    background: rgba(255,255,255,.9);
+    padding: 0.5mm 2mm; border-radius: 999px;
+  }
+
+  .product-page__info{ padding-top: 2mm; }
+  .product-page__cat{
+    display: inline-block;
+    padding: 1mm 3mm;
+    background: var(--lilac-50);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    margin-bottom: 3mm;
+  }
+  .product-page__cat--flagship{ background: #FEF6E7; color: #8B5A00; }
+  .product-page__cat--light{ background: #E0F2FE; color: #0C4A6E; }
+  .product-page__cat--wood{
+    background: linear-gradient(90deg, #F5E6C8, #EBD7A3);
+    color: #6B4C1A;
+  }
+  .product-page__name{
+    font-family: var(--font-en); font-size: 22pt; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.1;
+    color: var(--ink-900); margin: 0 0 2mm;
+  }
+  .product-page__name-kr{
+    font-size: 11.5pt; font-weight: 700;
+    color: var(--ink-700); margin: 0 0 3mm;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+  }
+  .product-page__tagline{
+    padding: 3mm 4mm;
+    background: var(--lilac-25);
+    border-left: 3px solid var(--purple-600);
+    border-radius: 0 2mm 2mm 0;
+    font-size: 9pt; line-height: 1.6;
+    color: var(--ink-700);
+    margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .product-page__tagline strong{ color: var(--purple-700); font-weight: 700; }
+  .product-page__nums{
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+  }
+  .product-page__num{
+    padding: 2.5mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 2mm;
+    text-align: center;
+  }
+  .product-page__num .n{
+    font-family: var(--font-en); font-weight: 800;
+    font-size: 14pt; color: var(--purple-700);
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .product-page__num .l{
+    margin-top: 1mm; font-size: 7.5pt;
+    color: var(--ink-500); font-weight: 600;
+  }
+
+  /* Product details block */
+  .product-details{
+    margin-top: 3mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+  }
+  .product-details h3{
+    font-size: 9.5pt; font-weight: 800;
+    color: var(--ink-900); margin: 0 0 2.5mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: -0.015em;
+    display: flex; align-items: center; gap: 2mm;
+  }
+  .product-details h3::before{
+    content: "";
+    width: 2.5mm; height: 2.5mm;
+    background: var(--purple-600);
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .product-details ul{
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 1.2mm;
+  }
+  .product-details li{
+    padding-left: 4mm;
+    position: relative;
+    font-size: 8pt;
+    line-height: 1.5;
+    color: var(--ink-700);
+    word-break: keep-all;
+  }
+  .product-details li::before{
+    content: "▸";
+    position: absolute; left: 0; top: 0;
+    color: var(--purple-500);
+    font-weight: 700;
+  }
+  .product-details li strong{ color: var(--ink-900); font-weight: 700; }
+
+  /* Product spec table (compact) */
+  .product-spec-mini{
+    margin-top: 3mm;
+    padding: 3mm 4mm;
+    background: var(--gray-50);
+    border-radius: 2mm;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2mm 3mm;
+  }
+  .product-spec-mini > div{
+    font-size: 7.5pt;
+    line-height: 1.4;
+  }
+  .product-spec-mini .k{
+    font-family: var(--font-en); font-size: 6.5pt;
+    color: var(--ink-500); font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .product-spec-mini .v{
+    color: var(--ink-900); font-weight: 700;
+  }
+
+  /* Product cert strip */
+  .product-cert-strip{
+    display: flex; gap: 1.5mm; flex-wrap: wrap;
+    margin-top: 3mm; padding-top: 3mm;
+    border-top: 1px dashed var(--line);
+  }
+  .product-cert-strip .cert{
+    padding: 1.5mm 3mm;
+    border-radius: 999px;
+    font-size: 7.5pt; font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .product-cert-strip .cert--purple{
+    background: var(--lilac-50);
+    color: var(--purple-700);
+  }
+  .product-cert-strip .cert--gold{
+    background: #FEF6E7;
+    color: #8B5A00;
+  }
+  .product-cert-strip .cert--green{
+    background: #E8F5EE;
+    color: var(--green-ink);
+  }
+  .product-cert-strip .cert--info{
+    background: var(--gray-50);
+    color: var(--ink-700);
+    font-family: var(--font-en); font-weight: 600;
+  }
+
+  /* Product lineup grid (P.3) */
+  .lineup-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin: 4mm 0;
+  }
+  .lineup-cell{
+    padding: 3mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3mm;
+    text-align: center;
+    position: relative;
+  }
+  .lineup-cell--feature{
+    background: linear-gradient(135deg, #FEF6E7, #fff);
+    border-color: #F5A623;
+  }
+  .lineup-cell__img{
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--lilac-25), var(--lilac-100));
+    border-radius: 2mm;
+    margin-bottom: 2mm;
+    display: grid; place-items: center;
+    padding: 3mm;
+    overflow: hidden;
+  }
+  .lineup-cell__img img{
+    width: 100%; height: 100%;
+    object-fit: contain;
+  }
+  .lineup-cell__cat{
+    font-family: var(--font-en); font-size: 6.5pt; font-weight: 800;
+    color: var(--purple-700); letter-spacing: .12em;
+    text-transform: uppercase; margin: 0;
+  }
+  .lineup-cell__cat--gold{ color: #8B5A00; }
+  .lineup-cell__cat--cyan{ color: #0C4A6E; }
+  .lineup-cell__cat--wood{ color: #6B4C1A; }
+  .lineup-cell__name{
+    font-size: 10pt; font-weight: 800;
+    color: var(--ink-900); margin: 1.5mm 0 0.5mm;
+    letter-spacing: -0.02em;
+  }
+  .lineup-cell__desc{
+    font-size: 7.5pt; color: var(--ink-500);
+    margin: 0; line-height: 1.4;
+  }
+
+  @media (max-width: 700px){
+    .co-hero, .product-page__hero, .product-details,
+    .co-info-grid, .key-nums, .lineup-grid{ grid-template-columns: 1fr; }
+    .product-spec-mini{ grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
 <!-- Screen toolbar -->
 <div class="toolbar">
   <div class="toolbar__left">
-    <a href="../index.html" class="toolbar__brand">
+    <a href="../Medical Japan 2026.html" class="toolbar__brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
       Medical Japan 2026
     </a>
     <span style="color:rgba(255,255,255,.6)">/ Exhibitor Brochure · 아이온 (AION)</span>
   </div>
   <div class="toolbar__right">
-    <a href="../index.html" class="tb-btn">← 랜딩페이지로</a>
+    <a href="../Medical Japan 2026.html" class="tb-btn">← 랜딩페이지로</a>
     <button class="tb-btn tb-btn--primary" onclick="window.print()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       PDF 다운로드 / 인쇄
@@ -32,7 +439,9 @@
 
 <div class="pages">
 
-  <!-- ============== PAGE 1 · COVER ============== -->
+  <!-- ================================================================
+       PAGE 1 · COVER
+       ================================================================ -->
   <section class="page cover">
     <div class="cover__inner">
       <div class="cover__top">
@@ -41,14 +450,16 @@
       </div>
       <div class="cover__event">Korea Health Industry Export Consultation</div>
       <h1 class="cover__co">
-        아이온 (AION)
-        <small>AION Co., Ltd.</small>
+        아이온
+        <small>AION · BINATTI (비나띠) Premium Walking Canes</small>
       </h1>
-      <p class="cover__tagline">3단 접이식 카본 샤프트로 300g · 5단 높이 조절을 구현한, 프리미엄 고령친화 보행보조기기.</p>
+      <p class="cover__tagline">
+        고령자와 보행약자의 <strong>안전하고 자유로운 이동</strong>을 위해. 경량 카본 소재와 프리미엄 디자인을 결합한 <strong>BINATTI 지팡이 5종 라인업</strong>. <strong>고령친화우수제품 · 노인장기요양보험 복지용구 급여제품</strong> 등록.
+      </p>
       <dl class="cover__meta">
         <div>
-          <dt>Product</dt>
-          <dd>비나띠 접이식 지팡이 (BINATTI Folding Cane)</dd>
+          <dt>Brand</dt>
+          <dd>BINATTI (비나띠)</dd>
         </div>
         <div>
           <dt>Category</dt>
@@ -66,110 +477,162 @@
     </div>
   </section>
 
-  <!-- ============== PAGE 2 · COMPANY OVERVIEW ============== -->
+  <!-- ================================================================
+       PAGE 2 · COMPANY OVERVIEW
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
         <div class="sec-head__num">01 · Company</div>
         <h2 class="sec-head__title">
-          기업 개요
-          <small>Company Overview</small>
+          회사 소개
+          <small>About AION · Premium Silver-Care Solutions</small>
         </h2>
       </div>
-      <div class="sec-head__side">아이온 (AION)<br/>Brochure</div>
+      <div class="sec-head__side">Company<br/>Overview</div>
     </header>
 
-    <div class="hero-visual" data-caption="BINATTI · SF01 / SF02">
-      <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M70 30 c 0 -10 20 -10 20 0 v 24"/><path d="M90 54 v 106"/><path d="M90 160 l 24 14"/><circle cx="90" cy="90" r="4" fill="currentColor"/><circle cx="90" cy="120" r="4" fill="currentColor"/><path d="M120 50 l 30 -10 l -10 12 l 10 12 l -30 -10" fill="none"/></svg>
+    <div class="co-hero">
+      <div class="co-hero__text">
+        <p class="co-hero__slogan">◆ Safe · Light · Beautiful Walking</p>
+        <h3 class="co-hero__headline">
+          <em>고령자의 자립적인 이동</em>과<br/>
+          안전한 일상을 지원합니다.
+        </h3>
+        <p class="co-hero__desc">
+          <strong>아이온(AION)</strong>은 고령화가 가속화되는 시대, 고령자와 보행약자의 <strong>안전하고 편리한 이동</strong>을 지원하기 위해 프리미엄 보행보조기기 브랜드 <strong>BINATTI(비나띠)</strong>를 전개합니다. 사용자의 신체조건과 사용환경에 맞춰 접이식·일자형·LED 라이트·스탠드·원목 등 <strong>5개 라인업</strong>을 구축하고, 경량 카본 소재와 디자인 감각을 결합한 프리미엄 지팡이로 <strong>일본 고령친화 시장</strong>에 진출합니다.
+        </p>
+      </div>
+      <div class="co-hero__visual">
+        <img src="../assets/aion-sf01-blue.png" alt="BINATTI Folding Cane"/>
+      </div>
     </div>
 
-    <p class="body">아이온(AION)은 고령자와 보행 약자의 <strong>안전한 보행과 편리한 휴대</strong>를 위해 프리미엄 보행보조기기를 개발하는 고령친화 브랜드입니다. 대표 제품 <strong>비나띠 접이식 지팡이(BINATTI Folding Cane)</strong>는 3단 접이식 구조 + 경량 카본 샤프트로 300g의 초경량을 실현했으며, 5단계 높이 조절과 이중 잠금 구조, 축광·반사 안전 요소를 결합한 프리미엄 라인업(접이식 · 일자형 · 라이트 · 스탠드 · 원목)을 갖추고 있습니다.</p>
+    <div class="co-info-grid">
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Company</div>
+        <div class="co-info-cell__value">아이온<small>AION Co., Ltd.</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">CEO · 대표</div>
+        <div class="co-info-cell__value">유성용<small>Yoo Sung-Yong</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Business</div>
+        <div class="co-info-cell__value">고령친화 보행보조기기<small>Premium Walking Canes · Silver Care</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Brand</div>
+        <div class="co-info-cell__value">BINATTI · 비나띠<small>5-Line Cane Collection</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Certification</div>
+        <div class="co-info-cell__value">고령친화우수제품 인증<small>노인장기요양보험 복지용구 등록</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Contact</div>
+        <div class="co-info-cell__value">Booth KP-04<small>Korea Pavilion · Makuhari Messe</small></div>
+      </div>
+    </div>
 
-    <dl class="rows" style="margin-top:6mm">
-      
-        <dt>기업명<span class="en">Company</span></dt>
-        <dd>아이온<small>AION Co., Ltd.</small></dd>
-        <dt>품목분야<span class="en">Category</span></dt>
-        <dd>고령친화 보행보조기기 (지팡이 · 복지용구)<small>Senior · Walking Aid</small></dd>
-        <dt>주력 제품<span class="en">Product Line</span></dt>
-        <dd>BINATTI 접이식 · 일자형 · 라이트 · 스탠드 · 원목<small>5-line Cane Series</small></dd>
-        <dt>핵심 기술<span class="en">Core Tech</span></dt>
-        <dd>3단 접이식 카본 샤프트 · 이중 잠금 5단 조절<small>Carbon-fiber Folding · Dual-Lock 5-step Height</small></dd>
-        <dt>국내 유통<span class="en">Domestic Distribution</span></dt>
-        <dd>국민건강보험공단 복지용구 급여제품 등록<small>NHIS Long-term Care Insurance Item</small></dd>
-        <dt>컬러 라인업<span class="en">Color Line</span></dt>
-        <dd>SF01 Blue · SF02 Red<small>Premium 2-color Lineup</small></dd>
-    </dl>
+    <h3 style="margin: 2mm 0 3mm; font-size: 11pt; font-weight: 800; color: var(--ink-900); letter-spacing: -0.015em;">
+      BINATTI의 핵심 가치 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Key Values · Safe · Light · Beautiful</span>
+    </h3>
+    <div class="key-nums">
+      <div class="key-nums__cell">
+        <p class="key-nums__n">260<sup>g</sup></p>
+        <p class="key-nums__l">최경량 · 카본 샤프트<small>Ultra-Light Carbon</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">5<sup>+</sup></p>
+        <p class="key-nums__l">라인업 (사용환경별)<small>Lineup Variety</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">10<sup>단계</sup></p>
+        <p class="key-nums__l">높이 조절 · 이중 잠금<small>Height Adjustable</small></p>
+      </div>
+    </div>
 
     <div class="page__marker">
       <span class="brand">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>02 / 06 · 아이온 (AION)</span>
+      <span>02 / 10 · About AION</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 3 · PRODUCT DETAIL ============== -->
+  <!-- ================================================================
+       PAGE 3 · BINATTI LINEUP OVERVIEW
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">02 · Product</div>
+        <div class="sec-head__num">02 · Lineup</div>
         <h2 class="sec-head__title">
-          대표 제품
-          <small>BINATTI Folding Cane · Carbon-fiber Foldable Walking Aid</small>
+          BINATTI 라인업 개요
+          <small>5-Line Premium Cane Collection</small>
         </h2>
       </div>
-      <div class="sec-head__side">Flagship<br/>Product</div>
+      <div class="sec-head__side">Product<br/>Lineup</div>
     </header>
 
     <div class="pull">
-      <em>비나띠 접이식 지팡이 (BINATTI Folding Cane)</em> — <strong>휴대성 · 안전성 · 디자인</strong>을 모두 잡은 프리미엄 접이식 지팡이. 300g 경량 카본 소재, 접이 시 29cm 컴팩트 사이즈, <em>5단계 높이 조절 이중 잠금 구조</em>로 여행·외출·응급 상황에서 안전하게 사용할 수 있습니다.
+      <em>BINATTI(비나띠)는 사용자의 신체조건·사용환경별로 최적화된 5개 지팡이 라인업</em>을 보유합니다. 공통으로 <strong>경량 카본 샤프트 · 이중 잠금 높이 조절 · 인체공학적 손잡이 · 미끄럼 방지 고무발 · 야간 축광·반사</strong> 안전 요소를 갖추면서, 각 제품마다 뚜렷한 차별화 포인트를 제공합니다.
     </div>
 
-    <div class="kn">
-      
-        <div class="kn__card">
-          <div class="kn__num">300<sup>g</sup></div>
-          <div class="kn__lab">초경량 (±10g)<small>Ultra Light</small></div>
+    <div class="lineup-grid">
+      <div class="lineup-cell lineup-cell--feature">
+        <div class="lineup-cell__img"><img src="../assets/aion-sf01-blue.png" alt="SF Folding"/></div>
+        <p class="lineup-cell__cat lineup-cell__cat--gold">SF · FEATURE · 3단 접이식</p>
+        <p class="lineup-cell__name">Folding Cane</p>
+        <p class="lineup-cell__desc">300g · 접이시 29cm<br/>대중교통·여행 최적</p>
+      </div>
+      <div class="lineup-cell">
+        <div class="lineup-cell__img"><img src="../assets/aion-ila02-wine.png" alt="ILA Straight"/></div>
+        <p class="lineup-cell__cat">ILA · 일자형</p>
+        <p class="lineup-cell__name">Straight Cane</p>
+        <p class="lineup-cell__desc">280g · 10단 조절<br/>일상 안정 보행</p>
+      </div>
+      <div class="lineup-cell">
+        <div class="lineup-cell__img"><img src="../assets/aion-lc02-wine.png" alt="LC LED"/></div>
+        <p class="lineup-cell__cat lineup-cell__cat--cyan">LC · LED 라이트</p>
+        <p class="lineup-cell__name">Light Cane</p>
+        <p class="lineup-cell__desc">260g · 손잡이 LED<br/>야간 안전 강화</p>
+      </div>
+      <div class="lineup-cell">
+        <div class="lineup-cell__img"><img src="../assets/aion-bs01-brown.png" alt="BS Standing"/></div>
+        <p class="lineup-cell__cat">BS · 자립 스탠드</p>
+        <p class="lineup-cell__name">Standing Cane</p>
+        <p class="lineup-cell__desc">350g · 360° 회전<br/>자립 · 넓은 접지</p>
+      </div>
+      <div class="lineup-cell">
+        <div class="lineup-cell__img" style="background:linear-gradient(135deg,#F5E6C8,#EBD7A3); display:grid; place-items:center; padding:6mm;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6B4C1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:60%;height:60%;">
+            <path d="M12 2v20"/>
+            <ellipse cx="12" cy="4" rx="3" ry="2" fill="#6B4C1A" opacity=".7"/>
+            <path d="M8 22h8" stroke-width="2"/>
+          </svg>
         </div>
-        <div class="kn__card">
-          <div class="kn__num">29<sup>cm</sup></div>
-          <div class="kn__lab">접이 시 길이<small>Folded Size</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">5<sup>단</sup></div>
-          <div class="kn__lab">높이 조절<small>Height Adjustment</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">84–94<sup>cm</sup></div>
-          <div class="kn__lab">사용 시 길이<small>In-Use Length</small></div>
-        </div>
+        <p class="lineup-cell__cat lineup-cell__cat--wood">BW · 천연 원목</p>
+        <p class="lineup-cell__name">Wood Cane</p>
+        <p class="lineup-cell__desc">260g · 원목 손잡이<br/>프리미엄 감성</p>
+      </div>
+      <div class="lineup-cell" style="background:linear-gradient(135deg, var(--lilac-25), #fff); border-color:var(--purple-400); display:grid; place-items:center;">
+        <p style="font-family:var(--font-en); font-size:8pt; font-weight:800; color:var(--purple-700); letter-spacing:.16em; margin:0 0 2mm;">COMMON</p>
+        <p style="font-size:9pt; font-weight:700; color:var(--purple-800); margin:0 0 2mm;">전 제품 공통</p>
+        <ul style="list-style:none; padding:0; margin:0; font-size:7.5pt; color:var(--ink-700); line-height:1.6; text-align:left;">
+          <li>▸ 경량 카본 샤프트</li>
+          <li>▸ 이중 잠금 구조</li>
+          <li>▸ 인체공학 손잡이</li>
+          <li>▸ 미끄럼 방지 고무발</li>
+          <li>▸ 축광·반사 안전 요소</li>
+        </ul>
+      </div>
     </div>
 
-    <h3 style="margin: 6mm 0 3mm; font-size: 12pt; font-weight: 800; letter-spacing: -0.02em;">핵심 기능 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9.5pt;margin-left:6px">Key Features</span></h3>
-    <div class="features">
-      
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
-          <p class="feat__title">3단 접이식 카본 샤프트<small>3-Fold Carbon Shaft</small></p>
-          <p class="feat__desc">경량 카본 소재로 무게 부담을 줄이면서 안정적인 지지력을 확보. 접이 시 29cm로 가방에 수납 가능.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <p class="feat__title">이중 잠금 5단 조절<small>Dual-Lock Height</small></p>
-          <p class="feat__desc">사용자 신장·보행 자세에 맞는 5단계 높이 조절, 이중 잠금으로 사용 중 흔들림·풀림을 방지.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7 7 .8-5.3 4.7 1.6 7L12 17.8 5.7 21.5l1.6-7L2 9.8 9 9z"/></svg></div>
-          <p class="feat__title">야간 안전 요소<small>Night-Safe Design</small></p>
-          <p class="feat__desc">축광·반사 소재로 야간·저조도 환경에서 식별성을 높이고, 인체공학적 손잡이로 장시간 편안한 그립.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-6 6-10 15-11-1 9-5 15-11 15z"/><path d="M2 22c5-7 12-10 20-11"/></svg></div>
-          <p class="feat__title">미끄럼 방지 고무발<small>Anti-slip Rubber Tip</small></p>
-          <p class="feat__desc">바닥 접지력을 고려한 미끄럼 방지 고무발 적용으로 실내외 일상 보행에서 안정적인 지지 제공.</p>
-        </div>
+    <div style="padding: 3.5mm 5mm; background: var(--gray-50); border-radius: 3mm; font-size: 8.5pt; color: var(--ink-700); line-height: 1.6; word-break: keep-all;">
+      <strong style="color:var(--ink-900);">📌 이후 페이지 (04–08)</strong>에서는 각 제품의 상세 사양·기능·색상 옵션을 <strong>제품당 한 페이지</strong>로 소개합니다.
     </div>
 
     <div class="page__marker">
@@ -177,171 +640,543 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>03 / 06 · 아이온 (AION)</span>
+      <span>03 / 10 · BINATTI Lineup</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 4 · SPEC & CERTIFICATION ============== -->
+  <!-- ================================================================
+       PAGE 4 · SF · Folding Cane (Featured)
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">03 · Specification</div>
+        <div class="sec-head__num">Product 01 · Featured</div>
         <h2 class="sec-head__title">
-          제품 사양 · 인증
-          <small>Specifications &amp; Certifications</small>
+          BINATTI Folding Cane · SF
+          <small>비나띠 접이식 지팡이 · 3단 접이식 · 휴대 최적화</small>
         </h2>
       </div>
-      <div class="sec-head__side">Quality<br/>Compliance</div>
+      <div class="sec-head__side">Feature<br/>Folding</div>
     </header>
 
-    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">제품 사양 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Product Specification</span></h3>
-    <dl class="rows">
-      
-        <dt>제품명 · Model</dt>
-        <dd>BINATTI Folding Cane · SF01 (Blue) / SF02 (Red)</dd>
-        <dt>소재 · Material</dt>
-        <dd>카본 (Carbon Fiber) · 합성수지 · 합성고무</dd>
-        <dt>중량 · Weight</dt>
-        <dd>300 ± 10 g</dd>
-        <dt>사용 길이 · Length</dt>
-        <dd>최소 84 cm ~ 최대 94 cm</dd>
-        <dt>접이 길이 · Folded</dt>
-        <dd>29 cm (컴팩트 수납)</dd>
-        <dt>접이 방식</dt>
-        <dd>3단 접이식 구조 (3-Fold System)</dd>
-        <dt>높이 조절</dt>
-        <dd>5단계 · 이중 잠금 구조</dd>
-        <dt>안전 요소</dt>
-        <dd>축광 · 반사 · 미끄럼 방지 고무발</dd>
-    </dl>
+    <div class="product-page__hero">
+      <div class="product-page__img product-page__img--dual" data-tag="Folding · Portable">
+        <div class="color-slot">
+          <img src="../assets/aion-sf01-blue.png" alt="SF01 Blue"/>
+          <span class="color-slot__label">SF-01 Blue</span>
+        </div>
+        <div class="color-slot">
+          <img src="../assets/aion-sf02-red.png" alt="SF02 Red"/>
+          <span class="color-slot__label">SF-02 Red</span>
+        </div>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--flagship">◆ Flagship · 3단 접이식</span>
+        <p class="product-page__name">Folding Cane</p>
+        <p class="product-page__name-kr">비나띠 접이식 지팡이</p>
+        <div class="product-page__tagline">
+          <strong>3단 접이식 구조</strong>로 접었을 때 <strong>29cm</strong>. 대중교통·여행·차량 탑승 시 <strong>보관과 휴대가 편리</strong>합니다. 경량 카본 샤프트로 <strong>300g</strong> 초경량, 필요할 때 간편하게 펼쳐 사용 가능한 프리미엄 접이식 지팡이.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">300<sup>g</sup></div><div class="l">중량 (±10g)</div></div>
+          <div class="product-page__num"><div class="n">29<sup>cm</sup></div><div class="l">보관 시 길이</div></div>
+          <div class="product-page__num"><div class="n">84–94</div><div class="l">사용 길이 (cm)</div></div>
+          <div class="product-page__num"><div class="n">5<sup>단</sup></div><div class="l">높이 조절</div></div>
+        </div>
+      </div>
+    </div>
 
-    <h3 style="margin: 8mm 0 3mm; font-size: 11pt; font-weight: 800;">인증 및 지식재산권 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Certifications &amp; IP</span></h3>
-    <table class="certs">
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>3단 접이식 구조</strong>: 접었을 때 29cm 초소형</li>
+          <li><strong>경량 카본 샤프트</strong>: 300g으로 부담 최소화</li>
+          <li><strong>5단계 높이 조절</strong>: 신장·자세에 맞춤</li>
+          <li><strong>이중 잠금 구조</strong>: 흔들림·풀림 방지</li>
+          <li><strong>축광·반사 안전 요소</strong>: 야간 저조도 식별</li>
+          <li><strong>인체공학적 손잡이</strong>: 장시간 편안한 그립</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적합 사용 · Best For</h3>
+        <ul>
+          <li><strong>대중교통·차량 탑승</strong> 시 휴대</li>
+          <li><strong>여행·외출</strong> 시 보관 편리</li>
+          <li>필요할 때만 펼쳐 사용하는 <strong>간헐 사용자</strong></li>
+          <li><strong>휴대성 우선</strong> 고령 사용자</li>
+          <li>디자인 감성을 중시하는 <strong>액티브 시니어</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">SF-01 (Blue) · SF-02 (Red)</div></div>
+      <div><div class="k">Weight</div><div class="v">300 ±10 g</div></div>
+      <div><div class="k">Length</div><div class="v">84–94 cm · 접기 29cm</div></div>
+      <div><div class="k">Material</div><div class="v">카본 · 합성수지 · 합성고무</div></div>
+      <div><div class="k">Adjust</div><div class="v">5단계 · 이중 잠금</div></div>
+      <div><div class="k">Color</div><div class="v">Blue · Red</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 9001</span>
+      <span class="cert cert--gold">고령친화우수제품 인증</span>
+      <span class="cert cert--gold">노인장기요양보험 복지용구 등록 (지팡이)</span>
+      <span class="cert cert--info">🇯🇵 일본 수출 진행 중</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>04 / 10 · Folding Cane (SF)</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 5 · ILA · Straight Cane
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 02 · Standard</div>
+        <h2 class="sec-head__title">
+          BINATTI Straight Cane · ILA
+          <small>비나띠 일자형 지팡이 · 일상 안정 보행</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Straight<br/>Standard</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img product-page__img--dual" data-tag="Straight · 10-Step">
+        <div class="color-slot">
+          <img src="../assets/aion-ila01-darkgrey.png" alt="ILA01 Dark Grey"/>
+          <span class="color-slot__label">ILA-01 Dark Grey</span>
+        </div>
+        <div class="color-slot">
+          <img src="../assets/aion-ila02-wine.png" alt="ILA02 Wine"/>
+          <span class="color-slot__label">ILA-02 Wine</span>
+        </div>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat">◆ Standard · 일자형 · 일상 보행</span>
+        <p class="product-page__name">Straight Cane</p>
+        <p class="product-page__name-kr">비나띠 일자형 지팡이 (ILA)</p>
+        <div class="product-page__tagline">
+          <strong>일자형 샤프트 구조</strong>로 반복적인 일상 보행 시 <strong>안정적인 지지</strong> 제공. <strong>10단계 높이 조절</strong>로 사용자의 신장에 세밀히 맞춤 가능한 표준형. 경량 카본 <strong>280g</strong>으로 장시간 사용 시에도 부담 최소.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">280<sup>g</sup></div><div class="l">중량 (±10g)</div></div>
+          <div class="product-page__num"><div class="n">62<sup>cm</sup></div><div class="l">보관 시 길이</div></div>
+          <div class="product-page__num"><div class="n">71–95</div><div class="l">사용 길이 (cm)</div></div>
+          <div class="product-page__num"><div class="n">10<sup>단</sup></div><div class="l">높이 조절</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>일자형 샤프트</strong>: 단순·견고한 구조</li>
+          <li><strong>경량 카본</strong>: 280g으로 초경량</li>
+          <li><strong>10단계 높이 조절</strong>: 세밀한 신장 매칭</li>
+          <li><strong>이중 잠금 구조</strong>: 안정적 고정</li>
+          <li><strong>축광·반사 안전 요소</strong>: 야간 식별성</li>
+          <li><strong>미끄럼 방지 고무발</strong>: 실내·외 안전</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적합 사용 · Best For</h3>
+        <ul>
+          <li><strong>일상 보행</strong>이 잦은 상시 사용자</li>
+          <li>안정적인 <strong>실내·외 보행</strong> 원하는 고령자</li>
+          <li>보조 지팡이가 <strong>처음</strong>인 사용자</li>
+          <li><strong>재활 후 회복기</strong> 안정 보행</li>
+          <li>다크 그레이·와인 컬러의 <strong>차분한 무드</strong> 선호</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">ILA-01 (Dark Grey) · ILA-02 (Wine)</div></div>
+      <div><div class="k">Weight</div><div class="v">280 ±10 g</div></div>
+      <div><div class="k">Length</div><div class="v">71–95 cm · 보관 62cm</div></div>
+      <div><div class="k">Material</div><div class="v">카본 · 합성수지 · 합성고무</div></div>
+      <div><div class="k">Adjust</div><div class="v">10단계 · 이중 잠금</div></div>
+      <div><div class="k">Color</div><div class="v">Dark Grey · Wine</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 9001</span>
+      <span class="cert cert--gold">고령친화우수제품 인증</span>
+      <span class="cert cert--gold">노인장기요양보험 복지용구 등록 (지팡이)</span>
+      <span class="cert cert--info">🇯🇵 일본 수출 진행 중</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>05 / 10 · Straight Cane (ILA)</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 6 · LC · Light Cane
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 03 · Innovative</div>
+        <h2 class="sec-head__title">
+          BINATTI Light Cane · LC
+          <small>비나띠 라이트 지팡이 · LED 야간 안전 강화</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">LED<br/>Innovation</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="LED · Night Safety">
+        <img src="../assets/aion-lc02-wine.png" alt="LC-02 LED Cane Wine"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--light">◆ Innovative · LED 라이트</span>
+        <p class="product-page__name">Light Cane</p>
+        <p class="product-page__name-kr">비나띠 라이트 지팡이 (LC)</p>
+        <div class="product-page__tagline">
+          손잡이 전면부 <strong>LED 라이트</strong>로 야간·저조도 환경에서 <strong>전방 시야 확보</strong>. 보행 지지 + 조명을 하나의 제품에 결합해 <strong>손전등 없이도 안전한 야간 보행</strong>을 지원하는 혁신 제품. 260g 초경량.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">260<sup>g</sup></div><div class="l">중량 (±10g)</div></div>
+          <div class="product-page__num"><div class="n">LED</div><div class="l">손잡이 라이트</div></div>
+          <div class="product-page__num"><div class="n">71–95</div><div class="l">사용 길이 (cm)</div></div>
+          <div class="product-page__num"><div class="n">10<sup>단</sup></div><div class="l">높이 조절</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>LED 라이트</strong>: 손잡이 전면부 야간 조명</li>
+          <li><strong>전방 시야 확보</strong>: 노면·장애물 인식</li>
+          <li><strong>보행+조명 통합</strong>: 손전등 별도 불필요</li>
+          <li><strong>10단계 높이 조절</strong>: 이중 잠금 구조</li>
+          <li><strong>축광·반사 요소</strong>: 이중 안전 강화</li>
+          <li>260g <strong>초경량 카본</strong> 샤프트</li>
+        </ul>
+      </div>
+      <div>
+        <h3>추천 사용 환경 · Use Cases</h3>
+        <ul>
+          <li><strong>야간 산책</strong>·외출 시 안전 보행</li>
+          <li>조명이 부족한 <strong>복도·주차장</strong></li>
+          <li><strong>새벽·저녁 출퇴근</strong> 시니어</li>
+          <li>시력이 저하된 <strong>고령자</strong></li>
+          <li>야간 활동이 잦은 <strong>액티브 시니어</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">LC-02 (Wine)</div></div>
+      <div><div class="k">Weight</div><div class="v">260 ±10 g</div></div>
+      <div><div class="k">Length</div><div class="v">71–95 cm · 보관 62cm</div></div>
+      <div><div class="k">Feature</div><div class="v">손잡이 LED 라이트</div></div>
+      <div><div class="k">Adjust</div><div class="v">10단계 · 이중 잠금</div></div>
+      <div><div class="k">Material</div><div class="v">카본 · 합성수지 · 합성고무</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 9001</span>
+      <span class="cert cert--gold">고령친화우수제품 인증</span>
+      <span class="cert cert--gold">노인장기요양보험 복지용구 등록 (지팡이)</span>
+      <span class="cert cert--info">🇯🇵 일본 수출 진행 중 · 야간 안전 특화</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>06 / 10 · Light Cane (LC)</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 7 · BS · Standing Cane
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 04 · Innovative</div>
+        <h2 class="sec-head__title">
+          BINATTI Standing Cane · BS
+          <small>비나띠 스탠드 지팡이 · 자립형 · 360° 회전</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Self-<br/>Standing</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img product-page__img--dual" data-tag="Self-Standing · 360°">
+        <div class="color-slot">
+          <img src="../assets/aion-bs01-brown.png" alt="BS01 Brown"/>
+          <span class="color-slot__label">BS-01 Brown</span>
+        </div>
+        <div class="color-slot">
+          <img src="../assets/aion-bs02-wine.png" alt="BS02 Wine"/>
+          <span class="color-slot__label">BS-02 Wine</span>
+        </div>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--light">◆ Innovative · 자립형 · 360° 회전</span>
+        <p class="product-page__name">Standing Cane</p>
+        <p class="product-page__name-kr">비나띠 스탠드 지팡이 (BS)</p>
+        <div class="product-page__tagline">
+          <strong>스탠드형 고무발</strong>로 벽·가구 없이 지팡이를 세워둘 수 있는 <strong>자립 기능</strong>. 하단부 <strong>360° 회전 구조</strong>로 다양한 지면·움직임에 유연하게 대응. 넓은 접지면으로 <strong>안정적 보행</strong>까지 확보한 프리미엄 제품.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">350<sup>g</sup></div><div class="l">중량 (±10g)</div></div>
+          <div class="product-page__num"><div class="n">360<sup>°</sup></div><div class="l">고무발 회전</div></div>
+          <div class="product-page__num"><div class="n">78–102</div><div class="l">사용 길이 (cm)</div></div>
+          <div class="product-page__num"><div class="n">Auto</div><div class="l">자립 · Self-Stand</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>스탠드형 고무발</strong>: 별도 거치대 없이 자립</li>
+          <li><strong>360° 회전 구조</strong>: 지면·움직임 유연 대응</li>
+          <li><strong>넓은 접지면</strong>: 일자형 대비 안정적 지지</li>
+          <li><strong>높이 조절 + 이중 잠금</strong>: 흔들림 방지</li>
+          <li><strong>인체공학 손잡이</strong>: 편안한 그립감</li>
+          <li>낙하 방지 · <strong>재사용 편의성</strong></li>
+        </ul>
+      </div>
+      <div>
+        <h3>추천 사용 환경 · Use Cases</h3>
+        <ul>
+          <li><strong>외출·대기·계산·휴식</strong> 시 잠시 손 떼는 상황</li>
+          <li>벽·가구에 <strong>기댈 곳이 없는 공간</strong></li>
+          <li>지팡이를 <strong>반복적으로 내려놓는</strong> 사용자</li>
+          <li><strong>넓은 접지</strong>가 필요한 균형 불안정 사용자</li>
+          <li>브라운·와인의 <strong>클래식 무드</strong> 선호</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">BS-01 (Brown) · BS-02 (Wine)</div></div>
+      <div><div class="k">Weight</div><div class="v">350 ±10 g</div></div>
+      <div><div class="k">Length</div><div class="v">78–102 cm · 보관 68cm</div></div>
+      <div><div class="k">Feature</div><div class="v">자립 · 360° 회전 고무발</div></div>
+      <div><div class="k">Adjust</div><div class="v">높이 조절 · 이중 잠금</div></div>
+      <div><div class="k">Material</div><div class="v">카본 · 합성수지 · 합성고무</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 9001</span>
+      <span class="cert cert--gold">고령친화우수제품 인증</span>
+      <span class="cert cert--gold">노인장기요양보험 복지용구 등록 (지팡이)</span>
+      <span class="cert cert--gold">접이식 폴대 특허</span>
+      <span class="cert cert--info">🇯🇵 일본 수출 진행 중 · 자립 기능 특화</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>07 / 10 · Standing Cane (BS)</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 8 · BW · Wood Cane
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 05 · Premium</div>
+        <h2 class="sec-head__title">
+          BINATTI Wood Cane · BW
+          <small>비나띠 원목 지팡이 · 천연 원목 + 카본 프리미엄</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Premium<br/>Wood</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Wood · Premium" style="background: linear-gradient(135deg, #F5E6C8, #EBD7A3); display:grid; place-items:center; padding:6mm;">
+        <svg viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40%; height:80%;">
+          <!-- Wood grain handle -->
+          <ellipse cx="50" cy="20" rx="18" ry="12" fill="#8B5A2B"/>
+          <ellipse cx="50" cy="20" rx="14" ry="8" fill="#6B4C1A" opacity=".5"/>
+          <path d="M 40 24 Q 50 30 60 24" stroke="#4B3313" stroke-width="1" fill="none" opacity=".6"/>
+          <!-- Metal collar -->
+          <rect x="46" y="28" width="8" height="5" fill="#B8912F"/>
+          <!-- Carbon shaft -->
+          <rect x="47" y="33" width="6" height="130" fill="#1F1F26"/>
+          <rect x="47" y="33" width="6" height="130" fill="url(#carbonPattern)" opacity=".3"/>
+          <!-- Rubber tip -->
+          <rect x="45" y="163" width="10" height="12" rx="2" fill="#2A2A30"/>
+          <!-- Height adjust ring -->
+          <rect x="46" y="90" width="8" height="4" fill="#8B7C6B"/>
+          <defs>
+            <pattern id="carbonPattern" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+              <path d="M 0 0 L 4 4 M 0 4 L 4 0" stroke="#000" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+        </svg>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--wood">◆ Premium · 천연 원목 + 카본</span>
+        <p class="product-page__name">Wood Cane</p>
+        <p class="product-page__name-kr">비나띠 원목 지팡이 (BW)</p>
+        <div class="product-page__tagline">
+          손잡이에 <strong>천연 원목</strong>, 샤프트에 <strong>경량 카본</strong>을 결합한 프리미엄 라인. 원목 고유의 자연스러운 질감과 색감으로 <strong>일반 보행보조기기와 차별화된 심미성</strong> 확보. 260g 초경량으로 일상 사용도 부담 없음.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">260<sup>g</sup></div><div class="l">중량 (±10g)</div></div>
+          <div class="product-page__num"><div class="n">Wood</div><div class="l">천연 원목 손잡이</div></div>
+          <div class="product-page__num"><div class="n">73–97</div><div class="l">사용 길이 (cm)</div></div>
+          <div class="product-page__num"><div class="n">10<sup>단</sup></div><div class="l">높이 조절</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>천연 원목 손잡이</strong>: 자연스러운 촉감·색감</li>
+          <li><strong>경량 카본 샤프트</strong>: 소재별 장점 결합</li>
+          <li><strong>10단계 높이 조절</strong>: 이중 잠금 구조</li>
+          <li><strong>인체공학 손잡이</strong>: 원목 형태 편안함</li>
+          <li><strong>미끄럼 방지 고무발</strong>: 실내·외 안정</li>
+          <li>정밀 설계 <strong>연결부·버튼</strong>: 흔들림·소음 최소</li>
+        </ul>
+      </div>
+      <div>
+        <h3>추천 사용 · Best For</h3>
+        <ul>
+          <li><strong>디자인·소재</strong>를 중시하는 프리미엄 시니어</li>
+          <li>격조 있는 <strong>외출·모임</strong> 자리</li>
+          <li>기능뿐 아니라 <strong>심미성</strong>을 원하는 사용자</li>
+          <li><strong>선물용</strong>·기념일 (부모님 · 조부모님)</li>
+          <li>일본 프리미엄 <strong>고령친화 시장</strong> 타겟</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">BW (Brown)</div></div>
+      <div><div class="k">Weight</div><div class="v">260 ±10 g</div></div>
+      <div><div class="k">Length</div><div class="v">73–97 cm · 보관 63cm</div></div>
+      <div><div class="k">Handle</div><div class="v">천연 원목 (Wood)</div></div>
+      <div><div class="k">Shaft</div><div class="v">경량 카본</div></div>
+      <div><div class="k">Adjust</div><div class="v">10단계 · 이중 잠금</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 9001</span>
+      <span class="cert cert--gold">고령친화우수제품 인증</span>
+      <span class="cert cert--gold">노인장기요양보험 복지용구 등록 (지팡이)</span>
+      <span class="cert cert--gold">접이식 폴대 특허</span>
+      <span class="cert cert--info">🇯🇵 일본 프리미엄 시장 진출 예정</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>08 / 10 · Wood Cane (BW)</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 9 · CERTIFICATIONS · IP · MARKET
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">03 · Compliance &amp; IP</div>
+        <h2 class="sec-head__title">
+          인증 · 지식재산권 · 시장성
+          <small>Certifications, IP &amp; Market Positioning</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Quality<br/>&amp; Market</div>
+    </header>
+
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">인증 및 지식재산권 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Certifications &amp; IP</span></h3>
+    <table class="certs" style="margin-bottom: 5mm;">
       <thead>
         <tr>
           <th>구분 · Category</th>
           <th>인증 · Certification</th>
-          <th>인증번호 · Number</th>
-          <th>일자 · Date</th>
+          <th>비고 · Notes</th>
         </tr>
       </thead>
       <tbody>
-        
-        <tr>
-          <td class="name">품질</td>
-          <td>ISO 9001 품질경영시스템 인증</td>
-          <td class="code">ISO-9001-QMS</td>
-          <td class="date">보유</td>
-        </tr>
-        <tr>
-          <td class="name">국가 인증</td>
-          <td>고령친화우수제품 인증</td>
-          <td class="code">Senior-Friendly</td>
-          <td class="date">보유</td>
-        </tr>
-        <tr>
-          <td class="name">공공 등록</td>
-          <td>국민건강보험공단 노인장기요양보험 복지용구 급여제품 (지팡이)</td>
-          <td class="code">NHIS-LTC</td>
-          <td class="date">보유</td>
-        </tr>
-        <tr>
-          <td class="name">지식재산권</td>
-          <td>지팡이 관련 특허 · 실용신안 · 디자인 등록</td>
-          <td class="code">IP Portfolio</td>
-          <td class="date">복수 건</td>
-        </tr>
-        <tr>
-          <td class="name">시험 성적</td>
-          <td>공인인증기관 시험성적서</td>
-          <td class="code">Test Report</td>
-          <td class="date">보유</td>
-        </tr>
+        <tr><td class="name">품질 인증</td><td>ISO 9001 품질경영시스템</td><td class="date">전 제품 공통</td></tr>
+        <tr style="background:linear-gradient(90deg, rgba(245,166,35,.08), transparent);"><td class="name">고령친화</td><td><strong>고령친화우수제품 인증</strong></td><td class="date">국가 지정</td></tr>
+        <tr style="background:linear-gradient(90deg, rgba(245,166,35,.08), transparent);"><td class="name">보험 급여</td><td><strong>노인장기요양보험 복지용구 급여제품 등록 (지팡이)</strong></td><td class="date">국민건강보험공단</td></tr>
+        <tr><td class="name">특허</td><td>접이식 폴대 특허 및 지팡이 관련 지식재산권</td><td class="date">보유</td></tr>
+        <tr><td class="name">시험성적</td><td>공인인증기관 제품 시험성적서</td><td class="date">각 제품별 보유</td></tr>
       </tbody>
     </table>
 
-    <div class="page__marker">
-      <span class="brand">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
-        Medical Japan 2026 · Export Consultation
-      </span>
-      <span>04 / 06 · 아이온 (AION)</span>
-    </div>
-  </section>
-
-  <!-- ============== PAGE 5 · MARKET & TRACK RECORD ============== -->
-  <section class="page">
-    <header class="sec-head">
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">시장성 · 사업화 준비 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Market Readiness</span></h3>
+    <div class="product-details" style="margin-top: 0;">
       <div>
-        <div class="sec-head__num">04 · Market</div>
-        <h2 class="sec-head__title">
-          시장 진출 · 실적
-          <small>Market Presence &amp; Track Record</small>
-        </h2>
+        <h3>일본 시장 진출 근거</h3>
+        <ul>
+          <li><strong>일본 고령화율 세계 1위</strong>: 29%+ 초고령사회</li>
+          <li>고령친화·복지용구 시장 <strong>지속 성장</strong></li>
+          <li>휴대성·안정성·디자인 등 <strong>다양한 수요</strong></li>
+          <li><strong>5개 라인업</strong>으로 다층 채널 대응</li>
+          <li>이미 <strong>일본 수출 실적</strong> 보유 (2025-2026)</li>
+        </ul>
       </div>
-      <div class="sec-head__side">Global<br/>Reach</div>
-    </header>
-
-    <p class="body">아이온은 <strong>세계 최고 초고령사회에 진입한 일본</strong>을 핵심 진출 시장으로 지정하고, 카본 소재 프리미엄 라인의 디자인 · 안전성 · 휴대성을 앞세워 <em>실버 스토어, 홈센터, 개호(介護) 채널</em>에 포지셔닝합니다. 국내 국민건강보험공단 복지용구 급여제품 등록 실적을 기반으로 일본 개호보험 유통망 진입을 목표로 합니다.</p>
-
-    
-      <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 수출국 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Export Markets</span></h3>
-      <div class="map">
-        
-        <div class="map__chip">
-          <span class="flag">🇯🇵</span>
-          <span class="name">Japan</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇹🇼</span>
-          <span class="name">Taiwan</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇸🇬</span>
-          <span class="name">Singapore</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇭🇰</span>
-          <span class="name">Hong Kong</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇺🇸</span>
-          <span class="name">USA</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇦🇺</span>
-          <span class="name">Australia</span>
-        </div>
+      <div>
+        <h3>사업화 준비 현황</h3>
+        <ul>
+          <li>국내 <strong>노인장기요양보험 등록</strong> 완료</li>
+          <li><strong>영문 카탈로그</strong> 및 제품 소개자료 구축</li>
+          <li>제품 <strong>품질관리·시험·인증</strong> 완료</li>
+          <li><strong>지식재산권</strong> 확보 (특허·디자인)</li>
+          <li>Medical Japan 통해 <strong>일본 파트너 발굴</strong></li>
+        </ul>
       </div>
+    </div>
 
-    <h3 style="margin: 6mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 성과 · 연혁 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Milestones</span></h3>
-    <div class="tl">
-      
-        <div class="tl__item">
-          <div class="tl__date">—</div>
-          <div class="tl__title">고령친화우수제품 인증 획득</div>
-          <p class="tl__desc">산업통상자원부·복지부 · 시니어 시장 진입</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">—</div>
-          <div class="tl__title">ISO 9001 품질경영시스템 구축</div>
-          <p class="tl__desc">수출용 QMS 기반 확보</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">—</div>
-          <div class="tl__title">국민건강보험공단 복지용구 등록</div>
-          <p class="tl__desc">노인장기요양보험 급여제품 (지팡이)</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2025</div>
-          <div class="tl__title">카본 프리미엄 라인업 확대</div>
-          <p class="tl__desc">SF01 Blue · SF02 Red 컬러 라인 확장</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2026.10</div>
-          <div class="tl__title">Medical Japan Tokyo 2026 참가</div>
-          <p class="tl__desc">Korea Pavilion KP-04 · 일본 개호 시장 진출</p>
-        </div>
+    <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">기대 성과 · 정량 목표 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Expected Outcomes</span></h3>
+    <div class="key-nums">
+      <div class="key-nums__cell">
+        <p class="key-nums__n">50<sup>억</sup></p>
+        <p class="key-nums__l">2026 국내 예상 매출<small>Domestic Revenue Target</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">3<sup>억</sup></p>
+        <p class="key-nums__l">해외 수출 목표<small>Export Target</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">2<sup>+</sup></p>
+        <p class="key-nums__l">일본 신규 거래처<small>New Japan Partners</small></p>
+      </div>
     </div>
 
     <div class="page__marker">
@@ -349,15 +1184,17 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>05 / 06 · 아이온 (AION)</span>
+      <span>09 / 10 · Certifications &amp; Market</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 6 · CONTACT & CONSULTATION ============== -->
+  <!-- ================================================================
+       PAGE 10 · CONTACT
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">05 · Consultation</div>
+        <div class="sec-head__num">04 · Contact</div>
         <h2 class="sec-head__title">
           상담 문의 · 방문
           <small>Contact &amp; On-site Consultation</small>
@@ -367,30 +1204,60 @@
     </header>
 
     <p class="body">
-      <strong>아이온 (AION)</strong>는 Medical Japan Tokyo 2026 연계 수출상담회 기간 중 <strong>Korea Pavilion Booth KP-04</strong>에서 해외 바이어 대상 1:1 상담을 진행합니다. 사전 상담 예약 및 자료 요청은 아래 채널을 통해 가능합니다.
+      <strong>아이온(AION)</strong>은 Medical Japan Tokyo 2026 연계 수출상담회 기간 중 <strong>Korea Pavilion Booth KP-04</strong>에서 해외 바이어 대상 1:1 상담을 진행합니다. 일본 시장은 이미 수출 실적을 보유하고 있으며, <strong>복지용구 유통업체 · 의료 헬스케어 유통사 · 수입 판매 업체</strong> 등 다층 채널의 신규 거래처 발굴을 목표로 합니다.
     </p>
 
     <div class="tags" style="margin: 6mm 0;">
-      <span class="tag tag--purple">주요 관심 시장 · 일본 · 개호(介護) · 실버 유통</span>
-      <span class="tag tag--green">상담 매칭 · 기업당 5건 내외</span>
+      <span class="tag tag--purple">주요 관심 시장 · 일본 (복지용구 · 고령친화)</span>
+      <span class="tag tag--green">상담 매칭 · 5개 라인업 전 제품</span>
       <span class="tag">통역 지원 · 한 · 영 · 일</span>
+      <span class="tag tag--purple">고령친화우수제품 · 복지용구 등록 완료</span>
     </div>
 
-    <div class="contact-card">
-      <h3>아이온 (AION) · Consultation Desk</h3>
-      <div class="c-rows">
-        <div><span>Company</span><b>AION Co., Ltd.</b></div>
-        <div><span>Category</span><b>고령친화 보행보조기기</b></div>
-        <div><span>Booth</span><b>Booth KP-04 · Korea Pavilion</b></div>
-        <div><span>Date</span><b>2026. 10. 7 – 10. 9 (JST)</b></div>
-        <div><span>Contact</span><b><span class="e-mail" data-b64="ZXhwb3J0QGFpb24ta29yZWEuY29t"></span></b></div>
-        <div><span>Website</span><b>www.aion-korea.com</b></div>
+    <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">지원받은 후 계획 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Post-event Plan</span></h3>
+    <div class="tl" style="margin-bottom: 5mm;">
+      <div class="tl__item">
+        <div class="tl__date">Step 1</div>
+        <div class="tl__title">일본 주력 제품군 발굴</div>
+        <p class="tl__desc">바이어별 선호도 파악 → 접이식·스탠드·원목 등 일본 시장 적합 라인업 선정</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 2</div>
+        <div class="tl__title">현지 유통 파트너 확보</div>
+        <p class="tl__desc">복지용구·의료·헬스케어 분야 바이어 → 샘플·견적·거래조건 협의</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 3</div>
+        <div class="tl__title">수출계약 · 지속 매출 창출</div>
+        <p class="tl__desc">초도 수출 → 제품군 단위 지속 수출구조 구축</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 4</div>
+        <div class="tl__title">현지 수요 반영 제품 고도화</div>
+        <p class="tl__desc">일본 소비자 선호 디자인·기능 → 기존 제품 개선 및 신규 개발 반영</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 5</div>
+        <div class="tl__title">글로벌 판로 확대</div>
+        <p class="tl__desc">일본 레퍼런스 → 타 국가 시장 진출 확대</p>
       </div>
     </div>
 
-    <p class="body" style="margin-top: 8mm; font-size: 9pt; color: var(--ink-500);">
+    <div class="contact-card">
+      <h3>아이온 · Consultation Desk</h3>
+      <div class="c-rows">
+        <div><span>Company</span><b>아이온 · AION Co., Ltd.</b></div>
+        <div><span>CEO</span><b>유성용 · Yoo Sung-Yong</b></div>
+        <div><span>Brand</span><b>BINATTI (비나띠) · 5-Line Cane Collection</b></div>
+        <div><span>Booth</span><b>KP-04 · Korea Pavilion, Makuhari Messe</b></div>
+        <div><span>Date</span><b>2026. 10. 7 – 10. 9 (JST)</b></div>
+        <div><span>Category</span><b>고령친화 보행보조기기 · Premium Silver Care</b></div>
+      </div>
+    </div>
+
+    <p class="body" style="margin-top: 4mm; font-size: 8.5pt; color: var(--ink-500);">
       본 브로셔의 사양·인증·수치는 발행 시점의 자료를 기준으로 하며 사전 통보 없이 변경될 수 있습니다. 사전 상담 신청 및 통합 안내는
-      <a href="../index.html#register" style="color:var(--purple-700);font-weight:600">Medical Japan 2026 사전등록 페이지</a>에서 가능합니다.
+      <a href="../Medical Japan 2026.html#register" style="color:var(--purple-700);font-weight:600">Medical Japan 2026 사전등록 페이지</a>에서 가능합니다.
     </p>
 
     <div class="page__marker">
@@ -398,19 +1265,18 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>06 / 06 · 아이온 (AION)</span>
+      <span>10 / 10 · Contact</span>
     </div>
   </section>
 
 </div>
+
 <script>
-  // Auto-open print dialog when opened with ?print=1
   (function(){
     var q = new URLSearchParams(window.location.search);
     if (q.get('print') === '1') {
       window.addEventListener('load', function(){
-        // Wait for fonts + layout
-        setTimeout(function(){ window.print(); }, 600);
+        setTimeout(function(){ window.print(); }, 700);
       });
     }
   })();

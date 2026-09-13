@@ -6,23 +6,347 @@
 <title>(주)케어엔코 · Company Brochure | Medical Japan 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
 <link rel="stylesheet" href="brochure.css"/>
+<style>
+  :root{
+    --navy-900: #0A153F;
+    --navy-800: #0F1E5A;
+    --brand-cyan: #38B6E0;
+  }
+
+  /* Company page — hero band */
+  .co-hero{
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 5mm;
+    margin: 4mm 0 5mm;
+    align-items: center;
+  }
+  .co-hero__text{ padding: 2mm 0; }
+  .co-hero__slogan{
+    font-family: var(--font-en); font-size: 8pt; font-weight: 700;
+    color: var(--purple-700); letter-spacing: .18em;
+    text-transform: uppercase; margin: 0 0 2mm;
+  }
+  .co-hero__headline{
+    font-size: 17pt; font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.3;
+    color: var(--ink-900); margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .co-hero__headline em{ font-style: normal; color: var(--purple-700); }
+  .co-hero__desc{
+    font-size: 9.5pt; color: var(--ink-700);
+    line-height: 1.7; margin: 0;
+    word-break: keep-all;
+  }
+  .co-hero__desc strong{ color: var(--ink-900); font-weight: 600; }
+  .co-hero__visual{
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, var(--lilac-25), var(--lilac-100));
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    padding: 6mm;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .co-hero__visual::before{
+    content: "";
+    position: absolute; top: -30%; right: -30%;
+    width: 80%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(56,182,224,.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .co-hero__visual img{
+    width: 100%; height: 100%;
+    object-fit: contain;
+    position: relative; z-index: 1;
+    border-radius: 2mm;
+  }
+
+  /* Company info grid */
+  .co-info-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5mm;
+    margin: 3mm 0 4mm;
+  }
+  .co-info-cell{
+    padding: 3.5mm 4mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3mm;
+  }
+  .co-info-cell__label{
+    font-family: var(--font-en);
+    font-size: 7pt; font-weight: 800;
+    color: var(--purple-700); letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: 1.5mm;
+  }
+  .co-info-cell__value{
+    font-size: 9.5pt; font-weight: 700;
+    color: var(--ink-900); letter-spacing: -0.015em;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .co-info-cell__value small{
+    display: block; font-family: var(--font-en);
+    font-size: 8pt; color: var(--ink-500);
+    font-weight: 500; margin-top: 1mm;
+  }
+
+  /* Key numbers strip (on company page) */
+  .key-nums{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin: 4mm 0;
+  }
+  .key-nums__cell{
+    padding: 4mm;
+    background: linear-gradient(135deg, #0A153F 0%, var(--purple-800) 100%);
+    color: #fff;
+    border-radius: 3mm;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .key-nums__cell::before{
+    content: "";
+    position: absolute; top: -30%; right: -30%;
+    width: 60%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(245,166,35,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .key-nums__n{
+    font-family: var(--font-en); font-weight: 900;
+    font-size: 26pt; color: #F5A623;
+    letter-spacing: -0.03em; line-height: 1;
+    margin: 0;
+  }
+  .key-nums__n sup{ font-size: 11pt; margin-left: 1mm; }
+  .key-nums__l{
+    margin-top: 2mm; font-size: 8.5pt;
+    color: #fff; font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .key-nums__l small{
+    display: block; font-family: var(--font-en);
+    font-size: 7pt; color: rgba(255,255,255,.6);
+    font-weight: 500; margin-top: 1mm;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+
+  /* Product page layout */
+  .product-page__hero{
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    gap: 5mm;
+    align-items: start;
+    margin: 4mm 0 4mm;
+  }
+  .product-page__img{
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #F6F2FE, #EDE7FB);
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    padding: 3mm;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-page__img::after{
+    content: attr(data-tag);
+    position: absolute;
+    top: 3mm; left: 3mm;
+    padding: 1mm 3mm;
+    background: rgba(255,255,255,.9);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+  .product-page__img img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 2mm;
+  }
+  .product-page__info{ padding-top: 2mm; }
+  .product-page__cat{
+    display: inline-block;
+    padding: 1mm 3mm;
+    background: var(--lilac-50);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    margin-bottom: 3mm;
+  }
+  .product-page__cat--medical{ background: #FEF6E7; color: #8B5A00; }
+  .product-page__cat--digital{ background: #E0F2FE; color: #0C4A6E; }
+  .product-page__name{
+    font-family: var(--font-en); font-size: 22pt; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.1;
+    color: var(--ink-900); margin: 0 0 2mm;
+  }
+  .product-page__name-kr{
+    font-size: 12pt; font-weight: 700;
+    color: var(--ink-700); margin: 0 0 3mm;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+  }
+  .product-page__tagline{
+    padding: 3mm 4mm;
+    background: var(--lilac-25);
+    border-left: 3px solid var(--purple-600);
+    border-radius: 0 2mm 2mm 0;
+    font-size: 9pt; line-height: 1.6;
+    color: var(--ink-700);
+    margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .product-page__tagline strong{ color: var(--purple-700); font-weight: 700; }
+  .product-page__nums{
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+  }
+  .product-page__num{
+    padding: 2.5mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 2mm;
+    text-align: center;
+  }
+  .product-page__num .n{
+    font-family: var(--font-en); font-weight: 800;
+    font-size: 15pt; color: var(--purple-700);
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .product-page__num .l{
+    margin-top: 1mm; font-size: 7.5pt;
+    color: var(--ink-500); font-weight: 600;
+  }
+
+  /* Product details block */
+  .product-details{
+    margin-top: 3mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+  }
+  .product-details h3{
+    font-size: 10pt; font-weight: 800;
+    color: var(--ink-900); margin: 0 0 3mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: -0.015em;
+    display: flex; align-items: center; gap: 2mm;
+  }
+  .product-details h3::before{
+    content: "";
+    width: 3mm; height: 3mm;
+    background: var(--purple-600);
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .product-details ul{
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 1.5mm;
+  }
+  .product-details li{
+    padding-left: 4mm;
+    position: relative;
+    font-size: 8.5pt;
+    line-height: 1.5;
+    color: var(--ink-700);
+    word-break: keep-all;
+  }
+  .product-details li::before{
+    content: "▸";
+    position: absolute; left: 0; top: 0;
+    color: var(--purple-500);
+    font-weight: 700;
+  }
+  .product-details li strong{ color: var(--ink-900); font-weight: 700; }
+
+  /* Product spec table (compact) */
+  .product-spec-mini{
+    margin-top: 3mm;
+    padding: 3mm 4mm;
+    background: var(--gray-50);
+    border-radius: 2mm;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2mm 3mm;
+  }
+  .product-spec-mini > div{
+    font-size: 8pt;
+    line-height: 1.4;
+  }
+  .product-spec-mini .k{
+    font-family: var(--font-en); font-size: 7pt;
+    color: var(--ink-500); font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .product-spec-mini .v{
+    color: var(--ink-900); font-weight: 700;
+  }
+
+  /* Product cert strip */
+  .product-cert-strip{
+    display: flex; gap: 1.5mm; flex-wrap: wrap;
+    margin-top: 3mm; padding-top: 3mm;
+    border-top: 1px dashed var(--line);
+  }
+  .product-cert-strip .cert{
+    padding: 1.5mm 3mm;
+    border-radius: 999px;
+    font-size: 7.5pt; font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .product-cert-strip .cert--purple{
+    background: var(--lilac-50);
+    color: var(--purple-700);
+  }
+  .product-cert-strip .cert--gold{
+    background: #FEF6E7;
+    color: #8B5A00;
+  }
+  .product-cert-strip .cert--green{
+    background: #E8F5EE;
+    color: var(--green-ink);
+  }
+  .product-cert-strip .cert--info{
+    background: var(--gray-50);
+    color: var(--ink-700);
+    font-family: var(--font-en); font-weight: 600;
+  }
+
+  @media (max-width: 700px){
+    .co-hero, .product-page__hero, .product-details,
+    .co-info-grid, .key-nums{ grid-template-columns: 1fr; }
+    .product-spec-mini{ grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
 <!-- Screen toolbar -->
 <div class="toolbar">
   <div class="toolbar__left">
-    <a href="../index.html" class="toolbar__brand">
+    <a href="../Medical Japan 2026.html" class="toolbar__brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
       Medical Japan 2026
     </a>
     <span style="color:rgba(255,255,255,.6)">/ Exhibitor Brochure · (주)케어엔코</span>
   </div>
   <div class="toolbar__right">
-    <a href="../index.html" class="tb-btn">← 랜딩페이지로</a>
+    <a href="../Medical Japan 2026.html" class="tb-btn">← 랜딩페이지로</a>
     <button class="tb-btn tb-btn--primary" onclick="window.print()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       PDF 다운로드 / 인쇄
@@ -32,7 +356,9 @@
 
 <div class="pages">
 
-  <!-- ============== PAGE 1 · COVER ============== -->
+  <!-- ================================================================
+       PAGE 1 · COVER
+       ================================================================ -->
   <section class="page cover">
     <div class="cover__inner">
       <div class="cover__top">
@@ -42,17 +368,19 @@
       <div class="cover__event">Korea Health Industry Export Consultation</div>
       <h1 class="cover__co">
         (주)케어엔코
-        <small>Care&Co Corp.</small>
+        <small>Care&amp;Co Corp. · Personalized Digital Healthcare</small>
       </h1>
-      <p class="cover__tagline">10초 만에 체중을 재듯 족저압과 자세를 측정하는, 방사선 없는 AI 체형 분석 초개인화 솔루션.</p>
+      <p class="cover__tagline">
+        예방부터 관리까지, <strong>Fisica와 함께</strong>. 634개 고성능 센서와 3D 디지털-트윈 기술로 <strong>96% 정확도</strong>의 체형 균형 분석을 제공하는 스마트 헬스케어 플랫폼. <strong>9개국 수출 · 미국 법인 · 일본 파트너십 완료</strong>.
+      </p>
       <dl class="cover__meta">
         <div>
-          <dt>Product</dt>
-          <dd>피지카 (Fisica)</dd>
+          <dt>Brand</dt>
+          <dd>Fisica (피지카)</dd>
         </div>
         <div>
           <dt>Category</dt>
-          <dd>디지털 헬스 · AI 진단</dd>
+          <dd>디지털 헬스케어 · 체형 분석</dd>
         </div>
         <div>
           <dt>Booth</dt>
@@ -66,110 +394,80 @@
     </div>
   </section>
 
-  <!-- ============== PAGE 2 · COMPANY OVERVIEW ============== -->
+  <!-- ================================================================
+       PAGE 2 · COMPANY OVERVIEW + FISICA SOLUTION
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
         <div class="sec-head__num">01 · Company</div>
         <h2 class="sec-head__title">
-          기업 개요
-          <small>Company Overview</small>
+          회사 소개 · Fisica 솔루션
+          <small>About Care&amp;Co · carenco.kr</small>
         </h2>
       </div>
-      <div class="sec-head__side">(주)케어엔코<br/>Brochure</div>
+      <div class="sec-head__side">Company<br/>Overview</div>
     </header>
 
-    <div class="hero-visual" data-caption="FISICA · SCALE + APP">
-      <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="100" cy="42" r="12"/><path d="M100 54 v 44"/><path d="M78 66 h 44"/><path d="M100 98 l -14 40"/><path d="M100 98 l 14 40"/><ellipse cx="78" cy="152" rx="12" ry="8"/><ellipse cx="122" cy="152" rx="12" ry="8"/><circle cx="78" cy="152" r="3" fill="currentColor"/><circle cx="122" cy="152" r="3" fill="currentColor"/></svg>
-    </div>
-
-    <p class="body">(주)케어엔코는 <strong>초개인화 헬스케어</strong>를 지향하는 디지털 헬스 스타트업으로, 대표 솔루션 <strong>피지카(Fisica)</strong>는 <em>Fisica Scale 디바이스</em>와 <em>Fisica App</em>으로 구성됩니다. 634개의 고성능 센서를 탑재한 스마트 스케일이 10초 이내에 족저압(Plantar Pressure)과 자세(Posture) 데이터를 멀티모달로 수집하고, AI가 3D 디지털 트윈 기술로 체형 불균형을 96% 정확도로 시각화합니다. 방사선 노출 위험이 없어 아동·성인 모두 안전하게 사용 가능한 가정용 헬스케어 디바이스입니다.</p>
-
-    <dl class="rows" style="margin-top:6mm">
-      
-        <dt>기업명<span class="en">Company</span></dt>
-        <dd>(주)케어엔코<small>Care&Co Corp.</small></dd>
-        <dt>품목분야<span class="en">Category</span></dt>
-        <dd>디지털 헬스 · AI 진단 · 헬스케어 IoT<small>Digital Health · AI · IoT</small></dd>
-        <dt>주력 제품<span class="en">Product</span></dt>
-        <dd>Fisica Scale + Fisica App<small>Multimodal body balance solution</small></dd>
-        <dt>핵심 기술<span class="en">Core Tech</span></dt>
-        <dd>634개 센서 멀티모달 융합 · AI 3D 디지털 트윈<small>Multimodal sensing · AI digital twin</small></dd>
-        <dt>정확도<span class="en">Accuracy</span></dt>
-        <dd>체형 불균형 분석 96%<small>96% accuracy (骨盤·脊椎 asymmetry)</small></dd>
-        <dt>가격<span class="en">Price</span></dt>
-        <dd>가정용 385,000원<small>B2C: KRW 385,000 · B2B SaaS 모델 병행</small></dd>
-    </dl>
-
-    <div class="page__marker">
-      <span class="brand">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
-        Medical Japan 2026 · Export Consultation
-      </span>
-      <span>02 / 06 · (주)케어엔코</span>
-    </div>
-  </section>
-
-  <!-- ============== PAGE 3 · PRODUCT DETAIL ============== -->
-  <section class="page">
-    <header class="sec-head">
-      <div>
-        <div class="sec-head__num">02 · Product</div>
-        <h2 class="sec-head__title">
-          대표 제품
-          <small>Fisica · AI Body Balance Analysis Solution</small>
-        </h2>
+    <div class="co-hero">
+      <div class="co-hero__text">
+        <p class="co-hero__slogan">◆ Prevention &amp; Personalized Digital Healthcare</p>
+        <h3 class="co-hero__headline">
+          <em>예방부터 관리</em>까지,<br/>
+          Fisica와 함께.
+        </h3>
+        <p class="co-hero__desc">
+          <strong>우리나라 국민 3명 중 1명이 근골격계 질환</strong>을 앓고 있으며 전체 건강보험 진료비의 <strong>11%</strong>를 차지합니다. (주)케어엔코는 <strong>정확한 인지와 예방</strong>이 최우선이라는 철학으로, 자체 개발한 <strong>족저압 측정 디바이스</strong>와 <strong>AI 3D 디지털 트윈 플랫폼</strong>을 결합한 초개인화 헬스케어 솔루션 <strong>Fisica(피지카)</strong>로 라이프 케어 산업의 디지털 전환을 선도합니다.
+        </p>
       </div>
-      <div class="sec-head__side">Flagship<br/>Product</div>
-    </header>
-
-    <div class="pull">
-      <em>피지카 (Fisica)</em> — <strong>의학 지식이 없어도 이해 가능한</strong> 데이터 분석과 맞춤형 관리 방법을 제안하는 초개인화 솔루션. 단순 측정을 넘어 <em>개선 상황 추적</em>과 <em>예방을 위한 관리 제안</em>까지 이어지는 헬스케어 흐름을 스마트폰 하나로 완성합니다.
+      <div class="co-hero__visual">
+        <img src="../assets/carenco-fisica-device.png" alt="Fisica Scale · 스마트 헬스케어 디바이스"/>
+      </div>
     </div>
 
-    <div class="kn">
-      
-        <div class="kn__card">
-          <div class="kn__num">634</div>
-          <div class="kn__lab">고성능 센서 탑재<small>Sensors</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">10<sup>s</sup></div>
-          <div class="kn__lab">측정 완료 시간<small>Full Scan</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">96<sup>%</sup></div>
-          <div class="kn__lab">체형 분석 정확도<small>AI Accuracy</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">0</div>
-          <div class="kn__lab">방사선 노출<small>Radiation-Free</small></div>
-        </div>
+    <div class="co-info-grid">
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Company</div>
+        <div class="co-info-cell__value">(주)케어엔코<small>Care&amp;Co Corp.</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">CEO · 대표</div>
+        <div class="co-info-cell__value">윤정용<small>Yoon Jung-Yong</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Business</div>
+        <div class="co-info-cell__value">디지털 헬스케어 플랫폼<small>Digital Healthcare · AI Body Balance</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Solution</div>
+        <div class="co-info-cell__value">Fisica Scale + App<small>Hardware + Software 통합 솔루션</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Global</div>
+        <div class="co-info-cell__value">미국 법인 · 일본 파트너십<small>9개국 수출 · UAE NDA 2건</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Contact</div>
+        <div class="co-info-cell__value">carenco.kr<small>Booth KP-03 · Makuhari Messe</small></div>
+      </div>
     </div>
 
-    <h3 style="margin: 6mm 0 3mm; font-size: 12pt; font-weight: 800; letter-spacing: -0.02em;">핵심 기능 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9.5pt;margin-left:6px">Key Features</span></h3>
-    <div class="features">
-      
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
-          <p class="feat__title">10초 멀티모달 측정<small>Multimodal in 10s</small></p>
-          <p class="feat__desc">체중을 재듯 서 있는 10초 동안 족저압과 자세 데이터를 동시에 정밀 측정합니다.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></div>
-          <p class="feat__title">AI 3D 디지털 트윈<small>AI Digital Twin</small></p>
-          <p class="feat__desc">전신 X-Ray를 촬영한 듯한 3D 체형 시각화로 골반·척추 비대칭 등 건강 이슈를 명확히 확인.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <p class="feat__title">방사선 없는 안전 측정<small>Radiation-Free</small></p>
-          <p class="feat__desc">방사선 노출 위험이 없어 아동·성인·고령자 모두 매일 사용 가능한 홈케어 디바이스.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.7 1.5A3.5 3.5 0 0 0 6 18z"/></svg></div>
-          <p class="feat__title">B2B SaaS 확장<small>B2B SaaS</small></p>
-          <p class="feat__desc">멤버십 · B2B용 SaaS 구독 모델을 통해 병원 · 피트니스 · 자세교정 클리닉까지 확장.</p>
-        </div>
+    <h3 style="margin: 2mm 0 3mm; font-size: 11pt; font-weight: 800; color: var(--ink-900); letter-spacing: -0.015em;">
+      Fisica의 핵심 수치 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Key Numbers · Prevention → Analysis → Management</span>
+    </h3>
+    <div class="key-nums">
+      <div class="key-nums__cell">
+        <p class="key-nums__n">10<sup>sec</sup></p>
+        <p class="key-nums__l">체중 측정하듯 측정<small>Measurement Time</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">634</p>
+        <p class="key-nums__l">고성능 센서 탑재<small>High-Precision Sensors</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">96<sup>%</sup></p>
+        <p class="key-nums__l">AI 체형 분석 정확도<small>Digital-Twin Diagnosis</small></p>
+      </div>
     </div>
 
     <div class="page__marker">
@@ -177,104 +475,232 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>03 / 06 · (주)케어엔코</span>
+      <span>02 / 06 · About Care&amp;Co</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 4 · SPEC & CERTIFICATION ============== -->
+  <!-- ================================================================
+       PAGE 3 · Fisica Scale (Device)
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">03 · Specification</div>
+        <div class="sec-head__num">Product 01 · Hardware</div>
         <h2 class="sec-head__title">
-          제품 사양 · 인증
-          <small>Specifications &amp; Certifications</small>
+          Fisica Scale
+          <small>피지카 스케일 · 스마트 체형 분석 디바이스</small>
         </h2>
       </div>
-      <div class="sec-head__side">Quality<br/>Compliance</div>
+      <div class="sec-head__side">Device<br/>Hardware</div>
     </header>
 
-    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">제품 사양 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Product Specification</span></h3>
-    <dl class="rows">
-      
-        <dt>제품명 · Model</dt>
-        <dd>Fisica Scale + Fisica App</dd>
-        <dt>소재 · Material</dt>
-        <dd>ABS (외관)</dd>
-        <dt>통신 · Connectivity</dt>
-        <dd>Bluetooth · Wi-Fi</dd>
-        <dt>측정 항목</dt>
-        <dd>Plantar Pressure (족저압) · Posture (자세)</dd>
-        <dt>센서 · Sensors</dt>
-        <dd>634개 고성능 압력 센서 어레이</dd>
-        <dt>측정 시간</dt>
-        <dd>10초 이내 (Full-Body Scan)</dd>
-        <dt>앱 · Platform</dt>
-        <dd>iOS · Android (전용 App)</dd>
-        <dt>타겟 사용자</dt>
-        <dd>가정 · 소아 성장 · 자세교정 · 시니어</dd>
-    </dl>
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Device · Bluetooth / WiFi">
+        <img src="../assets/carenco-fisica-device.png" alt="Fisica Scale 실제 제품 사진"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--medical">◆ Digital Healthcare Device · 하드웨어</span>
+        <p class="product-page__name">Fisica Scale</p>
+        <p class="product-page__name-kr">스마트 체형 분석 디바이스</p>
+        <div class="product-page__tagline">
+          <strong>체중을 측정하듯 10초 이내</strong>에 족저압(Plantar Pressure)과 자세(Posture) 데이터를 멀티모달로 수집. <strong>634개 고성능 센서</strong> 탑재로 전문가급 성능을 구현하면서도 <strong>가정용 가격(₩385,000)</strong>으로 보급 가능한 안전한 측정 방식.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">634</div><div class="l">고성능 센서</div></div>
+          <div class="product-page__num"><div class="n">10<sup>sec</sup></div><div class="l">측정 시간</div></div>
+          <div class="product-page__num"><div class="n">96<sup>%</sup></div><div class="l">분석 정확도</div></div>
+          <div class="product-page__num"><div class="n">0</div><div class="l">방사선 노출</div></div>
+        </div>
+      </div>
+    </div>
 
-    <h3 style="margin: 8mm 0 3mm; font-size: 11pt; font-weight: 800;">인증 및 지식재산권 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Certifications &amp; IP</span></h3>
-    <table class="certs">
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Functions</h3>
+        <ul>
+          <li><strong>족저압(Plantar Pressure) 측정</strong>: 634개 센서 정밀 측정</li>
+          <li><strong>자세(Posture) 데이터</strong>: 멀티모달 융합 분석</li>
+          <li><strong>안전한 측정</strong>: 방사선 노출·축적 위험 없음</li>
+          <li><strong>Bluetooth · WiFi 연결</strong>: 스마트폰 앱 실시간 연동</li>
+          <li><strong>휴대·보관 편리</strong>: 전용 PC 불필요, 소형화</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적용 분야 · Applications</h3>
+        <ul>
+          <li>가정용 <strong>일상 건강 관리</strong></li>
+          <li><strong>재활치료</strong>·체형교정·맞춤형 깔창 제작</li>
+          <li>의료 분야 (<strong>뇌졸증·당뇨 진행상황 체크</strong>)</li>
+          <li><strong>고령층·성장기 아이들</strong> 건강관리</li>
+          <li>근골격계 질환 <strong>예방</strong> 및 관리</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">Fisica Scale</div></div>
+      <div><div class="k">Material</div><div class="v">ABS 외</div></div>
+      <div><div class="k">Connectivity</div><div class="v">Bluetooth · WiFi</div></div>
+      <div><div class="k">Sensors</div><div class="v">634 High-Precision</div></div>
+      <div><div class="k">Measurement</div><div class="v">Plantar Pressure · Posture</div></div>
+      <div><div class="k">Price</div><div class="v">₩385,000 (가정용)</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 9001 (2022.07)</span>
+      <span class="cert cert--purple">KC EMC/RF (2022 · 2024 · 2025)</span>
+      <span class="cert cert--purple">CE (2024.04)</span>
+      <span class="cert cert--purple">FCC (2024.04)</span>
+      <span class="cert cert--purple">VCCI 🇯🇵 (2024.04)</span>
+      <span class="cert cert--gold">GS 인증 1등급 (2024.09)</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>03 / 06 · Fisica Scale</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 4 · Fisica App (Software)
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 02 · Software</div>
+        <h2 class="sec-head__title">
+          Fisica App
+          <small>피지카 앱 · AI 3D 디지털-트윈 헬스케어 플랫폼</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">App<br/>Platform</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="App · iOS · Android">
+        <img src="../assets/carenco-fisica-app.png" alt="Fisica App UI"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--digital">◆ Digital Healthcare App · 소프트웨어</span>
+        <p class="product-page__name">Fisica App</p>
+        <p class="product-page__name-kr">AI 3D 디지털-트윈 헬스케어 앱</p>
+        <div class="product-page__tagline">
+          <strong>전신 X-Ray를 촬영한 듯</strong> 3D 디지털-트윈 시각화로 <strong>골반·척추 비대칭</strong> 등 체형 불균형을 분석. 의학 지식이 없어도 <strong>직관적으로 이해</strong> 가능한 데이터 · 맞춤형 관리 방법 제안.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">3D</div><div class="l">Digital-Twin 시각화</div></div>
+          <div class="product-page__num"><div class="n">AI</div><div class="l">진단 알고리즘</div></div>
+          <div class="product-page__num"><div class="n">iOS<br/>AND</div><div class="l">모바일 앱 지원</div></div>
+          <div class="product-page__num"><div class="n">B2B<br/>SaaS</div><div class="l">멤버십 구독형</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>3D 디지털-트윈 시각화</strong>: 골반·척추 비대칭 진단</li>
+          <li><strong>AI 진단</strong>: 96% 정확도 자세 분석</li>
+          <li><strong>맞춤형 관리 제안</strong>: 초개인화 헬스케어</li>
+          <li><strong>개선 상황 추적</strong>: 지속 관리 및 예방</li>
+          <li><strong>공유 기능</strong>: 가족·전문가와 건강 이슈 공유</li>
+        </ul>
+      </div>
+      <div>
+        <h3>서비스 확장성 · Scalability</h3>
+        <ul>
+          <li><strong>AI 멤버십 구독</strong> 모델 (B2C)</li>
+          <li><strong>B2B SaaS 구독</strong> (헬스 · 필라테스 스튜디오)</li>
+          <li><strong>비대면 건강관리</strong> 플랫폼 확장</li>
+          <li><strong>메타버스 · 디지털 헬스케어</strong> 연계</li>
+          <li>장기 매출 · 고객 락인 구조 확보</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Platform</div><div class="v">iOS · Android</div></div>
+      <div><div class="k">Visualization</div><div class="v">3D Digital-Twin</div></div>
+      <div><div class="k">AI Engine</div><div class="v">Posture / Balance Diagnosis</div></div>
+      <div><div class="k">Model</div><div class="v">Freemium + AI 멤버십</div></div>
+      <div><div class="k">B2B Option</div><div class="v">SaaS 구독</div></div>
+      <div><div class="k">Integration</div><div class="v">Fisica Scale 연동</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--info">스마트폰 앱만으로 모든 기능 활용</span>
+      <span class="cert cert--info">별도 전용 PC 불필요</span>
+      <span class="cert cert--green">근골격계 질환 예방 · 관리 지원</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>04 / 06 · Fisica App</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 5 · CERTIFICATIONS · IP
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">02 · Compliance</div>
+        <h2 class="sec-head__title">
+          인증 · 지식재산권
+          <small>Certifications &amp; Patent Portfolio</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Quality<br/>&amp; IP</div>
+    </header>
+
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">국제·국내 인증 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Certifications · 8 Items</span></h3>
+    <table class="certs" style="margin-bottom: 5mm;">
       <thead>
         <tr>
           <th>구분 · Category</th>
           <th>인증 · Certification</th>
-          <th>인증번호 · Number</th>
-          <th>일자 · Date</th>
+          <th>인증번호</th>
+          <th>일자</th>
         </tr>
       </thead>
       <tbody>
-        
+        <tr><td class="name">품질 인증</td><td>ISO 9001:2015</td><td class="code">ITS-KQ-01724</td><td class="date">2022.07.05</td></tr>
+        <tr><td class="name">🇰🇷 국내</td><td>KC (EMC/RF) 전자파 인증</td><td class="code">R-R-CNn-CN-1G001</td><td class="date">2022.05.26</td></tr>
+        <tr><td class="name">🇰🇷 국내</td><td>KC (EMC/RF) 전자파 인증</td><td class="code">R-R-CNn-CN-1G002</td><td class="date">2024.04.05</td></tr>
+        <tr><td class="name">🇰🇷 국내</td><td>KC (EMC/RF) 전자파 인증</td><td class="code">R-R-CNn-CN-1G003</td><td class="date">2025.12.02</td></tr>
+        <tr><td class="name">🇪🇺 유럽</td><td>CE 인증</td><td class="code">DOC-CE-CN-1G002</td><td class="date">2024.04.05</td></tr>
+        <tr><td class="name">🇺🇸 미국</td><td>FCC 인증</td><td class="code">DOC-FCC-CN-1G002</td><td class="date">2024.04.05</td></tr>
+        <tr><td class="name">🇯🇵 일본</td><td><strong>VCCI 인증</strong> (일본 EMC)</td><td class="code">240400100SEL-EMC1</td><td class="date">2024.04.22</td></tr>
+        <tr style="background:linear-gradient(90deg, rgba(245,166,35,.08), transparent);"><td class="name">국제</td><td><strong>GS 인증 (1등급)</strong></td><td class="code">TGS-A-24-0252-E</td><td class="date">2024.09.11</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">특허 포트폴리오 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Patent Portfolio · 3 Granted + 4 Pending</span></h3>
+    <table class="certs" style="margin-bottom: 3mm;">
+      <thead>
         <tr>
-          <td class="name">품질</td>
-          <td>ISO 9001:2015</td>
-          <td class="code">ITS-KQ-01724</td>
-          <td class="date">2024</td>
+          <th>구분</th>
+          <th>명칭</th>
+          <th>등록/출원번호</th>
+          <th>일자</th>
         </tr>
-        <tr>
-          <td class="name">국내 EMC</td>
-          <td>KC 인증 (Type A)</td>
-          <td class="code">R-R-CNn-CN-1G001</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">국내 EMC</td>
-          <td>KC 인증 (Type B)</td>
-          <td class="code">R-R-CNn-CN-1G002</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">국내 EMC</td>
-          <td>KC 인증 (Type C)</td>
-          <td class="code">R-R-CNn-CN-1G003</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">유럽</td>
-          <td>CE (DoC)</td>
-          <td class="code">DOC-CE-CN-1G002</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">미국</td>
-          <td>FCC (DoC)</td>
-          <td class="code">DOC-FCC-CN-1G002</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">일본</td>
-          <td>VCCI</td>
-          <td class="code">240400100SEL-EMC1</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">SW 우수성</td>
-          <td>GS인증 1등급</td>
-          <td class="code">TGS-A-24-0252-E</td>
-          <td class="date">2024</td>
-        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="name">🇰🇷 등록</td><td>족저압 측정을 통한 건강정보 제공 시스템</td><td class="code">KR 10-201775691</td><td class="date">2017.08.31</td></tr>
+        <tr><td class="name">🇰🇷 등록</td><td>몸무게 측정 겸용 플렉서블 족저압 측정기</td><td class="code">KR 10-201859670</td><td class="date">2018.05.14</td></tr>
+        <tr><td class="name">🇺🇸 등록</td><td>Health information providing system through plantar pressure measurement</td><td class="code">US 11,311,208 B2</td><td class="date">2022.04.26</td></tr>
+        <tr><td class="name">🇰🇷 출원</td><td>족압 측정 장치 및 체형 건강 측정 시스템</td><td class="code">KR 10-2024-0068497</td><td class="date">2024.05.27</td></tr>
+        <tr><td class="name">🇰🇷 출원</td><td>실시간 밸런스 및 자세 분석 맞춤형 건강관리 시스템</td><td class="code">KR 10-2025-0045957</td><td class="date">2025.04.09</td></tr>
+        <tr><td class="name">🇰🇷 출원</td><td>족저압 측정 장치</td><td class="code">KR 10-2025-0208869</td><td class="date">2025.12.24</td></tr>
+        <tr><td class="name">🌐 PCT</td><td>족저압 측정 장치 (국제출원)</td><td class="code">PCT/KR2025/022731</td><td class="date">2025.12.24</td></tr>
       </tbody>
     </table>
 
@@ -283,137 +709,82 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>04 / 06 · (주)케어엔코</span>
+      <span>05 / 06 · Certifications &amp; IP</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 5 · MARKET & TRACK RECORD ============== -->
+  <!-- ================================================================
+       PAGE 6 · MARKET · EXPORT · CONTACT
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">04 · Market</div>
+        <div class="sec-head__num">03 · Market &amp; Contact</div>
         <h2 class="sec-head__title">
-          시장 진출 · 실적
-          <small>Market Presence &amp; Track Record</small>
+          수출 실적 · 상담 문의
+          <small>Export Track Record &amp; Consultation Desk</small>
         </h2>
       </div>
       <div class="sec-head__side">Global<br/>Reach</div>
     </header>
 
-    <p class="body">케어엔코는 <strong>일본 헬스뷰티 · 자세교정 · 시니어 · 성장 클리닉</strong> 시장을 1순위 진출 지역으로 설정하고, 이미 <strong>VCCI(일본 EMC)</strong> 인증을 완료했습니다. 아동 성장기 자세 관리, 시니어 낙상 예방, 헬스 · 필라테스 스튜디오의 B2B SaaS 도입 등 다층 채널로 시장을 공략합니다.</p>
-
-    
-      <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 수출국 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Export Markets</span></h3>
-      <div class="map">
-        
-        <div class="map__chip">
-          <span class="flag">🇯🇵</span>
-          <span class="name">Japan</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇺🇸</span>
-          <span class="name">USA</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇩🇪</span>
-          <span class="name">Germany</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇸🇬</span>
-          <span class="name">Singapore</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇹🇼</span>
-          <span class="name">Taiwan</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇦🇪</span>
-          <span class="name">UAE</span>
-        </div>
-      </div>
-
-    <h3 style="margin: 6mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 성과 · 연혁 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Milestones</span></h3>
-    <div class="tl">
-      
-        <div class="tl__item">
-          <div class="tl__date">2023</div>
-          <div class="tl__title">피지카 스케일 프로토타입 개발</div>
-          <p class="tl__desc">634개 센서 어레이 · AI 알고리즘 초기 개발</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2024.04</div>
-          <div class="tl__title">VCCI 일본 EMC 인증 취득</div>
-          <p class="tl__desc">240400100SEL-EMC1 · 일본 시장 준비 완료</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2024</div>
-          <div class="tl__title">CE · FCC · KC 인증 완료</div>
-          <p class="tl__desc">북미 · 유럽 · 국내 시장 진출 기반 구축</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2024</div>
-          <div class="tl__title">GS 인증 1등급 획득</div>
-          <p class="tl__desc">TGS-A-24-0252-E · SW 우수성 검증</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2025</div>
-          <div class="tl__title">B2C 385,000원 가정용 판매 개시</div>
-          <p class="tl__desc">멤버십 서비스 결합</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2026.10</div>
-          <div class="tl__title">Medical Japan Tokyo 2026 참가</div>
-          <p class="tl__desc">Korea Pavilion KP-03</p>
-        </div>
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">주요 수출국 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Export Markets · 9 Countries · Cumulative USD 76,762 (2024–25)</span></h3>
+    <div class="map" style="margin-bottom:5mm;">
+      <div class="map__chip"><span class="flag">🇺🇸</span><span class="name">USA</span></div>
+      <div class="map__chip"><span class="flag">🇨🇦</span><span class="name">Canada</span></div>
+      <div class="map__chip"><span class="flag">🇩🇪</span><span class="name">Germany</span></div>
+      <div class="map__chip"><span class="flag">🇫🇷</span><span class="name">France</span></div>
+      <div class="map__chip"><span class="flag">🇮🇹</span><span class="name">Italy</span></div>
+      <div class="map__chip"><span class="flag">🇨🇿</span><span class="name">Czech</span></div>
+      <div class="map__chip"><span class="flag">🇦🇺</span><span class="name">Australia</span></div>
+      <div class="map__chip"><span class="flag">🇯🇵</span><span class="name">Japan</span></div>
+      <div class="map__chip"><span class="flag">🇸🇬</span><span class="name">Singapore</span></div>
     </div>
 
-    <div class="page__marker">
-      <span class="brand">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
-        Medical Japan 2026 · Export Consultation
-      </span>
-      <span>05 / 06 · (주)케어엔코</span>
-    </div>
-  </section>
-
-  <!-- ============== PAGE 6 · CONTACT & CONSULTATION ============== -->
-  <section class="page">
-    <header class="sec-head">
-      <div>
-        <div class="sec-head__num">05 · Consultation</div>
-        <h2 class="sec-head__title">
-          상담 문의 · 방문
-          <small>Contact &amp; On-site Consultation</small>
-        </h2>
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">글로벌 파트너십 · 진출 현황 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Partnership &amp; Milestones</span></h3>
+    <div class="tl" style="margin-bottom: 5mm;">
+      <div class="tl__item">
+        <div class="tl__date">2017</div>
+        <div class="tl__title">최초 특허 등록 · 족저압 측정 시스템</div>
+        <p class="tl__desc">KR 10-201775691 · 건강정보 제공 시스템 원천 기술 확보</p>
       </div>
-      <div class="sec-head__side">Get in<br/>Touch</div>
-    </header>
-
-    <p class="body">
-      <strong>(주)케어엔코</strong>는 Medical Japan Tokyo 2026 연계 수출상담회 기간 중 <strong>Korea Pavilion Booth KP-03</strong>에서 해외 바이어 대상 1:1 상담을 진행합니다. 사전 상담 예약 및 자료 요청은 아래 채널을 통해 가능합니다.
-    </p>
-
-    <div class="tags" style="margin: 6mm 0;">
-      <span class="tag tag--purple">주요 관심 시장 · 일본 · 자세교정 · 시니어 · 성장 클리닉</span>
-      <span class="tag tag--green">상담 매칭 · 기업당 5건 내외</span>
-      <span class="tag">통역 지원 · 한 · 영 · 일</span>
+      <div class="tl__item">
+        <div class="tl__date">2022</div>
+        <div class="tl__title">ISO 9001 · 미국 특허 등록 (US 11,311,208 B2)</div>
+        <p class="tl__desc">품질경영시스템 확보 · 글로벌 IP 기반 마련</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">2024</div>
+        <div class="tl__title">CE · FCC · VCCI · GS 1등급 · 미국 법인 설립</div>
+        <p class="tl__desc">유럽·미국·일본 인증 + Care&amp;Co USA 완료 · 일본 파트너 계약</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">2025</div>
+        <div class="tl__title">누적 수출 USD 76,762 · UAE NDA 2건</div>
+        <p class="tl__desc">9개국 수출 확대 · 중동 시장 파트너 검증 단계</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">2026.10</div>
+        <div class="tl__title">Medical Japan Tokyo 2026 참가</div>
+        <p class="tl__desc">Makuhari Messe · KP-03 · 일본 파트너와 본격 공급 개시</p>
+      </div>
     </div>
 
     <div class="contact-card">
       <h3>(주)케어엔코 · Consultation Desk</h3>
       <div class="c-rows">
-        <div><span>Company</span><b>Care&Co Corp.</b></div>
-        <div><span>Category</span><b>디지털 헬스 · AI 진단</b></div>
-        <div><span>Booth</span><b>Booth KP-03 · Korea Pavilion</b></div>
+        <div><span>Company</span><b>(주)케어엔코 · Care&amp;Co Corp.</b></div>
+        <div><span>CEO</span><b>윤정용 · Yoon Jung-Yong</b></div>
+        <div><span>Brand</span><b>Fisica (피지카) · Body Balance Analysis</b></div>
+        <div><span>Booth</span><b>KP-03 · Korea Pavilion, Makuhari Messe</b></div>
         <div><span>Date</span><b>2026. 10. 7 – 10. 9 (JST)</b></div>
-        <div><span>Contact</span><b><span class="e-mail" data-b64="Z2xvYmFsQGNhcmUtbi1jby5jb20="></span></b></div>
-        <div><span>Website</span><b>www.care-n-co.com</b></div>
+        <div><span>Website</span><b>www.carenco.kr</b></div>
       </div>
     </div>
 
-    <p class="body" style="margin-top: 8mm; font-size: 9pt; color: var(--ink-500);">
+    <p class="body" style="margin-top: 4mm; font-size: 8.5pt; color: var(--ink-500);">
       본 브로셔의 사양·인증·수치는 발행 시점의 자료를 기준으로 하며 사전 통보 없이 변경될 수 있습니다. 사전 상담 신청 및 통합 안내는
-      <a href="../index.html#register" style="color:var(--purple-700);font-weight:600">Medical Japan 2026 사전등록 페이지</a>에서 가능합니다.
+      <a href="../Medical Japan 2026.html#register" style="color:var(--purple-700);font-weight:600">Medical Japan 2026 사전등록 페이지</a>에서 가능합니다.
     </p>
 
     <div class="page__marker">
@@ -421,19 +792,18 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>06 / 06 · (주)케어엔코</span>
+      <span>06 / 06 · Contact</span>
     </div>
   </section>
 
 </div>
+
 <script>
-  // Auto-open print dialog when opened with ?print=1
   (function(){
     var q = new URLSearchParams(window.location.search);
     if (q.get('print') === '1') {
       window.addEventListener('load', function(){
-        // Wait for fonts + layout
-        setTimeout(function(){ window.print(); }, 600);
+        setTimeout(function(){ window.print(); }, 700);
       });
     }
   })();

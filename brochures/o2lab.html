@@ -6,23 +6,479 @@
 <title>(주)오투랩 · Company Brochure | Medical Japan 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
 <link rel="stylesheet" href="brochure.css"/>
+<style>
+  :root{
+    --navy-900: #0A153F;
+    --navy-800: #0F1E5A;
+    --brand-cyan: #38B6E0;
+    --brand-mint: #64B5A5;
+  }
+
+  /* Company page — hero band */
+  .co-hero{
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 5mm;
+    margin: 4mm 0 5mm;
+    align-items: center;
+  }
+  .co-hero__text{ padding: 2mm 0; }
+  .co-hero__slogan{
+    font-family: var(--font-en); font-size: 8pt; font-weight: 700;
+    color: var(--purple-700); letter-spacing: .18em;
+    text-transform: uppercase; margin: 0 0 2mm;
+  }
+  .co-hero__headline{
+    font-size: 17pt; font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.3;
+    color: var(--ink-900); margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .co-hero__headline em{ font-style: normal; color: var(--purple-700); }
+  .co-hero__desc{
+    font-size: 9.5pt; color: var(--ink-700);
+    line-height: 1.7; margin: 0;
+    word-break: keep-all;
+  }
+  .co-hero__desc strong{ color: var(--ink-900); font-weight: 600; }
+  .co-hero__visual{
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--lilac-25), var(--lilac-100));
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    padding: 3mm;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .co-hero__visual::before{
+    content: "";
+    position: absolute; top: -30%; right: -30%;
+    width: 80%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(100,181,165,.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .co-hero__visual img{
+    width: 100%; height: 100%;
+    object-fit: contain;
+    position: relative; z-index: 1;
+    border-radius: 2mm;
+  }
+
+  /* Company info grid */
+  .co-info-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5mm;
+    margin: 3mm 0 4mm;
+  }
+  .co-info-cell{
+    padding: 3.5mm 4mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3mm;
+  }
+  .co-info-cell__label{
+    font-family: var(--font-en);
+    font-size: 7pt; font-weight: 800;
+    color: var(--purple-700); letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: 1.5mm;
+  }
+  .co-info-cell__value{
+    font-size: 9.5pt; font-weight: 700;
+    color: var(--ink-900); letter-spacing: -0.015em;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .co-info-cell__value small{
+    display: block; font-family: var(--font-en);
+    font-size: 8pt; color: var(--ink-500);
+    font-weight: 500; margin-top: 1mm;
+  }
+
+  /* Key numbers strip */
+  .key-nums{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin: 4mm 0;
+  }
+  .key-nums__cell{
+    padding: 4mm;
+    background: linear-gradient(135deg, #0A153F 0%, var(--purple-800) 100%);
+    color: #fff;
+    border-radius: 3mm;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .key-nums__cell::before{
+    content: "";
+    position: absolute; top: -30%; right: -30%;
+    width: 60%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(245,166,35,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .key-nums__n{
+    font-family: var(--font-en); font-weight: 900;
+    font-size: 26pt; color: #F5A623;
+    letter-spacing: -0.03em; line-height: 1;
+    margin: 0;
+  }
+  .key-nums__n sup{ font-size: 11pt; margin-left: 1mm; }
+  .key-nums__l{
+    margin-top: 2mm; font-size: 8.5pt;
+    color: #fff; font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .key-nums__l small{
+    display: block; font-family: var(--font-en);
+    font-size: 7pt; color: rgba(255,255,255,.6);
+    font-weight: 500; margin-top: 1mm;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+
+  /* Product page layout */
+  .product-page__hero{
+    display: grid;
+    grid-template-columns: 0.95fr 1fr;
+    gap: 5mm;
+    align-items: start;
+    margin: 4mm 0 4mm;
+  }
+  .product-page__img{
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #F6F2FE, #EDE7FB);
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    padding: 3mm;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-page__img::after{
+    content: attr(data-tag);
+    position: absolute;
+    top: 3mm; left: 3mm;
+    padding: 1mm 3mm;
+    background: rgba(255,255,255,.9);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+  }
+  .product-page__img img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 2mm;
+  }
+  .product-page__info{ padding-top: 2mm; }
+  .product-page__cat{
+    display: inline-block;
+    padding: 1mm 3mm;
+    background: var(--lilac-50);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    margin-bottom: 3mm;
+  }
+  .product-page__cat--flagship{ background: #FEF6E7; color: #8B5A00; }
+  .product-page__cat--digital{ background: #E0F2FE; color: #0C4A6E; }
+  .product-page__name{
+    font-family: var(--font-en); font-size: 22pt; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.1;
+    color: var(--ink-900); margin: 0 0 2mm;
+  }
+  .product-page__name-kr{
+    font-size: 12pt; font-weight: 700;
+    color: var(--ink-700); margin: 0 0 3mm;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+  }
+  .product-page__tagline{
+    padding: 3mm 4mm;
+    background: var(--lilac-25);
+    border-left: 3px solid var(--purple-600);
+    border-radius: 0 2mm 2mm 0;
+    font-size: 9pt; line-height: 1.6;
+    color: var(--ink-700);
+    margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .product-page__tagline strong{ color: var(--purple-700); font-weight: 700; }
+  .product-page__nums{
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+  }
+  .product-page__num{
+    padding: 2.5mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 2mm;
+    text-align: center;
+  }
+  .product-page__num .n{
+    font-family: var(--font-en); font-weight: 800;
+    font-size: 15pt; color: var(--purple-700);
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .product-page__num .l{
+    margin-top: 1mm; font-size: 7.5pt;
+    color: var(--ink-500); font-weight: 600;
+  }
+
+  /* Product details block */
+  .product-details{
+    margin-top: 3mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+  }
+  .product-details h3{
+    font-size: 10pt; font-weight: 800;
+    color: var(--ink-900); margin: 0 0 3mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: -0.015em;
+    display: flex; align-items: center; gap: 2mm;
+  }
+  .product-details h3::before{
+    content: "";
+    width: 3mm; height: 3mm;
+    background: var(--purple-600);
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .product-details ul{
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 1.5mm;
+  }
+  .product-details li{
+    padding-left: 4mm;
+    position: relative;
+    font-size: 8.5pt;
+    line-height: 1.5;
+    color: var(--ink-700);
+    word-break: keep-all;
+  }
+  .product-details li::before{
+    content: "▸";
+    position: absolute; left: 0; top: 0;
+    color: var(--purple-500);
+    font-weight: 700;
+  }
+  .product-details li strong{ color: var(--ink-900); font-weight: 700; }
+
+  /* Product spec table (compact) */
+  .product-spec-mini{
+    margin-top: 3mm;
+    padding: 3mm 4mm;
+    background: var(--gray-50);
+    border-radius: 2mm;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2mm 3mm;
+  }
+  .product-spec-mini > div{
+    font-size: 8pt;
+    line-height: 1.4;
+  }
+  .product-spec-mini .k{
+    font-family: var(--font-en); font-size: 7pt;
+    color: var(--ink-500); font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .product-spec-mini .v{
+    color: var(--ink-900); font-weight: 700;
+  }
+
+  /* Product cert strip */
+  .product-cert-strip{
+    display: flex; gap: 1.5mm; flex-wrap: wrap;
+    margin-top: 3mm; padding-top: 3mm;
+    border-top: 1px dashed var(--line);
+  }
+  .product-cert-strip .cert{
+    padding: 1.5mm 3mm;
+    border-radius: 999px;
+    font-size: 7.5pt; font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .product-cert-strip .cert--purple{
+    background: var(--lilac-50);
+    color: var(--purple-700);
+  }
+  .product-cert-strip .cert--gold{
+    background: #FEF6E7;
+    color: #8B5A00;
+  }
+  .product-cert-strip .cert--green{
+    background: #E8F5EE;
+    color: var(--green-ink);
+  }
+  .product-cert-strip .cert--info{
+    background: var(--gray-50);
+    color: var(--ink-700);
+    font-family: var(--font-en); font-weight: 600;
+  }
+
+  /* 5-Mode grid */
+  .mode-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2.5mm;
+    margin: 4mm 0;
+  }
+  .mode-cell{
+    padding: 4mm 3mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3mm;
+    text-align: center;
+    position: relative;
+  }
+  .mode-cell--static{
+    background: linear-gradient(135deg, #E0F2FE, #fff);
+    border-color: #0C4A6E;
+  }
+  .mode-cell__num{
+    font-family: var(--font-en); font-size: 9pt; font-weight: 800;
+    color: var(--purple-700); letter-spacing: .12em;
+    text-transform: uppercase; margin: 0 0 2mm;
+  }
+  .mode-cell--static .mode-cell__num{ color: #0C4A6E; }
+  .mode-cell__ico{
+    width: 12mm; height: 12mm;
+    margin: 0 auto 2mm;
+    background: var(--lilac-50);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: var(--purple-700);
+  }
+  .mode-cell--static .mode-cell__ico{
+    background: #E0F2FE; color: #0C4A6E;
+  }
+  .mode-cell__ico svg{ width: 6mm; height: 6mm; }
+  .mode-cell__name{
+    font-size: 9pt; font-weight: 800;
+    color: var(--ink-900); margin: 0 0 1mm;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .mode-cell__desc{
+    font-size: 7pt; color: var(--ink-500);
+    margin: 0; line-height: 1.4;
+  }
+
+  /* 4-Type grid (body types) */
+  .type-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5mm;
+    margin: 4mm 0;
+  }
+  .type-cell{
+    padding: 4mm 3mm;
+    background: linear-gradient(180deg, var(--lilac-25), #fff);
+    border: 1px solid var(--purple-400);
+    border-radius: 3mm;
+    text-align: center;
+  }
+  .type-cell__label{
+    font-family: var(--font-en); font-size: 7pt; font-weight: 800;
+    color: var(--purple-700); letter-spacing: .14em;
+    text-transform: uppercase; margin: 0 0 2mm;
+  }
+  .type-cell__body{
+    display: grid; place-items: center;
+    margin: 2mm 0;
+    color: var(--purple-700);
+  }
+  .type-cell__body svg{ width: 18mm; height: 18mm; }
+  .type-cell__name{
+    font-size: 9.5pt; font-weight: 800;
+    color: var(--ink-900); margin: 0 0 1mm;
+  }
+  .type-cell__desc{
+    font-size: 7pt; color: var(--ink-500);
+    margin: 0; line-height: 1.4;
+  }
+
+  /* One-Stop System flow */
+  .flow{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) auto;
+    gap: 0;
+    margin: 4mm 0;
+    align-items: center;
+  }
+  .flow-step{
+    padding: 3mm 2mm;
+    background: linear-gradient(135deg, var(--purple-600), var(--purple-800));
+    color: #fff;
+    border-radius: 3mm;
+    text-align: center;
+    position: relative;
+  }
+  .flow-step__n{
+    font-family: var(--font-en); font-size: 7pt; font-weight: 800;
+    color: #F5A623; letter-spacing: .1em;
+    margin: 0 0 1mm;
+  }
+  .flow-step__t{
+    font-size: 8pt; font-weight: 700;
+    line-height: 1.3; margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .flow-arrow{
+    display: grid; place-items: center;
+    padding: 0 1mm;
+    color: var(--purple-500);
+    font-size: 12pt; font-weight: 800;
+  }
+  .flow-arrow--back{
+    grid-column: 1 / -1;
+    margin-top: 2mm;
+    padding: 2mm;
+    background: linear-gradient(90deg, transparent, rgba(245,166,35,.1), transparent);
+    border-top: 1px dashed var(--gold);
+    text-align: center;
+    color: var(--gold);
+    font-family: var(--font-en); font-size: 8pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+
+  @media (max-width: 700px){
+    .co-hero, .product-page__hero, .product-details,
+    .co-info-grid, .key-nums{ grid-template-columns: 1fr; }
+    .product-spec-mini{ grid-template-columns: 1fr 1fr; }
+    .mode-grid{ grid-template-columns: repeat(2, 1fr); }
+    .type-grid{ grid-template-columns: 1fr 1fr; }
+    .flow{ grid-template-columns: 1fr; }
+    .flow-arrow{ display: none; }
+  }
+</style>
 </head>
 <body>
 
 <!-- Screen toolbar -->
 <div class="toolbar">
   <div class="toolbar__left">
-    <a href="../index.html" class="toolbar__brand">
+    <a href="../Medical Japan 2026.html" class="toolbar__brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
       Medical Japan 2026
     </a>
     <span style="color:rgba(255,255,255,.6)">/ Exhibitor Brochure · (주)오투랩</span>
   </div>
   <div class="toolbar__right">
-    <a href="../index.html" class="tb-btn">← 랜딩페이지로</a>
+    <a href="../Medical Japan 2026.html" class="tb-btn">← 랜딩페이지로</a>
     <button class="tb-btn tb-btn--primary" onclick="window.print()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       PDF 다운로드 / 인쇄
@@ -32,7 +488,9 @@
 
 <div class="pages">
 
-  <!-- ============== PAGE 1 · COVER ============== -->
+  <!-- ================================================================
+       PAGE 1 · COVER
+       ================================================================ -->
   <section class="page cover">
     <div class="cover__inner">
       <div class="cover__top">
@@ -42,17 +500,19 @@
       <div class="cover__event">Korea Health Industry Export Consultation</div>
       <h1 class="cover__co">
         (주)오투랩
-        <small>O2Lab Co., Ltd.</small>
+        <small>O2Lab · Smart Body Balance &amp; Rehab Solutions</small>
       </h1>
-      <p class="cover__tagline">자체 개발 밸런스 인덱스 알고리즘으로 정적·동적 균형을 정량 분석하는 One-Stop 재활 솔루션.</p>
+      <p class="cover__tagline">
+        움직임을 연구하고 건강한 삶을 제안합니다. 자체 개발한 <strong>밸런스 인덱스 알고리즘</strong>으로 정적·동적 균형을 정량 측정하고 <strong>One-Stop 균형관리 체계</strong>를 구현하는 스마트 헬스케어 장비 전문 기업. <strong>미국·영국·말레이시아 등 8개국 수출</strong>.
+      </p>
       <dl class="cover__meta">
         <div>
           <dt>Product</dt>
-          <dd>다이나믹 밸런스 (Dynamic Balance)</dd>
+          <dd>Dynamic Balance (다이나믹 밸런스)</dd>
         </div>
         <div>
           <dt>Category</dt>
-          <dd>재활 · 균형측정 의료기기</dd>
+          <dd>디지털 헬스케어 · 재활 · 균형측정 의료기기</dd>
         </div>
         <div>
           <dt>Booth</dt>
@@ -66,110 +526,371 @@
     </div>
   </section>
 
-  <!-- ============== PAGE 2 · COMPANY OVERVIEW ============== -->
+  <!-- ================================================================
+       PAGE 2 · COMPANY OVERVIEW
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
         <div class="sec-head__num">01 · Company</div>
         <h2 class="sec-head__title">
-          기업 개요
-          <small>Company Overview</small>
+          회사 소개
+          <small>About O2Lab · onlyonelab.co.kr</small>
         </h2>
       </div>
-      <div class="sec-head__side">(주)오투랩<br/>Brochure</div>
+      <div class="sec-head__side">Company<br/>Overview</div>
     </header>
 
-    <div class="hero-visual" data-caption="DYNAMIC BALANCE · Class I">
-      <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="30" y="110" width="140" height="34" rx="6"/><path d="M100 110 v -60"/><circle cx="100" cy="42" r="10"/><path d="M50 144 v 14 M150 144 v 14"/><path d="M60 96 h 80" stroke-dasharray="6 6"/><path d="M76 130 h 48"/></svg>
+    <div class="co-hero">
+      <div class="co-hero__text">
+        <p class="co-hero__slogan">◆ Movement Study · Healthier Life</p>
+        <h3 class="co-hero__headline">
+          <em>움직임을 연구</em>하고<br/>
+          건강한 삶을 제안합니다.
+        </h3>
+        <p class="co-hero__desc">
+          <strong>O2Lab(오투랩)</strong>은 물리치료·재활 분야의 전문성을 바탕으로 설립된 스마트 헬스케어 장비·솔루션 R&amp;D 기업입니다. <strong>바이오헬스 분야의 지식과 기술을 기반으로 신체 균형 능력과 자세 건강 관리</strong>를 위한 측정평가, 연구개발, 생산을 수행하며, 물리치료공학 특화 R&amp;D 조직과 기술 협업을 통해 <strong>인체 움직임 연구</strong> 및 <strong>손상 예방 스마트 헬스케어 제품</strong>을 개발합니다. 미국·중국·일본을 포함 <strong>8개국 수출망</strong>을 확장 중입니다.
+        </p>
+      </div>
+      <div class="co-hero__visual">
+        <img src="../assets/o2lab-dynamic-balance-main.jpg" alt="Dynamic Balance · 다이나믹 밸런스 실제 제품 사진"/>
+      </div>
     </div>
 
-    <p class="body">(주)오투랩은 <strong>균형 측정 · 데이터 분석 · 체형 유형 분류 · 맞춤형 운동 · 인지운동 → 재측정</strong>까지 이어지는 One-Stop 재활 솔루션을 자체 개발한 의료기기 전문기업입니다. 대표 제품 <strong>다이나믹 밸런스</strong>는 자체 개발한 밸런스 인덱스 알고리즘을 탑재해 정적·동적 균형 상태를 5가지 모드로 정량 분석하는 운동실조묘화기(의료기기 1등급)로, 병원·재활센터·헬스케어센터 등 다양한 현장에서 활용 가능한 이동형 구조가 특징입니다.</p>
+    <div class="co-info-grid">
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Company</div>
+        <div class="co-info-cell__value">(주)오투랩<small>O2Lab · Only One Lab Co., Ltd.</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">CEO · 대표</div>
+        <div class="co-info-cell__value">이수경<small>Lee Soo-Kyung</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Business</div>
+        <div class="co-info-cell__value">스마트 헬스케어 장비 R&amp;D<small>Balance · Rehab · Digital Health</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Product</div>
+        <div class="co-info-cell__value">Dynamic Balance · Ver.3<small>정적·동적 균형측정 의료기기</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Global</div>
+        <div class="co-info-cell__value">8개국 수출<small>USA · UK · Malaysia · Japan 등</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Contact</div>
+        <div class="co-info-cell__value">onlyonelab.co.kr<small>Booth KP-02 · Makuhari Messe</small></div>
+      </div>
+    </div>
 
-    <dl class="rows" style="margin-top:6mm">
-      
-        <dt>기업명<span class="en">Company</span></dt>
-        <dd>(주)오투랩<small>O2Lab Co., Ltd.</small></dd>
-        <dt>품목분야<span class="en">Category</span></dt>
-        <dd>의료기기 (운동실조묘화기 · Class I) · 재활 · 디지털 헬스<small>Rehab · Digital Health · Med-Device</small></dd>
-        <dt>주력 제품<span class="en">Product</span></dt>
-        <dd>다이나믹 밸런스 (Dynamic Balance)<small>Balance measurement + cognitive exercise</small></dd>
-        <dt>핵심 기술<span class="en">Core Tech</span></dt>
-        <dd>자체 개발 밸런스 인덱스 알고리즘<small>Proprietary Balance Index Algorithm</small></dd>
-        <dt>가격 경쟁력<span class="en">Price</span></dt>
-        <dd>국내 공급가 약 700만원 수준<small>≈ USD 5,300 (competitive vs. imports)</small></dd>
-        <dt>SW 성능<span class="en">SW Test</span></dt>
-        <dd>모드 전환 0.05초 · 데이터 수집 성공률 100%<small>Verified by 부산IT융합부품연구소</small></dd>
-    </dl>
+    <h3 style="margin: 2mm 0 3mm; font-size: 11pt; font-weight: 800; color: var(--ink-900); letter-spacing: -0.015em;">
+      Dynamic Balance의 핵심 수치 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Key Numbers · Verified Performance</span>
+    </h3>
+    <div class="key-nums">
+      <div class="key-nums__cell">
+        <p class="key-nums__n">5<sup>Mode</sup></p>
+        <p class="key-nums__l">정적 1 + 동적 4 측정<small>Balance Measurement Modes</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">100<sup>%</sup></p>
+        <p class="key-nums__l">데이터 수집 성공률<small>System Reliability</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">0.05<sup>sec</sup></p>
+        <p class="key-nums__l">평균 모드 전환시간<small>Response Speed</small></p>
+      </div>
+    </div>
 
     <div class="page__marker">
       <span class="brand">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>02 / 06 · (주)오투랩</span>
+      <span>02 / 08 · About O2Lab</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 3 · PRODUCT DETAIL ============== -->
+  <!-- ================================================================
+       PAGE 3 · Dynamic Balance Product Detail
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">02 · Product</div>
+        <div class="sec-head__num">Product · Flagship</div>
         <h2 class="sec-head__title">
-          대표 제품
-          <small>Dynamic Balance · Static &amp; Dynamic Balance Measurement Device</small>
+          Dynamic Balance
+          <small>다이나믹 밸런스 · 밸런스 인덱스 알고리즘 기반 균형측정 의료기기</small>
         </h2>
       </div>
-      <div class="sec-head__side">Flagship<br/>Product</div>
+      <div class="sec-head__side">Balance<br/>Measurement</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Medical Device · Class I">
+        <img src="../assets/o2lab-dynamic-balance-main.jpg" alt="Dynamic Balance 실제 제품 사진"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--flagship">◆ Flagship · 의료기기 1등급</span>
+        <p class="product-page__name">Dynamic Balance</p>
+        <p class="product-page__name-kr">다이나믹 밸런스 · 운동실조묘화기 (Ver.3)</p>
+        <div class="product-page__tagline">
+          자체 개발 <strong>밸런스 인덱스 알고리즘</strong>으로 인체의 정적·동적 균형 상태를 <strong>정량적으로 측정·분석</strong>하는 운동실조묘화기. 정적 1종 + 동적 4종 <strong>총 5가지 측정 모드</strong>로 좌우 압력 분포·중심 이동·균형 유지 능력 분석. 병원·재활센터·헬스케어센터 등 다양한 현장에서 활용 가능한 <strong>휴대·이동형 구조</strong>.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">5<sup>Mode</sup></div><div class="l">측정 모드</div></div>
+          <div class="product-page__num"><div class="n">4<sup>Type</sup></div><div class="l">체형 유형 분류</div></div>
+          <div class="product-page__num"><div class="n">Ver.3</div><div class="l">상용화 현황</div></div>
+          <div class="product-page__num"><div class="n">1<sup>등급</sup></div><div class="l">의료기기 분류</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Functions</h3>
+        <ul>
+          <li><strong>정적 + 동적 균형 측정</strong>: 5가지 모드 (정적 1 + 동적 4)</li>
+          <li><strong>좌우 압력 분포 분석</strong>: 정량적 데이터 시각화</li>
+          <li><strong>중심 이동·균형 유지 능력</strong> 정량 분석</li>
+          <li><strong>전용 앱 연동</strong>: 실시간 결과 확인 · 결과지 제공</li>
+          <li><strong>휴대·이동형 구조</strong>: 병원·재활센터 어디서든 설치</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적용 현장 · Applications</h3>
+        <ul>
+          <li>병원 · 재활클리닉 · 대학교</li>
+          <li>데이서비스센터 · 고령자 복지시설</li>
+          <li>지역 건강관리센터 · 헬스케어센터</li>
+          <li>한의원 · 낙상예방 프로그램 운영기관</li>
+          <li>스포츠·재활 트레이닝 센터</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">Dynamic Balance Ver.3</div></div>
+      <div><div class="k">Device</div><div class="v">557 × 436 × 33 mm</div></div>
+      <div><div class="k">Stand</div><div class="v">356 × 173 × 407 mm</div></div>
+      <div><div class="k">Material</div><div class="v">강화유리·PC (상판) / ABS (하판)</div></div>
+      <div><div class="k">Class</div><div class="v">의료기기 1등급 · 운동실조묘화기</div></div>
+      <div><div class="k">국내 공급가</div><div class="v">700만원 (경쟁품 2,000~8,800만원)</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 9001 &amp; 14001 (2019~2022 연속)</span>
+      <span class="cert cert--gold">GS 인증 1등급 (2020.02)</span>
+      <span class="cert cert--gold">의료기기 제조업 허가 · 1등급 제조신고</span>
+      <span class="cert cert--gold">KC 전자파 적합인증</span>
+      <span class="cert cert--green">부산IT융합부품연구소 SW 시험성적서 (SW-22-0059)</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>03 / 08 · Dynamic Balance</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 4 · 5-Mode Measurement + 4-Type Classification
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product · Technology</div>
+        <h2 class="sec-head__title">
+          측정 모드 · 체형 유형 분류
+          <small>5 Measurement Modes &amp; 4 Body-Type Classification</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Balance<br/>Technology</div>
+    </header>
+
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">5가지 측정 모드 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Static 1 + Dynamic 4 Modes</span></h3>
+    <div class="mode-grid">
+      <div class="mode-cell mode-cell--static">
+        <p class="mode-cell__num">MODE S</p>
+        <div class="mode-cell__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>
+        </div>
+        <p class="mode-cell__name">정적 균형</p>
+        <p class="mode-cell__desc">Static Balance</p>
+      </div>
+      <div class="mode-cell">
+        <p class="mode-cell__num">MODE D1</p>
+        <div class="mode-cell__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16M12 4l6 8-6 8"/></svg>
+        </div>
+        <p class="mode-cell__name">전후 이동</p>
+        <p class="mode-cell__desc">Anterior-Posterior</p>
+      </div>
+      <div class="mode-cell">
+        <p class="mode-cell__num">MODE D2</p>
+        <div class="mode-cell__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v16M4 12l8-6 8 6"/></svg>
+        </div>
+        <p class="mode-cell__name">좌우 이동</p>
+        <p class="mode-cell__desc">Medio-Lateral</p>
+      </div>
+      <div class="mode-cell">
+        <p class="mode-cell__num">MODE D3</p>
+        <div class="mode-cell__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/></svg>
+        </div>
+        <p class="mode-cell__name">원형 이동</p>
+        <p class="mode-cell__desc">Circular Motion</p>
+      </div>
+      <div class="mode-cell">
+        <p class="mode-cell__num">MODE D4</p>
+        <div class="mode-cell__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v6M12 21v-6M8 12H4M20 12h-4"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <p class="mode-cell__name">한발 서기</p>
+        <p class="mode-cell__desc">Single Leg Stand</p>
+      </div>
+    </div>
+
+    <h3 style="margin: 5mm 0 3mm; font-size: 11pt; font-weight: 800;">4가지 체형 유형 분류 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">4 Body-Type Classification · Grade-based</span></h3>
+    <div class="type-grid">
+      <div class="type-cell">
+        <p class="type-cell__label">TYPE A</p>
+        <div class="type-cell__body">
+          <svg viewBox="0 0 40 60" fill="currentColor"><circle cx="20" cy="8" r="5"/><rect x="17" y="15" width="6" height="20" rx="2"/><rect x="16" y="35" width="3" height="18" rx="1"/><rect x="21" y="35" width="3" height="18" rx="1"/></svg>
+        </div>
+        <p class="type-cell__name">균형형</p>
+        <p class="type-cell__desc">Balanced · 이상적 균형</p>
+      </div>
+      <div class="type-cell">
+        <p class="type-cell__label">TYPE B</p>
+        <div class="type-cell__body">
+          <svg viewBox="0 0 40 60" fill="currentColor"><circle cx="18" cy="8" r="5"/><rect x="15" y="15" width="6" height="20" rx="2" transform="rotate(-8 18 25)"/><rect x="14" y="35" width="3" height="18" rx="1"/><rect x="19" y="35" width="3" height="18" rx="1"/></svg>
+        </div>
+        <p class="type-cell__name">좌측 편중</p>
+        <p class="type-cell__desc">Left-Dominant</p>
+      </div>
+      <div class="type-cell">
+        <p class="type-cell__label">TYPE C</p>
+        <div class="type-cell__body">
+          <svg viewBox="0 0 40 60" fill="currentColor"><circle cx="22" cy="8" r="5"/><rect x="19" y="15" width="6" height="20" rx="2" transform="rotate(8 22 25)"/><rect x="18" y="35" width="3" height="18" rx="1"/><rect x="23" y="35" width="3" height="18" rx="1"/></svg>
+        </div>
+        <p class="type-cell__name">우측 편중</p>
+        <p class="type-cell__desc">Right-Dominant</p>
+      </div>
+      <div class="type-cell">
+        <p class="type-cell__label">TYPE D</p>
+        <div class="type-cell__body">
+          <svg viewBox="0 0 40 60" fill="currentColor"><circle cx="20" cy="8" r="5"/><rect x="17" y="15" width="6" height="20" rx="2"/><rect x="16" y="35" width="3" height="18" rx="1"/><rect x="21" y="35" width="3" height="18" rx="1"/><path d="M 10 30 Q 20 34 30 30" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </div>
+        <p class="type-cell__name">불안정형</p>
+        <p class="type-cell__desc">Unstable · 관리 필요</p>
+      </div>
+    </div>
+
+    <h3 style="margin: 5mm 0 3mm; font-size: 11pt; font-weight: 800;">One-Stop System · 균형관리 체계 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Continuous Balance Management Flow</span></h3>
+    <div class="flow">
+      <div class="flow-step">
+        <p class="flow-step__n">01</p>
+        <p class="flow-step__t">균형 측정</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <p class="flow-step__n">02</p>
+        <p class="flow-step__t">데이터 분석</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <p class="flow-step__n">03</p>
+        <p class="flow-step__t">체형 유형 분류</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <p class="flow-step__n">04</p>
+        <p class="flow-step__t">맞춤 운동·인지운동</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <p class="flow-step__n">05</p>
+        <p class="flow-step__t">재측정 · 변화 확인</p>
+      </div>
+      <div class="flow-arrow--back">↺ Continuous Improvement Loop</div>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>04 / 08 · Balance Technology</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 5 · Cognitive Training + Differentiation
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product · Solution</div>
+        <h2 class="sec-head__title">
+          맞춤 인지운동 · 차별화 포인트
+          <small>Cognitive Training Program &amp; Competitive Edge</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Solution<br/>Strengths</div>
     </header>
 
     <div class="pull">
-      <em>다이나믹 밸런스 (Dynamic Balance)</em> — <strong>정적 1종 + 동적 4종</strong> 총 5가지 측정 모드로 좌우 압력 분포, 중심 이동, 균형 유지 능력을 정량화하고, <em>4가지 체형 유형 · 등급별 맞춤 운동 · 실시간 인지운동 프로그램</em>까지 하나의 솔루션에서 제공합니다.
+      <em>Dynamic Balance는 측정만 하는 장비가 아닙니다.</em> 측정 데이터를 기반으로 <strong>맞춤형 운동 솔루션과 실시간 반응형 인지운동 프로그램</strong>까지 제공하여, 단순 측정 중심의 경쟁제품과 근본적으로 차별화됩니다.
     </div>
 
-    <div class="kn">
-      
-        <div class="kn__card">
-          <div class="kn__num">5</div>
-          <div class="kn__lab">측정 모드<small>Static 1 + Dynamic 4</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">4</div>
-          <div class="kn__lab">체형 유형 분류<small>Body Type Categories</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">0.05<sup>s</sup></div>
-          <div class="kn__lab">모드 전환 시간<small>Instant Switching</small></div>
-        </div>
-        <div class="kn__card">
-          <div class="kn__num">100<sup>%</sup></div>
-          <div class="kn__lab">데이터 수집 성공률<small>SW Test Passed</small></div>
-        </div>
+    <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">실시간 반응형 인지운동 · Cognitive Training</h3>
+    <div class="product-details" style="margin-top: 0;">
+      <div>
+        <h3>측정·확인 가능한 지표</h3>
+        <ul>
+          <li><strong>중심 이동 양상</strong>: 실시간 궤적 시각화</li>
+          <li><strong>균형 유지시간</strong>: 정량적 기록</li>
+          <li><strong>한발 들기 수행시간</strong>: 좌우 비교 분석</li>
+          <li><strong>좌우·전후 밸런스 변화</strong>: 시각·정량 확인</li>
+          <li><strong>등급별 특성 분류</strong>: 유형별 맞춤 처방</li>
+        </ul>
+      </div>
+      <div>
+        <h3>맞춤형 운동 솔루션</h3>
+        <ul>
+          <li>4가지 체형 유형별 <strong>운동 프로그램</strong> 자동 제안</li>
+          <li>실시간 반응형 <strong>인지운동 프로그램</strong> 병행</li>
+          <li>측정 → 훈련 → 재측정 <strong>변화 관리</strong></li>
+          <li>결과지 자동 생성으로 <strong>상담·교육</strong> 지원</li>
+          <li>데이터 누적 시 <strong>알고리즘 고도화</strong> 가능</li>
+        </ul>
+      </div>
     </div>
 
-    <h3 style="margin: 6mm 0 3mm; font-size: 12pt; font-weight: 800; letter-spacing: -0.02em;">핵심 기능 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9.5pt;margin-left:6px">Key Features</span></h3>
-    <div class="features">
-      
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></div>
-          <p class="feat__title">밸런스 인덱스 알고리즘<small>Balance Index Algorithm</small></p>
-          <p class="feat__desc">자체 개발한 알고리즘을 기반으로 좌우 압력 분포, 중심 이동, 균형 유지 능력을 정량 분석합니다.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4"/></svg></div>
-          <p class="feat__title">전용 앱 실시간 연동<small>App-Connected</small></p>
-          <p class="feat__desc">전용 애플리케이션과 연동하여 측정 결과를 실시간 확인하고 결과지 제공까지 지원합니다.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 20c0-4 3-7 7-7s7 3 7 7"/><circle cx="17" cy="7" r="3"/><path d="M22 18c0-3-2-5-5-5"/></svg></div>
-          <p class="feat__title">맞춤형 인지운동<small>Cognitive Exercise</small></p>
-          <p class="feat__desc">4가지 체형 유형별 맞춤형 운동 솔루션과 실시간 반응형 인지운동 프로그램을 제공합니다.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
-          <p class="feat__title">휴대형 구조<small>Portable Design</small></p>
-          <p class="feat__desc">이동형 모니터링 거치대와 33mm 슬림 상판으로 병원·재활센터·헬스케어센터에서 자유롭게 활용.</p>
-        </div>
+    <h3 style="margin: 5mm 0 3mm; font-size: 11pt; font-weight: 800;">경쟁제품 대비 차별화 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Competitive Advantage</span></h3>
+    <table class="certs" style="margin-bottom:3mm;">
+      <thead>
+        <tr>
+          <th style="width: 25%;">비교 항목</th>
+          <th style="width: 37%;">경쟁제품</th>
+          <th>Dynamic Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="name">측정 범위</td><td>단일 자세 or 압력 분포만</td><td><strong style="color:var(--purple-700)">정적 + 동적 5가지 모드</strong></td></tr>
+        <tr><td class="name">측정 이후</td><td>결과 확인에 그침</td><td><strong style="color:var(--purple-700)">체형 유형 → 맞춤 솔루션까지</strong></td></tr>
+        <tr><td class="name">인지운동</td><td>없음 or 별도 장비 필요</td><td><strong style="color:var(--purple-700)">실시간 반응형 통합</strong></td></tr>
+        <tr><td class="name">이동성</td><td>고정 설치형</td><td><strong style="color:var(--purple-700)">휴대·이동 가능</strong></td></tr>
+        <tr style="background:linear-gradient(90deg, rgba(245,166,35,.08), transparent);"><td class="name">가격</td><td>2,000 ~ 8,800만원</td><td><strong style="color:#8B5A00">국내 공급가 700만원</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div style="padding: 3.5mm 5mm; background: linear-gradient(135deg, var(--lilac-25), #fff); border-left: 3px solid var(--purple-600); border-radius: 0 2mm 2mm 0; font-size: 9pt; line-height: 1.6; color: var(--ink-700); word-break: keep-all;">
+      <strong style="color: var(--purple-700);">🎯 부산IT융합부품연구소 검증</strong>: 평균 모드 전환시간 <strong>0.05초</strong>, 데이터 수집 성공률 <strong>100%</strong> 확인 (시험성적서 SW-22-0059) · 시스템 안정성과 데이터 처리 성능 검증
     </div>
 
     <div class="page__marker">
@@ -177,104 +898,61 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>03 / 06 · (주)오투랩</span>
+      <span>05 / 08 · Solution &amp; Differentiation</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 4 · SPEC & CERTIFICATION ============== -->
+  <!-- ================================================================
+       PAGE 6 · CERTIFICATIONS · IP
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">03 · Specification</div>
+        <div class="sec-head__num">02 · Compliance</div>
         <h2 class="sec-head__title">
-          제품 사양 · 인증
-          <small>Specifications &amp; Certifications</small>
+          인증 · 지식재산권
+          <small>Certifications &amp; Patent Portfolio</small>
         </h2>
       </div>
-      <div class="sec-head__side">Quality<br/>Compliance</div>
+      <div class="sec-head__side">Quality<br/>&amp; IP</div>
     </header>
 
-    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">제품 사양 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Product Specification</span></h3>
-    <dl class="rows">
-      
-        <dt>제품명 · Model</dt>
-        <dd>다이나믹 밸런스 · Dynamic Balance</dd>
-        <dt>본체 소재</dt>
-        <dd>상판(강화유리 · PC) / 하판(ABS)</dd>
-        <dt>본체 규격</dt>
-        <dd>557 × 436 × 33 mm</dd>
-        <dt>거치대 규격</dt>
-        <dd>이동형 모니터링 거치대 356 × 173 × 407 mm</dd>
-        <dt>측정 모드</dt>
-        <dd>정적 1종 + 동적 4종 (총 5종)</dd>
-        <dt>분석 지표</dt>
-        <dd>좌우 압력 분포 · 중심 이동 · 균형 유지 능력</dd>
-        <dt>체형 유형</dt>
-        <dd>4가지 유형 · 등급별 특성 분류</dd>
-        <dt>운영 프로그램</dt>
-        <dd>맞춤 운동 · 실시간 반응형 인지운동</dd>
-    </dl>
-
-    <h3 style="margin: 8mm 0 3mm; font-size: 11pt; font-weight: 800;">인증 및 지식재산권 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Certifications &amp; IP</span></h3>
-    <table class="certs">
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">특허 포트폴리오 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Patent Portfolio · 4 KR + 1 PCT</span></h3>
+    <table class="certs" style="margin-bottom: 5mm;">
       <thead>
         <tr>
-          <th>구분 · Category</th>
-          <th>인증 · Certification</th>
-          <th>인증번호 · Number</th>
-          <th>일자 · Date</th>
+          <th>구분</th>
+          <th>발명 명칭</th>
+          <th>등록/출원번호</th>
+          <th>일자</th>
         </tr>
       </thead>
       <tbody>
-        
+        <tr><td class="name">🇰🇷 등록</td><td>다이나믹 밸런서</td><td class="code">KR 10-1887097</td><td class="date">2018.08.03</td></tr>
+        <tr><td class="name">🇰🇷 등록</td><td>다이나믹 밸런서 제어시스템 및 제어방법</td><td class="code">KR 10-2231899</td><td class="date">2021.03.19</td></tr>
+        <tr><td class="name">🇰🇷 등록</td><td>신체 균형능력 측정 장치 및 제어방법</td><td class="code">KR 10-2514194</td><td class="date">2023.03.27</td></tr>
+        <tr><td class="name">🇰🇷 출원</td><td>체형 및 근골격 측정 기반 동작 분석 장치</td><td class="code">KR 10-2023-0151813</td><td class="date">2024.03.18</td></tr>
+        <tr style="background:linear-gradient(90deg, rgba(245,166,35,.08), transparent);"><td class="name">🌐 PCT</td><td><strong>다이나믹 밸런서 제어시스템 (해외)</strong></td><td class="code">PCT/KR2019/017084</td><td class="date">2019.12.05</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">인증 현황 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Certifications</span></h3>
+    <table class="certs" style="margin-bottom: 3mm;">
+      <thead>
         <tr>
-          <td class="name">의료기기</td>
-          <td>의료기기 1등급 (운동실조묘화기) 제조신고</td>
-          <td class="code">Class I MFDS</td>
-          <td class="date">2024</td>
+          <th>구분</th>
+          <th>인증 · Certification</th>
+          <th>대상</th>
+          <th>일자</th>
         </tr>
-        <tr>
-          <td class="name">품질</td>
-          <td>ISO 9001 (품질경영시스템)</td>
-          <td class="code">QMS-9001</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">환경</td>
-          <td>ISO 14001 (환경경영시스템)</td>
-          <td class="code">EMS-14001</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">전자파</td>
-          <td>KC 전자파 적합인증</td>
-          <td class="code">KC-EMC</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">SW 우수성</td>
-          <td>GS인증 1등급</td>
-          <td class="code">GS-Grade-1</td>
-          <td class="date">2024</td>
-        </tr>
-        <tr>
-          <td class="name">특허</td>
-          <td>다이나믹 밸런서</td>
-          <td class="code">제10-1887097호</td>
-          <td class="date">2018</td>
-        </tr>
-        <tr>
-          <td class="name">특허</td>
-          <td>다이나믹 밸런서 제어시스템 및 제어방법</td>
-          <td class="code">제10-2231899호</td>
-          <td class="date">2021</td>
-        </tr>
-        <tr>
-          <td class="name">해외 특허</td>
-          <td>PCT 국제출원</td>
-          <td class="code">PCT/KR</td>
-          <td class="date">진행 중</td>
-        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:linear-gradient(90deg, rgba(245,166,35,.08), transparent);"><td class="name">🏆 국제</td><td><strong>GS 인증 1등급</strong></td><td>Dynamic Balance 2.0</td><td class="date">2020.02.27</td></tr>
+        <tr><td class="name">품질 · 환경</td><td>ISO 9001 &amp; ISO 14001</td><td>품질환경경영시스템</td><td class="date">2019~2022 연속</td></tr>
+        <tr><td class="name">의료기기</td><td>의료기기 제조업 허가</td><td>㈜오투랩</td><td class="date">보유</td></tr>
+        <tr><td class="name">의료기기</td><td>운동실조묘화기 1등급 제조신고</td><td>Dynamic Balance</td><td class="date">보유</td></tr>
+        <tr><td class="name">🇰🇷 국내</td><td>KC 전자파 적합인증</td><td>Dynamic Balance</td><td class="date">보유</td></tr>
+        <tr><td class="name">SW 검증</td><td>부산IT융합부품연구소 SW 시험성적서</td><td class="code">SW-22-0059</td><td class="date">2022</td></tr>
       </tbody>
     </table>
 
@@ -283,88 +961,81 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>04 / 06 · (주)오투랩</span>
+      <span>06 / 08 · Certifications &amp; IP</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 5 · MARKET & TRACK RECORD ============== -->
+  <!-- ================================================================
+       PAGE 7 · MARKET · EXPORT
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">04 · Market</div>
+        <div class="sec-head__num">03 · Market</div>
         <h2 class="sec-head__title">
-          시장 진출 · 실적
-          <small>Market Presence &amp; Track Record</small>
+          해외 시장 진출 · 수출 실적
+          <small>Global Expansion &amp; Export Track Record</small>
         </h2>
       </div>
       <div class="sec-head__side">Global<br/>Reach</div>
     </header>
 
-    <p class="body">오투랩은 <strong>국내 병원·재활센터·헬스케어센터 도입 실적</strong>을 기반으로, 유사 수입 제품 대비 우수한 가격 경쟁력(약 700만원대)과 One-Stop 워크플로우를 강점으로 <strong>일본 · 아세안 · 미주 시장</strong> 진출을 추진합니다. 특히 일본은 고령화로 낙상·균형장애 관리 수요가 급증하는 재활 시장으로, 병원·요양시설·피트니스 채널을 중심으로 공략합니다.</p>
-
-    
-      <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 수출국 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Export Markets</span></h3>
-      <div class="map">
-        
-        <div class="map__chip">
-          <span class="flag">🇯🇵</span>
-          <span class="name">Japan</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇸🇬</span>
-          <span class="name">Singapore</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇻🇳</span>
-          <span class="name">Vietnam</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇹🇭</span>
-          <span class="name">Thailand</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇲🇾</span>
-          <span class="name">Malaysia</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇺🇸</span>
-          <span class="name">USA</span>
-        </div>
+    <div class="key-nums">
+      <div class="key-nums__cell">
+        <p class="key-nums__n">8<sup>+</sup></p>
+        <p class="key-nums__l">수출국<small>Export Markets</small></p>
       </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">USD<br/>40K</p>
+        <p class="key-nums__l" style="font-size:7.5pt;">CES 2023 MOU 체결<small>MOU 2 Cases</small></p>
+      </div>
+      <div class="key-nums__cell">
+        <p class="key-nums__n">8<sup>MOU</sup></p>
+        <p class="key-nums__l">MEGA US Vietnam 2024<small>Business MOU</small></p>
+      </div>
+    </div>
 
-    <h3 style="margin: 6mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 성과 · 연혁 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Milestones</span></h3>
+    <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 수출국 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Confirmed Export Markets</span></h3>
+    <div class="map" style="margin-bottom:5mm;">
+      <div class="map__chip"><span class="flag">🇺🇸</span><span class="name">USA · LA 재활클리닉 납품</span></div>
+      <div class="map__chip"><span class="flag">🇬🇧</span><span class="name">United Kingdom</span></div>
+      <div class="map__chip"><span class="flag">🇲🇾</span><span class="name">Malaysia</span></div>
+      <div class="map__chip"><span class="flag">🇯🇵</span><span class="name">Japan (진행 중)</span></div>
+      <div class="map__chip"><span class="flag">🇨🇳</span><span class="name">China</span></div>
+      <div class="map__chip"><span class="flag">🇻🇳</span><span class="name">Vietnam</span></div>
+    </div>
+
+    <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">해외 전시·상담회 참가 이력 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Global Tradeshow History</span></h3>
     <div class="tl">
-      
-        <div class="tl__item">
-          <div class="tl__date">2018</div>
-          <div class="tl__title">다이나믹 밸런서 특허 등록</div>
-          <p class="tl__desc">제10-1887097호</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2021</div>
-          <div class="tl__title">제어시스템 특허 등록</div>
-          <p class="tl__desc">제10-2231899호 · PCT 진행</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2024</div>
-          <div class="tl__title">GS인증 1등급 획득</div>
-          <p class="tl__desc">부산IT융합부품연구소 SW 시험 통과</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2024</div>
-          <div class="tl__title">ISO 9001 · 14001 인증</div>
-          <p class="tl__desc">품질 · 환경경영시스템 구축</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2025</div>
-          <div class="tl__title">국내 병원·재활센터 도입 확대</div>
-          <p class="tl__desc">누적 도입 사례 축적</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2026.10</div>
-          <div class="tl__title">Medical Japan Tokyo 2026 참가</div>
-          <p class="tl__desc">Korea Pavilion KP-02</p>
-        </div>
+      <div class="tl__item">
+        <div class="tl__date">2022</div>
+        <div class="tl__title">ASD 2022 · 메디컬 오사카 2022</div>
+        <p class="tl__desc">Autism Spectrum Disorder · Medical Osaka · 아시아 시장 진출 기반 마련</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">2023</div>
+        <div class="tl__title">CES 2023 · 2023 K-CON LA</div>
+        <p class="tl__desc"><strong>MOU 2건 체결 · USD 40,000</strong> · 미국 LA 재활클리닉 납품 개시</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">2024</div>
+        <div class="tl__title">CES 2024 · MEGA US Vietnam 2024</div>
+        <p class="tl__desc">MEGA US Vietnam · <strong>MOU 8건 체결</strong> · 동남아 시장 확대</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">2026</div>
+        <div class="tl__title">CES 2026 · 수출·판매 계약 체결</div>
+        <p class="tl__desc"><strong>Dynamic Balance 수출·판매 1건 + MOU 1건</strong> · 지속적 매출 창출</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">2026.10</div>
+        <div class="tl__title">Medical Japan Tokyo 2026 참가</div>
+        <p class="tl__desc">Makuhari Messe · Booth KP-02 · 일본 초고령사회 시장 본격 진출</p>
+      </div>
+    </div>
+
+    <div style="padding:3mm 4mm; background:linear-gradient(135deg, #FEF6E7, #fff); border-left:3px solid #F5A623; border-radius: 0 2mm 2mm 0; font-size: 8.5pt; color:var(--ink-700); margin-top:4mm; line-height:1.6; word-break:keep-all;">
+      <strong style="color:#8B5A00;">🇯🇵 일본 시장 기회</strong> · 65세 이상 인구 <strong>29.3%</strong> 초고령사회 · 고령자 시장 규모 <strong>101조 엔 (2025)</strong> · 데이서비스센터·고령자 복지시설·지역 건강관리기관 대상 <strong>낙상예방·재활 프로그램</strong> 장비로 제안 가능
     </div>
 
     <div class="page__marker">
@@ -372,15 +1043,17 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>05 / 06 · (주)오투랩</span>
+      <span>07 / 08 · Global Market</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 6 · CONTACT & CONSULTATION ============== -->
+  <!-- ================================================================
+       PAGE 8 · CONTACT
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">05 · Consultation</div>
+        <div class="sec-head__num">04 · Contact</div>
         <h2 class="sec-head__title">
           상담 문의 · 방문
           <small>Contact &amp; On-site Consultation</small>
@@ -390,30 +1063,60 @@
     </header>
 
     <p class="body">
-      <strong>(주)오투랩</strong>는 Medical Japan Tokyo 2026 연계 수출상담회 기간 중 <strong>Korea Pavilion Booth KP-02</strong>에서 해외 바이어 대상 1:1 상담을 진행합니다. 사전 상담 예약 및 자료 요청은 아래 채널을 통해 가능합니다.
+      <strong>(주)오투랩</strong>은 Medical Japan Tokyo 2026 연계 수출상담회 기간 중 <strong>Korea Pavilion Booth KP-02</strong>에서 해외 바이어 대상 1:1 상담을 진행합니다. 일본 초고령사회 대응 <strong>낙상예방·재활·데이케어</strong> 시장을 주요 타겟으로, 의료기기·재활장비·고령친화 유통 파트너 발굴에 집중합니다.
     </p>
 
-    <div class="tags" style="margin: 6mm 0;">
-      <span class="tag tag--purple">주요 관심 시장 · 일본 · 아세안 · 재활 · 병원</span>
-      <span class="tag tag--green">상담 매칭 · 기업당 5건 내외</span>
+    <div class="tags" style="margin: 5mm 0;">
+      <span class="tag tag--purple">주요 관심 시장 · 일본 (의료·재활·고령친화)</span>
+      <span class="tag tag--green">상담 매칭 · Dynamic Balance 단일 제품 집중</span>
       <span class="tag">통역 지원 · 한 · 영 · 일</span>
+      <span class="tag tag--purple">의료기기 1등급 · GS 1등급 완비</span>
+    </div>
+
+    <h3 style="margin: 3mm 0 3mm; font-size: 11pt; font-weight: 800;">상담 이후 계획 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Post-event Plan</span></h3>
+    <div class="tl" style="margin-bottom: 4mm;">
+      <div class="tl__item">
+        <div class="tl__date">Step 1</div>
+        <div class="tl__title">상담 바이어 후속 협상</div>
+        <p class="tl__desc">구매의향·유통역량 구분 · 제품소개서·인증자료·견적서 제공 · 화상회의 · 샘플 공급</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 2</div>
+        <div class="tl__title">현지 실증 · 신규 시장 확보</div>
+        <p class="tl__desc">병원·재활클리닉·데이서비스센터 · 사용성·설치환경·구매의향 검증</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 3</div>
+        <div class="tl__title">제품·마케팅 자료 현지화</div>
+        <p class="tl__desc">일본 UI·결과지·매뉴얼 개선 · 현지 활용사례·홍보 메시지 반영</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 4</div>
+        <div class="tl__title">패키지 상품 확대</div>
+        <p class="tl__desc">장비 판매 → 맞춤형 인솔 + 운동·인지운동 솔루션 통합 패키지 확장</p>
+      </div>
+      <div class="tl__item">
+        <div class="tl__date">Step 5</div>
+        <div class="tl__title">수출 계약 · 지속 매출</div>
+        <p class="tl__desc">국내 3억 · 해외 2천만원 목표 · 해외영업·기술지원 전문인력 채용 연계</p>
+      </div>
     </div>
 
     <div class="contact-card">
       <h3>(주)오투랩 · Consultation Desk</h3>
       <div class="c-rows">
-        <div><span>Company</span><b>O2Lab Co., Ltd.</b></div>
-        <div><span>Category</span><b>재활 · 균형측정 의료기기</b></div>
-        <div><span>Booth</span><b>Booth KP-02 · Korea Pavilion</b></div>
+        <div><span>Company</span><b>(주)오투랩 · O2Lab · Only One Lab Co., Ltd.</b></div>
+        <div><span>CEO</span><b>이수경 · Lee Soo-Kyung</b></div>
+        <div><span>Product</span><b>Dynamic Balance (다이나믹 밸런스) Ver.3</b></div>
+        <div><span>Booth</span><b>KP-02 · Korea Pavilion, Makuhari Messe</b></div>
         <div><span>Date</span><b>2026. 10. 7 – 10. 9 (JST)</b></div>
-        <div><span>Contact</span><b><span class="e-mail" data-b64="ZXhwb3J0QG8ybGFiLmty"></span></b></div>
-        <div><span>Website</span><b>www.o2lab.kr</b></div>
+        <div><span>Website</span><b>www.onlyonelab.co.kr</b></div>
       </div>
     </div>
 
-    <p class="body" style="margin-top: 8mm; font-size: 9pt; color: var(--ink-500);">
+    <p class="body" style="margin-top: 4mm; font-size: 8.5pt; color: var(--ink-500);">
       본 브로셔의 사양·인증·수치는 발행 시점의 자료를 기준으로 하며 사전 통보 없이 변경될 수 있습니다. 사전 상담 신청 및 통합 안내는
-      <a href="../index.html#register" style="color:var(--purple-700);font-weight:600">Medical Japan 2026 사전등록 페이지</a>에서 가능합니다.
+      <a href="../Medical Japan 2026.html#register" style="color:var(--purple-700);font-weight:600">Medical Japan 2026 사전등록 페이지</a>에서 가능합니다.
     </p>
 
     <div class="page__marker">
@@ -421,19 +1124,18 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>06 / 06 · (주)오투랩</span>
+      <span>08 / 08 · Contact</span>
     </div>
   </section>
 
 </div>
+
 <script>
-  // Auto-open print dialog when opened with ?print=1
   (function(){
     var q = new URLSearchParams(window.location.search);
     if (q.get('print') === '1') {
       window.addEventListener('load', function(){
-        // Wait for fonts + layout
-        setTimeout(function(){ window.print(); }, 600);
+        setTimeout(function(){ window.print(); }, 700);
       });
     }
   })();

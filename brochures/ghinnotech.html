@@ -6,23 +6,399 @@
 <title>지에이치이노텍 · Company Brochure | Medical Japan 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
 <link rel="stylesheet" href="brochure.css"/>
+<style>
+  /* -------- Extended brochure enhancements -------- */
+  :root{
+    --navy-900: #0A153F;
+    --navy-800: #0F1E5A;
+    --brand-cyan: #38B6E0;
+  }
+
+  /* Company page — hero band */
+  .co-hero{
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 5mm;
+    margin: 4mm 0 6mm;
+    align-items: center;
+  }
+  .co-hero__text{ padding: 2mm 0; }
+  .co-hero__slogan{
+    font-family: var(--font-en); font-size: 8pt; font-weight: 700;
+    color: var(--purple-700); letter-spacing: .18em;
+    text-transform: uppercase; margin: 0 0 2mm;
+  }
+  .co-hero__headline{
+    font-size: 17pt; font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.3;
+    color: var(--ink-900); margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .co-hero__headline em{ font-style: normal; color: var(--purple-700); }
+  .co-hero__desc{
+    font-size: 9.5pt; color: var(--ink-700);
+    line-height: 1.7; margin: 0;
+    word-break: keep-all;
+  }
+  .co-hero__desc strong{ color: var(--ink-900); font-weight: 600; }
+  .co-hero__visual{
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, var(--lilac-25), var(--lilac-100));
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    padding: 8mm;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .co-hero__visual::before{
+    content: "";
+    position: absolute; top: -30%; right: -30%;
+    width: 80%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(56,182,224,.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .co-hero__visual svg{
+    width: 55%; height: auto;
+    color: var(--purple-700);
+    position: relative; z-index: 1;
+  }
+  .co-hero__visual__brand{
+    position: absolute; bottom: 5mm; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-en); font-weight: 800;
+    color: var(--purple-800); letter-spacing: -.02em;
+    font-size: 14pt;
+    z-index: 1;
+  }
+  .co-hero__visual__brand small{
+    display: block; font-size: 7pt; font-weight: 600;
+    color: var(--ink-500); letter-spacing: .18em;
+    margin-top: 1mm; text-transform: uppercase;
+  }
+
+  /* Company info grid */
+  .co-info-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin: 3mm 0 5mm;
+  }
+  .co-info-cell{
+    padding: 4mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3mm;
+  }
+  .co-info-cell__label{
+    font-family: var(--font-en);
+    font-size: 7pt; font-weight: 800;
+    color: var(--purple-700); letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: 2mm;
+  }
+  .co-info-cell__value{
+    font-size: 10pt; font-weight: 700;
+    color: var(--ink-900); letter-spacing: -0.015em;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .co-info-cell__value small{
+    display: block; font-family: var(--font-en);
+    font-size: 8.5pt; color: var(--ink-500);
+    font-weight: 500; margin-top: 1mm;
+  }
+
+  /* Vision boxes */
+  .vision-strip{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin: 4mm 0;
+  }
+  .vision-cell{
+    padding: 4mm;
+    background: linear-gradient(135deg, #0A153F 0%, var(--purple-800) 100%);
+    color: #fff;
+    border-radius: 3mm;
+    position: relative;
+    overflow: hidden;
+  }
+  .vision-cell::before{
+    content: attr(data-idx);
+    position: absolute;
+    top: -8mm; right: -6mm;
+    font-family: var(--font-en); font-weight: 900;
+    font-size: 40pt; color: rgba(255,255,255,.08);
+    letter-spacing: -.05em;
+  }
+  .vision-cell__title{
+    font-size: 11pt; font-weight: 800;
+    color: #F5A623; letter-spacing: -0.02em;
+    margin: 0 0 2mm;
+  }
+  .vision-cell__desc{
+    font-size: 8.5pt; line-height: 1.55;
+    color: rgba(255,255,255,.85);
+    margin: 0;
+    word-break: keep-all;
+  }
+
+  /* Product page layout */
+  .product-page__hero{
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: 5mm;
+    align-items: start;
+    margin: 4mm 0 4mm;
+  }
+  .product-page__img{
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, #F6F2FE, #EDE7FB);
+    border-radius: 4mm;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    padding: 5mm;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-page__img::after{
+    content: attr(data-tag);
+    position: absolute;
+    top: 3mm; left: 3mm;
+    padding: 1mm 3mm;
+    background: rgba(255,255,255,.9);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+  .product-page__img img{
+    width: 100%; height: 100%;
+    object-fit: contain;
+  }
+  .product-page__img svg{
+    width: 65%; height: 65%; color: var(--purple-700);
+  }
+  .product-page__info{ padding-top: 2mm; }
+  .product-page__cat{
+    display: inline-block;
+    padding: 1mm 3mm;
+    background: var(--lilac-50);
+    color: var(--purple-700);
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+    margin-bottom: 3mm;
+  }
+  .product-page__cat--medical{ background: #FEF6E7; color: #8B5A00; }
+  .product-page__cat--digital{ background: #E0F2FE; color: #0C4A6E; }
+  .product-page__name{
+    font-family: var(--font-en); font-size: 20pt; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.1;
+    color: var(--ink-900); margin: 0 0 2mm;
+  }
+  .product-page__name-kr{
+    font-size: 11pt; font-weight: 700;
+    color: var(--ink-700); margin: 0 0 3mm;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+  }
+  .product-page__tagline{
+    padding: 2.5mm 4mm;
+    background: var(--lilac-25);
+    border-left: 3px solid var(--purple-600);
+    border-radius: 0 2mm 2mm 0;
+    font-size: 9pt; line-height: 1.6;
+    color: var(--ink-700);
+    margin: 0 0 3mm;
+    word-break: keep-all;
+  }
+  .product-page__tagline strong{ color: var(--purple-700); font-weight: 700; }
+  .product-page__nums{
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+  }
+  .product-page__num{
+    padding: 2.5mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 2mm;
+    text-align: center;
+  }
+  .product-page__num .n{
+    font-family: var(--font-en); font-weight: 800;
+    font-size: 14pt; color: var(--purple-700);
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .product-page__num .l{
+    margin-top: 1mm; font-size: 7.5pt;
+    color: var(--ink-500); font-weight: 600;
+  }
+  /* Product details block */
+  .product-details{
+    margin-top: 3mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+  }
+  .product-details h3{
+    font-size: 9.5pt; font-weight: 800;
+    color: var(--ink-900); margin: 0 0 2.5mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: -0.015em;
+    display: flex; align-items: center; gap: 2mm;
+  }
+  .product-details h3::before{
+    content: "";
+    width: 2.5mm; height: 2.5mm;
+    background: var(--purple-600);
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .product-details ul{
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 1.2mm;
+  }
+  .product-details li{
+    padding-left: 4mm;
+    position: relative;
+    font-size: 8pt;
+    line-height: 1.5;
+    color: var(--ink-700);
+    word-break: keep-all;
+  }
+  .product-details li::before{
+    content: "▸";
+    position: absolute; left: 0; top: 0;
+    color: var(--purple-500);
+    font-weight: 700;
+  }
+  .product-details li strong{ color: var(--ink-900); font-weight: 700; }
+
+  /* Product spec table (compact) */
+  .product-spec-mini{
+    margin-top: 3mm;
+    padding: 3mm 4mm;
+    background: var(--gray-50);
+    border-radius: 2mm;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2mm 3mm;
+  }
+  .product-spec-mini > div{
+    font-size: 7.5pt;
+    line-height: 1.4;
+  }
+  .product-spec-mini .k{
+    font-family: var(--font-en); font-size: 6.5pt;
+    color: var(--ink-500); font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .product-spec-mini .v{
+    color: var(--ink-900); font-weight: 700;
+  }
+
+  /* Product cert-mini strip */
+  .product-cert-strip{
+    display: flex; gap: 1.5mm; flex-wrap: wrap;
+    margin-top: 3mm; padding-top: 3mm;
+    border-top: 1px dashed var(--line);
+  }
+  .product-cert-strip .cert{
+    padding: 1.5mm 3mm;
+    border-radius: 999px;
+    font-size: 7.5pt; font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .product-cert-strip .cert--purple{
+    background: var(--lilac-50);
+    color: var(--purple-700);
+  }
+  .product-cert-strip .cert--gold{
+    background: #FEF6E7;
+    color: #8B5A00;
+  }
+  .product-cert-strip .cert--green{
+    background: #E8F5EE;
+    color: var(--green-ink);
+  }
+  .product-cert-strip .cert--info{
+    background: var(--gray-50);
+    color: var(--ink-700);
+    font-family: var(--font-en); font-weight: 600;
+  }
+
+  /* Pressure ladder (IMT 3-color) */
+  .pressure-ladder{
+    display: grid; gap: 2mm;
+    margin: 3mm 0;
+  }
+  .pressure-ladder__row{
+    display: grid;
+    grid-template-columns: 8mm 25mm 1fr;
+    gap: 3mm;
+    align-items: center;
+    padding: 2mm 3mm;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 2mm;
+    font-size: 8.5pt;
+  }
+  .pressure-ladder__row .dot{
+    width: 5mm; height: 5mm; border-radius: 50%;
+    border: 2px solid rgba(0,0,0,.1);
+  }
+  .pressure-ladder__row .dot--green{ background: #22C55E; }
+  .pressure-ladder__row .dot--blue{ background: #3B82F6; }
+  .pressure-ladder__row .dot--red{ background: #EF4444; }
+  .pressure-ladder__row .label{
+    font-weight: 800; letter-spacing: -0.01em;
+    color: var(--ink-900);
+  }
+  .pressure-ladder__row .value{
+    font-size: 8pt; color: var(--ink-700);
+  }
+  .pressure-ladder__row .value strong{ color: var(--ink-900); }
+
+  /* NEW product ribbon */
+  .new-ribbon{
+    position: absolute;
+    top: 3mm; right: 3mm;
+    padding: 1mm 3mm;
+    background: linear-gradient(90deg, #F5A623, #E88E00);
+    color: #0A153F;
+    font-family: var(--font-en); font-size: 7.5pt; font-weight: 800;
+    letter-spacing: .14em; text-transform: uppercase;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(245,166,35,.4);
+  }
+
+  @media (max-width: 700px){
+    .co-hero, .product-page__hero, .product-details,
+    .co-info-grid, .vision-strip{ grid-template-columns: 1fr; }
+    .product-spec-mini{ grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
 <!-- Screen toolbar -->
 <div class="toolbar">
   <div class="toolbar__left">
-    <a href="../index.html" class="toolbar__brand">
+    <a href="../Medical Japan 2026.html" class="toolbar__brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
       Medical Japan 2026
     </a>
     <span style="color:rgba(255,255,255,.6)">/ Exhibitor Brochure · 지에이치이노텍</span>
   </div>
   <div class="toolbar__right">
-    <a href="../index.html" class="tb-btn">← 랜딩페이지로</a>
+    <a href="../Medical Japan 2026.html" class="tb-btn">← 랜딩페이지로</a>
     <button class="tb-btn tb-btn--primary" onclick="window.print()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       PDF 다운로드 / 인쇄
@@ -32,7 +408,9 @@
 
 <div class="pages">
 
-  <!-- ============== PAGE 1 · COVER ============== -->
+  <!-- ================================================================
+       PAGE 1 · COVER
+       ================================================================ -->
   <section class="page cover">
     <div class="cover__inner">
       <div class="cover__top">
@@ -42,17 +420,19 @@
       <div class="cover__event">Korea Health Industry Export Consultation</div>
       <h1 class="cover__co">
         지에이치이노텍
-        <small>GH Innotech Co., Ltd.</small>
+        <small>GH Innotech Co., Ltd. · Good Health Innovation Technology</small>
       </h1>
-      <p class="cover__tagline">흡기(IMT)와 호기(PEP) 양방향 호흡근 강화를 단일 기기에서 구현한, 임상근거 기반의 호흡재활 의료기기.</p>
+      <p class="cover__tagline">
+        건강한 호흡을 위한 첫걸음. 흡기(IMT)와 호기(PEP) <strong>양방향 호흡근 강화 · 진동 배출 · 디지털 측정</strong>을 아우르는 종합 호흡재활 의료기기 전문 기업. <strong>SCI 임상근거 · 조달청 혁신제품 · 9개국 이상 수출</strong>.
+      </p>
       <dl class="cover__meta">
         <div>
-          <dt>Product</dt>
-          <dd>빅브리드 양방향 호흡근 강화기기 (IMT/PEP)</dd>
+          <dt>Brand</dt>
+          <dd>BIGBREATHE · BreatheCare (빅브리드)</dd>
         </div>
         <div>
           <dt>Category</dt>
-          <dd>호흡재활 의료기기</dd>
+          <dd>호흡재활 의료기기 · 스포츠 강화형 · 디지털 측정</dd>
         </div>
         <div>
           <dt>Booth</dt>
@@ -66,110 +446,187 @@
     </div>
   </section>
 
-  <!-- ============== PAGE 2 · COMPANY OVERVIEW ============== -->
+  <!-- ================================================================
+       PAGE 2 · COMPANY OVERVIEW
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
         <div class="sec-head__num">01 · Company</div>
         <h2 class="sec-head__title">
-          기업 개요
-          <small>Company Overview</small>
+          회사 소개
+          <small>About GH Innotech · ghit.co.kr</small>
         </h2>
       </div>
-      <div class="sec-head__side">지에이치이노텍<br/>Brochure</div>
+      <div class="sec-head__side">Company<br/>Overview</div>
     </header>
 
-    <div class="hero-visual" data-caption="BIGBREATHE · IMT/PEP">
-      <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M100 40 v 75"/><path d="M100 55 c -10 -14 -34 -10 -40 8 c -10 22 -14 52 -6 74 c 4 14 14 20 24 16 c 14 -4 22 -20 22 -36 z"/><path d="M100 55 c 10 -14 34 -10 40 8 c 10 22 14 52 6 74 c -4 14 -14 20 -24 16 c -14 -4 -22 -20 -22 -36 z"/><circle cx="100" cy="44" r="6" fill="currentColor"/></svg>
+    <div class="co-hero">
+      <div class="co-hero__text">
+        <p class="co-hero__slogan">◆ Good Health Innovation Technology</p>
+        <h3 class="co-hero__headline">
+          <em>건강한 호흡</em>을 위한 첫걸음,<br/>
+          (주)지에이치이노텍이 함께 하겠습니다.
+        </h3>
+        <p class="co-hero__desc">
+          <strong>질병의 90%는 활성산소가 원인</strong>이라 알려져 있습니다. 호흡할 때 들어오는 산소의 1~2%는 완전히 산화하지 못하고 불안정해져 만병의 근원이자 노화의 원인이 됩니다. <strong>㈜지에이치이노텍</strong>은 이러한 활성산소를 낮추고 <strong>건강한 호흡</strong>을 지원하는 <strong>빅브리드(BIGBREATHE) · BreatheCare</strong> 브랜드로 호흡재활 의료기기·스포츠 강화형·디지털 측정 기기를 개발·제조합니다.
+        </p>
+      </div>
+      <div class="co-hero__visual">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M100 40 v 75"/>
+          <path d="M100 55 c -10 -14 -34 -10 -40 8 c -10 22 -14 52 -6 74 c 4 14 14 20 24 16 c 14 -4 22 -20 22 -36 z"/>
+          <path d="M100 55 c 10 -14 34 -10 40 8 c 10 22 14 52 6 74 c -4 14 -14 20 -24 16 c -14 -4 -22 -20 -22 -36 z"/>
+          <circle cx="100" cy="44" r="6" fill="currentColor"/>
+        </svg>
+        <div class="co-hero__visual__brand">BIGBREATHE<small>Respiratory Rehab</small></div>
+      </div>
     </div>
 
-    <p class="body">지에이치이노텍은 폐 질환자·수술 전후 재활 대상자·고령자의 호흡근을 회복·강화하는 <strong>호흡재활 의료기기 전문 제조사</strong>입니다. 자체 개발한 압력 조절식 저항 구조를 통해 흡기(IMT)와 호기(PEP)를 한 대에서 훈련할 수 있는 <strong>양방향 호흡근 강화기기</strong>를 주력으로, 수동식 흉벽진동기(V-PEP), 흡기근 강화기기(BreST Mask, S-IMT), 디지털 호흡측정기(BreatheCare MIP/MEP, Smart IMT/PEP100) 등 폭넓은 호흡 케어 제품군을 보유하고 있습니다.</p>
+    <div class="co-info-grid">
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Company</div>
+        <div class="co-info-cell__value">㈜지에이치이노텍<small>GH Innotech Co., Ltd.</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">CEO · 대표</div>
+        <div class="co-info-cell__value">권유용<small>Kwon Yu-Yong</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Business</div>
+        <div class="co-info-cell__value">호흡재활 의료기기<small>Respiratory Rehab Devices</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Head Office</div>
+        <div class="co-info-cell__value">본사 · PNU AVEC<small>(46285) 부산 금정구 부산대학로 50번길 68, 2층 B2호</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Branch</div>
+        <div class="co-info-cell__value">지점<small>(46335) 부산 금정구 반송로 356, 3층 301호</small></div>
+      </div>
+      <div class="co-info-cell">
+        <div class="co-info-cell__label">Contact</div>
+        <div class="co-info-cell__value">051-518-4701<small>ghit@ghit.co.kr · www.ghit.co.kr</small></div>
+      </div>
+    </div>
 
-    <dl class="rows" style="margin-top:6mm">
-      
-        <dt>기업명<span class="en">Company</span></dt>
-        <dd>지에이치이노텍<small>GH Innotech Co., Ltd.</small></dd>
-        <dt>품목분야<span class="en">Category</span></dt>
-        <dd>호흡재활 의료기기 (Class I / II)<small>Respiratory Rehab · Medical Device</small></dd>
-        <dt>주력 제품<span class="en">Product Line</span></dt>
-        <dd>빅브리드 IMT/PEP · V-PEP · BreST Mask · Smart IMT/PEP100</dd>
-        <dt>핵심 기술<span class="en">Core Tech</span></dt>
-        <dd>압력 조절식 저항 구조 · ICT 기반 모바일 앱 연동<small>Pressure-controlled resistance · Mobile app integration</small></dd>
-        <dt>임상 근거<span class="en">Clinical Evidence</span></dt>
-        <dd>SCI급 임상논문 · 부산대학교병원 재활의학과<small>BMC Geriatrics (2022) 22:155</small></dd>
-        <dt>공공조달<span class="en">Public Procurement</span></dt>
-        <dd>조달청 혁신제품 지정 (제2021-168호)<small>Innovation Product Designation</small></dd>
-    </dl>
+    <h3 style="margin: 2mm 0 3mm; font-size: 11pt; font-weight: 800; color: var(--ink-900); letter-spacing: -0.015em;">
+      우리의 핵심 가치 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Our Core Values</span>
+    </h3>
+    <div class="vision-strip">
+      <div class="vision-cell" data-idx="01">
+        <p class="vision-cell__title">Clinical Evidence</p>
+        <p class="vision-cell__desc">SCI급 임상논문(BMC Geriatrics)으로 검증된 <strong style="color:#fff">MIP +20%, MEP +23%</strong> 개선 효과 기반 의료기기.</p>
+      </div>
+      <div class="vision-cell" data-idx="02">
+        <p class="vision-cell__title">Patented Innovation</p>
+        <p class="vision-cell__desc">한국·미국 특허 등록. <strong style="color:#fff">양방향 압력조절 저항 구조</strong>로 단방향 대비 운동시간 단축.</p>
+      </div>
+      <div class="vision-cell" data-idx="03">
+        <p class="vision-cell__title">Global Reach</p>
+        <p class="vision-cell__desc">Amazon US/DE·JP · Bird Healthcare(호주) 등 <strong style="color:#fff">9개국 이상 수출</strong>. 26년 일본 본격 진출.</p>
+      </div>
+    </div>
 
     <div class="page__marker">
       <span class="brand">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>02 / 06 · 지에이치이노텍</span>
+      <span>02 / 12 · About GH Innotech</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 3 · PRODUCT DETAIL ============== -->
+  <!-- ================================================================
+       PAGE 3 · PRODUCT PORTFOLIO OVERVIEW (8 products)
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">02 · Product</div>
+        <div class="sec-head__num">02 · Portfolio</div>
         <h2 class="sec-head__title">
-          대표 제품
-          <small>Bigbreathe Double Action IMT / PEP · Respiratory Rehab Device</small>
+          BIGBREATHE 제품군 개요
+          <small>Full Product Portfolio · 8 Products</small>
         </h2>
       </div>
-      <div class="sec-head__side">Flagship<br/>Product</div>
+      <div class="sec-head__side">All<br/>Products</div>
     </header>
 
     <div class="pull">
-      <em>빅브리드 양방향 호흡근 강화기기 (IMT/PEP)</em> — 흡기(IMT)와 호기(PEP)를 <strong>단일 기기에서 동시에 훈련</strong>할 수 있는 세계 최초 양방향 구조. 단방향 제품 대비 운동시간 단축, 압력 조절식 저항으로 사용자 맞춤 훈련이 가능합니다.
+      <em>빅브리드(BIGBREATHE)의 모든 제품은 압력 저항식(Pressure-Resistance)으로 제작</em>되어 기존 유로 방식 대비 <strong>운동효과가 뛰어남</strong>이 임상적으로 입증되었습니다. 의료용 · 스포츠 강화형 · 디지털 측정까지 <strong>3개 카테고리 · 8개 제품군</strong>을 보유하고 있습니다.
     </div>
 
-    <div class="kn">
-      
-        <div class="kn__card">
-          <div class="kn__num">40</div>
-          <div class="kn__lab">최대 흡기압 (IMT)<small>cmH₂O ±10%</small></div>
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm; margin: 4mm 0;">
+      <div style="padding:3mm; background:linear-gradient(135deg,#FEF6E7,#fff); border:1px solid #F5A623; border-radius:3mm; text-align:center;">
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/bigbreathe-product.png" alt="Bigbreathe IMT/PEP" style="max-width:100%; max-height:100%; object-fit:contain;"/>
         </div>
-        <div class="kn__card">
-          <div class="kn__num">20</div>
-          <div class="kn__lab">최대 호기압 (PEP)<small>cmH₂O ±10%</small></div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:#8B5A00; letter-spacing:.12em; margin:0;">MEDICAL</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">Bigbreathe IMT/PEP</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">양방향 호흡근 강화</p>
+      </div>
+      <div style="padding:3mm; background:linear-gradient(135deg,#FEF6E7,#fff); border:1px solid #F5A623; border-radius:3mm; text-align:center;">
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/prod-vpep.png" alt="V-PEP/IMT" style="max-width:100%; max-height:100%; object-fit:contain;"/>
         </div>
-        <div class="kn__card">
-          <div class="kn__num">+20<sup>%</sup></div>
-          <div class="kn__lab">최대흡기압 증가<small>MIP · SCI Clinical</small></div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:#8B5A00; letter-spacing:.12em; margin:0;">MEDICAL</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">V-PEP/IMT</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">진동식 흉벽진동기</p>
+      </div>
+      <div style="padding:3mm; background:#FBF9FF; border:1px solid var(--line); border-radius:3mm; text-align:center;">
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/prod-brest-mask.png" alt="BreST Mask" style="max-width:100%; max-height:100%; object-fit:contain;"/>
         </div>
-        <div class="kn__card">
-          <div class="kn__num">+23<sup>%</sup></div>
-          <div class="kn__lab">최대호기압 증가<small>MEP · SCI Clinical</small></div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:var(--purple-700); letter-spacing:.12em; margin:0;">SPORTS</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">BreST Mask</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">스포츠 마스크</p>
+      </div>
+      <div style="padding:3mm; background:#FBF9FF; border:1px solid var(--line); border-radius:3mm; text-align:center;">
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/prod-simt.png" alt="S-IMT" style="max-width:100%; max-height:100%; object-fit:contain;"/>
         </div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:var(--purple-700); letter-spacing:.12em; margin:0;">SPORTS</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">S-IMT</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">초소형 흡기근 강화</p>
+      </div>
+      <div style="padding:3mm; background:#FBF9FF; border:1px solid var(--line); border-radius:3mm; text-align:center;">
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/prod-imt-green.png" alt="IMT 3종" style="max-width:100%; max-height:100%; object-fit:contain;"/>
+        </div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:var(--purple-700); letter-spacing:.12em; margin:0;">SPORTS</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">IMT 3종</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">Low·Middle·High 3단계</p>
+      </div>
+      <div style="padding:3mm; background:linear-gradient(135deg,#FEF6E7,#fff); border:1px solid #F5A623; border-radius:3mm; text-align:center; position:relative;">
+        <span style="position:absolute; top:2mm; right:2mm; padding:0.5mm 2mm; background:#F5A623; color:#0A153F; font-family:var(--font-en); font-size:6pt; font-weight:800; letter-spacing:.1em; border-radius:999px;">NEW</span>
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/prod-imt-pep100-mech.png" alt="Bigbreathe IMT/PEP100" style="max-width:100%; max-height:100%; object-fit:contain;"/>
+        </div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:#8B5A00; letter-spacing:.12em; margin:0;">MEDICAL · NEW</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">IMT/PEP100</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">양방향 기계식</p>
+      </div>
+      <div style="padding:3mm; background:linear-gradient(135deg,#E0F2FE,#fff); border:1px solid #0C4A6E; border-radius:3mm; text-align:center; position:relative;">
+        <span style="position:absolute; top:2mm; right:2mm; padding:0.5mm 2mm; background:#F5A623; color:#0A153F; font-family:var(--font-en); font-size:6pt; font-weight:800; letter-spacing:.1em; border-radius:999px;">NEW</span>
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/prod-imt-pep100-smart.png" alt="Smart IMT/PEP100" style="max-width:100%; max-height:100%; object-fit:contain;"/>
+        </div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:#0C4A6E; letter-spacing:.12em; margin:0;">DIGITAL · NEW</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">Smart IMT/PEP100</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">전자식 앱 연동</p>
+      </div>
+      <div style="padding:3mm; background:linear-gradient(135deg,#E0F2FE,#fff); border:1px solid #0C4A6E; border-radius:3mm; text-align:center;">
+        <div style="aspect-ratio:1; background:#fff; border-radius:2mm; margin-bottom:2mm; overflow:hidden; display:grid; place-items:center; padding:2mm;">
+          <img src="../assets/prod-breathecare.png" alt="BreatheCare MIP/MEP" style="max-width:100%; max-height:100%; object-fit:contain;"/>
+        </div>
+        <p style="font-family:var(--font-en); font-size:6.5pt; font-weight:800; color:#0C4A6E; letter-spacing:.12em; margin:0;">DIGITAL</p>
+        <p style="font-size:9pt; font-weight:800; color:var(--ink-900); margin:1mm 0 0; letter-spacing:-0.02em;">BreatheCare</p>
+        <p style="font-size:7pt; color:var(--ink-500); margin:1mm 0 0;">MIP/MEP 측정기</p>
+      </div>
     </div>
 
-    <h3 style="margin: 6mm 0 3mm; font-size: 12pt; font-weight: 800; letter-spacing: -0.02em;">핵심 기능 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9.5pt;margin-left:6px">Key Features</span></h3>
-    <div class="features">
-      
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
-          <p class="feat__title">양방향 동시 훈련<small>Bidirectional Action</small></p>
-          <p class="feat__desc">흡기 · 호기 · 양방향 3가지 호흡 모드를 하나의 기기에서 제공. 단방향 제품 대비 운동시간을 크게 단축합니다.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
-          <p class="feat__title">압력 조절식 저항<small>Pressure-Controlled Resistance</small></p>
-          <p class="feat__desc">유로조절식 대비 정밀한 저항 조절이 가능해 근력 단계별 맞춤 훈련을 지원합니다.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.7 1.5A3.5 3.5 0 0 0 6 18z"/></svg></div>
-          <p class="feat__title">ICT · 앱 연동<small>App-Connected</small></p>
-          <p class="feat__desc">Android · iOS 앱으로 실시간 훈련 데이터 기록 및 재활 진행률 관리 지원.</p>
-        </div>
-        <div class="feat">
-          <div class="feat__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8 15l-2 7 6-4 6 4-2-7"/></svg></div>
-          <p class="feat__title">SCI급 임상 검증<small>Clinical Evidence</small></p>
-          <p class="feat__desc">부산대학교병원 재활의학과 임상시험을 통한 MIP +20%, MEP +23% 개선 효과 검증.</p>
-        </div>
+    <div style="padding: 3.5mm 5mm; background: var(--gray-50); border-radius: 3mm; font-size: 8.5pt; color: var(--ink-700); line-height: 1.6; word-break: keep-all;">
+      <strong style="color:var(--ink-900);">📌 이후 페이지 (04–11)</strong>에서는 각 제품의 상세 사양·기능·인증·수출 실적을 <strong>제품당 한 페이지</strong>로 소개합니다. 마지막 P.12에서 전체 인증·특허·수출 종합 및 컨택트 안내를 제공합니다.
     </div>
 
     <div class="page__marker">
@@ -177,292 +634,783 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>03 / 06 · 지에이치이노텍</span>
+      <span>03 / 12 · Product Portfolio</span>
     </div>
   </section>
 
-  <!-- ============== PAGE 4 · SPEC & CERTIFICATION ============== -->
+  <!-- ================================================================
+       PAGE 4 · Bigbreathe IMT/PEP (Medical Featured)
+       ================================================================ -->
   <section class="page">
     <header class="sec-head">
       <div>
-        <div class="sec-head__num">03 · Specification</div>
+        <div class="sec-head__num">Product 01 · Featured</div>
         <h2 class="sec-head__title">
-          제품 사양 · 인증
-          <small>Specifications &amp; Certifications</small>
+          Bigbreathe Double Action IMT/PEP
+          <small>빅브리드 양방향 호흡근 강화기기 · Medical Class I</small>
         </h2>
       </div>
-      <div class="sec-head__side">Quality<br/>Compliance</div>
+      <div class="sec-head__side">KP-01<br/>Feature</div>
     </header>
 
-    <h3 style="margin: 0 0 3mm; font-size: 11pt; font-weight: 800;">제품 사양 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Product Specification</span></h3>
-    <dl class="rows">
-      
-        <dt>제품명 · Model</dt>
-        <dd>빅브리드 양방향 호흡근 강화기기 · Bigbreathe Double Action IMT/PEP</dd>
-        <dt>소재 · Material</dt>
-        <dd>PC, ABS, PP, 실리콘 (Silicone)</dd>
-        <dt>규격 · Dimensions</dt>
-        <dd>190 × 40 mm</dd>
-        <dt>압력 · Pressure</dt>
-        <dd>IMT 40 cmH₂O ±10% / PEP 20 cmH₂O ±10%</dd>
-        <dt>진동 (V-PEP)</dt>
-        <dd>23 Hz Vibration Frequency</dd>
-        <dt>호흡 모드</dt>
-        <dd>IMT · PEP · IMT + PEP 양방향 (3-mode)</dd>
-        <dt>적응증</dt>
-        <dd>만성 폐질환 · 수술 전후 재활 · 고령자 호흡근 회복</dd>
-        <dt>앱 연동</dt>
-        <dd>Android · iOS 실시간 데이터 관리</dd>
-    </dl>
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Medical · 3-Mode">
+        <img src="../assets/bigbreathe-product.png" alt="Bigbreathe IMT/PEP"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--medical">◆ Medical Device · 의료용</span>
+        <p class="product-page__name">Bigbreathe IMT/PEP</p>
+        <p class="product-page__name-kr">빅브리드 양방향 호흡근 강화기기</p>
+        <div class="product-page__tagline">
+          <strong>흡기(IMT) · 호기(PEP) · 양방향(IMT+PEP)</strong> 3가지 호흡 모드를 단일 기기에서 구현. 단방향 제품 대비 <strong>운동시간을 절반으로 단축</strong>. SCI 임상논문으로 검증된 유일한 양방향 구조.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">40</div><div class="l">IMT 최대 흡기압 (cmH₂O)</div></div>
+          <div class="product-page__num"><div class="n">20</div><div class="l">PEP 최대 호기압 (cmH₂O)</div></div>
+          <div class="product-page__num"><div class="n">+20<sup>%</sup></div><div class="l">MIP 개선 (SCI)</div></div>
+          <div class="product-page__num"><div class="n">+23<sup>%</sup></div><div class="l">MEP 개선 (SCI)</div></div>
+        </div>
+      </div>
+    </div>
 
-    <h3 style="margin: 8mm 0 3mm; font-size: 11pt; font-weight: 800;">인증 및 지식재산권 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Certifications &amp; IP</span></h3>
-    <table class="certs">
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Functions</h3>
+        <ul>
+          <li><strong>IMT (흡기)</strong>: 횡격막 강화, 폐활량 증가, 천식·호흡곤란 완화</li>
+          <li><strong>PEP (호기)</strong>: 가래·객담 배출, 수술 전후 폐기능 향상</li>
+          <li><strong>IMT+PEP (양방향)</strong>: 동시 훈련으로 운동시간 단축</li>
+          <li><strong>압력 조절식 저항</strong>: 유로조절식 대비 정밀한 근력 단계별 훈련</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적응증 · Indications</h3>
+        <ul>
+          <li>수술 전후 재활 (심장·폐·복부 수술)</li>
+          <li>만성 폐질환자 (COPD · 천식)</li>
+          <li>고령자 호흡근 회복 · 근감소증</li>
+          <li>보행거리 향상 · 심폐지구력 개선</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">Bigbreathe Double Action</div></div>
+      <div><div class="k">Dimensions</div><div class="v">190 × 40 mm</div></div>
+      <div><div class="k">Material</div><div class="v">PC · ABS · PP · Silicone</div></div>
+      <div><div class="k">IMT Pressure</div><div class="v">40 cmH₂O ±10%</div></div>
+      <div><div class="k">PEP Pressure</div><div class="v">20 cmH₂O ±10%</div></div>
+      <div><div class="k">Class</div><div class="v">Medical Class I</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 13485</span>
+      <span class="cert cert--purple">CE MDR</span>
+      <span class="cert cert--purple">FDA Class I</span>
+      <span class="cert cert--purple">MDA · CDSCO · COFEPRIS</span>
+      <span class="cert cert--gold">조달청 혁신제품 (제2021-168호)</span>
+      <span class="cert cert--info">🇺🇸 🇦🇺 🇩🇪 🇻🇳 🇨🇱 🇭🇰 🇮🇳 등 9+ 개국 수출</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>04 / 12 · Bigbreathe IMT/PEP</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 5 · V-PEP/IMT (수동식 흉벽진동기)
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 02 · Medical</div>
+        <h2 class="sec-head__title">
+          Bigbreathe Double Action V-PEP/IMT
+          <small>수동식 흉벽진동기 · 진동 결합 양방향 호흡근 강화</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Vibration<br/>Type</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Medical · Vibration">
+        <img src="../assets/prod-vpep.png" alt="V-PEP/IMT"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--medical">◆ Medical Device · 의료용</span>
+        <p class="product-page__name">V-PEP / IMT</p>
+        <p class="product-page__name-kr">수동식 흉벽진동기 V-PEP/IMT</p>
+        <div class="product-page__tagline">
+          <strong>흡기(IMT) + 수동식 진동 호기(V-PEP)</strong>를 동시에 제공하는 일체형 호흡근 강화기. 들숨 시 <strong>횡격막 단련</strong>, 날숨 시 <strong>23Hz 기도 진동</strong>으로 객담 배출·폐 합병증 예방.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">7–46</div><div class="l">IMT 압력 (cmH₂O)</div></div>
+          <div class="product-page__num"><div class="n">23<sup>Hz</sup></div><div class="l">V-PEP 진동 빈도</div></div>
+          <div class="product-page__num"><div class="n">2-in-1</div><div class="l">IMT + V-PEP 통합</div></div>
+          <div class="product-page__num"><div class="n">±2</div><div class="l">cmH₂O 압력 정밀도</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Functions</h3>
+        <ul>
+          <li><strong>IMT (들숨)</strong>: 횡격막 단련 · 폐활량 · 심폐지구력 향상</li>
+          <li><strong>V-PEP (날숨)</strong>: 23Hz 기도 진동 · 객담 배출 · 폐 합병증 예방</li>
+          <li><strong>일체형 통합</strong>: 흉벽진동기 + 흡기근 강화기 단일 장치</li>
+          <li><strong>맞춤형 압력</strong>: 사용자별 단계 설정 · 복식 호흡 유도</li>
+          <li><strong>탈부착 마우스피스</strong>: 위생적·보관 편리</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적응증 · Indications</h3>
+        <ul>
+          <li>폐 수술 전·후 환자 재활</li>
+          <li>만성 폐질환 · <strong>기관지확장증</strong></li>
+          <li>고령자 호흡기 재활 · 기침 횟수 감소</li>
+          <li>운동능력·심폐지구력 향상</li>
+          <li>호흡기 합병증 예방</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">Bigbreathe Double Action V-PEP/IMT</div></div>
+      <div><div class="k">Dimensions</div><div class="v">150 × 40 × 95 mm</div></div>
+      <div><div class="k">Material</div><div class="v">PC · ABS · PP · Silicone</div></div>
+      <div><div class="k">IMT Range</div><div class="v">7–46 cmH₂O (±2)</div></div>
+      <div><div class="k">V-PEP Freq.</div><div class="v">23 Hz Manual</div></div>
+      <div><div class="k">Class</div><div class="v">Medical Class I</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 13485</span>
+      <span class="cert cert--purple">CE MDR</span>
+      <span class="cert cert--purple">FDA Class I</span>
+      <span class="cert cert--purple">MDA · CDSCO · COFEPRIS</span>
+      <span class="cert cert--gold">KR 10-2021096 · KR 10-2416723 · US 12,064,663</span>
+      <span class="cert cert--gold">조달청 혁신제품 · 인천 서구·미추홀구 실증 · 베트남 병원 실증</span>
+      <span class="cert cert--info">🇺🇸 🇦🇺 🇩🇪 🇻🇳 🇨🇱 🇭🇰 🇲🇾 🇮🇳 등 수출</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>05 / 12 · V-PEP/IMT</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 6 · BreST Mask
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 03 · Sports</div>
+        <h2 class="sec-head__title">
+          BreST Mask
+          <small>브레스트 마스크 · 압력 저항식 스포츠 마스크</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Sports<br/>Mask</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Sports · Mask">
+        <img src="../assets/prod-brest-mask.png" alt="BreST Mask"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat">◆ Sports &amp; Strengthening · 스포츠 강화형</span>
+        <p class="product-page__name">BreST Mask</p>
+        <p class="product-page__name-kr">압력 저항식 호흡운동 마스크</p>
+        <div class="product-page__tagline">
+          <strong>착용형 고강도 호흡 훈련</strong>. 러닝·크로스핏 등 유·무산소 운동 중 착용하여 <strong>고산지대 훈련 효과</strong>를 재현. 손이 자유로워 유·무산소 훈련 병행 가능하며, <strong>신라대학교 연계 논문</strong>으로 심폐기능 44% 향상 입증.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">6–72</div><div class="l">압력 범위 (cmH₂O)</div></div>
+          <div class="product-page__num"><div class="n">9<sup>단계</sup></div><div class="l">저항 조절</div></div>
+          <div class="product-page__num"><div class="n">+44<sup>%</sup></div><div class="l">심폐기능 향상 (논문)</div></div>
+          <div class="product-page__num"><div class="n">Hands</div><div class="l">Free · 손 자유</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>고강도 호흡운동</strong>: 유·무산소 훈련 병행</li>
+          <li><strong>손 자유로운 착용</strong>: 러닝·헬스·크로스핏 최적</li>
+          <li><strong>고산지대 훈련 재현</strong>: 저산소 환경 시뮬레이션</li>
+          <li><strong>다이어트 효과</strong>: 복식호흡 유도 · 칼로리 소모</li>
+          <li><strong>9단계 압력 조절</strong>: 사용자 수준별 맞춤</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적합 대상 · Target Users</h3>
+        <ul>
+          <li>트레이닝 중 호흡 강화가 필요한 자</li>
+          <li>유·무산소 운동가 · 마라토너·사이클리스트</li>
+          <li>다이어터 · 운동선수 · 성악가</li>
+          <li>퍼스널 트레이너 · 피트니스 강사</li>
+          <li>일반인 홈트·야외 운동 사용자</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Type</div><div class="v">Sports Training Mask</div></div>
+      <div><div class="k">Pressure</div><div class="v">6–72 cmH₂O · 9-Level</div></div>
+      <div><div class="k">Material</div><div class="v">Medical Silicone · PC</div></div>
+      <div><div class="k">Reference</div><div class="v">신라대학교 연계 논문</div></div>
+      <div><div class="k">Feature</div><div class="v">Hands-free · 착용형</div></div>
+      <div><div class="k">Cleaning</div><div class="v">Water washable</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 13485 (2023.04.09)</span>
+      <span class="cert cert--purple">FDA Class I (2023.03.15)</span>
+      <span class="cert cert--gold">KR 10-2416723 · US 18/771,690</span>
+      <span class="cert cert--info">🇺🇸 🇩🇪 🇯🇵 🇨🇿 등 수출</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>06 / 12 · BreST Mask</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 7 · S-IMT (초소형)
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 04 · Sports</div>
+        <h2 class="sec-head__title">
+          S-IMT
+          <small>세계 초소형 압력 저항식 흡기근 강화기</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Compact<br/>Sports</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Sports · Compact">
+        <img src="../assets/prod-simt.png" alt="S-IMT"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat">◆ Sports &amp; Strengthening · 스포츠 강화형</span>
+        <p class="product-page__name">S-IMT</p>
+        <p class="product-page__name-kr">초소형 흡기근 강화기 · Small IMT</p>
+        <div class="product-page__tagline">
+          <strong>세계 초소형 압력 저항식 흡기근 강화기</strong>. 기존 IMT 대비 <strong>40% 이상 소형화</strong>된 휴대성 · 초경량 설계. 부산대학교 연계 임상에서 <strong>MIP 22%, MEP 24% 향상</strong> 확인. 국방부 우수사용품 선정(해병대1사단 시범사용).
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">16–100</div><div class="l">압력 범위 (cmH₂O)</div></div>
+          <div class="product-page__num"><div class="n">9<sup>단계</sup></div><div class="l">저항 조절</div></div>
+          <div class="product-page__num"><div class="n">+22<sup>%</sup></div><div class="l">MIP 향상 (임상)</div></div>
+          <div class="product-page__num"><div class="n">−40<sup>%</sup></div><div class="l">Size 소형화 (vs IMT)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>심폐기능 강화</strong>: 흡기근·폐활량 증대</li>
+          <li><strong>복식호흡 유도</strong>: 횡격막 두께 증가</li>
+          <li><strong>초경량·초소형</strong>: 휴대·이동 최적화</li>
+          <li><strong>젖산 분비 지연</strong>: 운동 지속력 향상</li>
+          <li><strong>9단계 압력 조절</strong>: 사용자 수준별 훈련</li>
+        </ul>
+      </div>
+      <div>
+        <h3>적합 대상 · Target Users</h3>
+        <ul>
+          <li>고령자 · 일반인 · 재활환자</li>
+          <li>국방부 우수사용품 (해병대1사단 시범사용)</li>
+          <li>운동선수 · 프로 아스리트</li>
+          <li>여행자·출장 사용자 (휴대성)</li>
+          <li>학교·단체 대량 도입용</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Type</div><div class="v">Small IMT (흡기 전용)</div></div>
+      <div><div class="k">Pressure</div><div class="v">16–100 cmH₂O · 9-Level</div></div>
+      <div><div class="k">Size</div><div class="v">−40% (vs 기존 IMT)</div></div>
+      <div><div class="k">Material</div><div class="v">PC · Silicone</div></div>
+      <div><div class="k">Reference</div><div class="v">부산대 임상: MIP+22%, MEP+24%</div></div>
+      <div><div class="k">Award</div><div class="v">국방부 우수사용품</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 13485 (2023.04.09)</span>
+      <span class="cert cert--purple">CE MDR (2022.11.15)</span>
+      <span class="cert cert--purple">FDA Class I (2023.03.15)</span>
+      <span class="cert cert--gold">KR 10-2416723 · US 18/771,750</span>
+      <span class="cert cert--info">🇺🇸 🇯🇵 🇭🇰 🇩🇪 🇨🇿 등 수출</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>07 / 12 · S-IMT</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 8 · IMT 3종 (Low/Middle/High)
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 05 · Sports</div>
+        <h2 class="sec-head__title">
+          IMT Series (Low · Middle · High)
+          <small>3단계 압력 세분화 흡기근 강화기</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">3-Level<br/>Series</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Sports · 3-Color System">
+        <img src="../assets/prod-imt-green.png" alt="IMT Series"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat">◆ Sports &amp; Strengthening · 스포츠 강화형</span>
+        <p class="product-page__name">IMT 3종</p>
+        <p class="product-page__name-kr">3단계 압력 세분화 호흡운동기 (Low·Middle·High)</p>
+        <div class="product-page__tagline">
+          <strong>사용자별 3단계 압력 세분화</strong>로 일반인부터 전문가까지 <strong>단계별 사용</strong>이 가능한 흡기근 강화기 라인업. 실내외 모두 적합한 <strong>글로벌 공급용 범용 제품</strong>. 각 컬러당 10단계 저항 세밀 조절.
+        </div>
+      </div>
+    </div>
+
+    <div class="pressure-ladder">
+      <div class="pressure-ladder__row">
+        <span class="dot dot--green"></span>
+        <span class="label">Low (Green) · 입문</span>
+        <span class="value"><strong>12–93 cmH₂O</strong> · 10단계 · 재활 초기·고령자·여성</span>
+      </div>
+      <div class="pressure-ladder__row">
+        <span class="dot dot--blue"></span>
+        <span class="label">Middle (Blue) · 중급</span>
+        <span class="value"><strong>19–174 cmH₂O</strong> · 10단계 · 일반 성인·회복기</span>
+      </div>
+      <div class="pressure-ladder__row">
+        <span class="dot dot--red"></span>
+        <span class="label">High (Red) · 상급</span>
+        <span class="value"><strong>31–256 cmH₂O</strong> · 10단계 · 아스리트·특수부대·프로</span>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Features</h3>
+        <ul>
+          <li><strong>3단계 압력 세분화</strong>: 사용자 수준별 정확한 매칭</li>
+          <li><strong>각 컬러당 10단계 저항</strong>: 세밀한 훈련 강도</li>
+          <li><strong>글로벌 범용성</strong>: 실내외·홈트·야외 모두 적합</li>
+          <li><strong>세트 판매</strong>: 단계별 프로그램 운영 가능</li>
+          <li><strong>다이어트 & 운동 병행</strong>: 모든 타겟 커버</li>
+        </ul>
+      </div>
+      <div>
+        <h3>활용 시나리오 · Use Cases</h3>
+        <ul>
+          <li><strong>재활병원</strong>: 회복 단계별 저항 조절</li>
+          <li><strong>트레이닝 센터</strong>: 회원 수준별 매칭</li>
+          <li><strong>스포츠팀</strong>: 신입 → 주전 단계 훈련</li>
+          <li><strong>피트니스</strong>: 성별·연령별 저항 선택</li>
+          <li><strong>가정용</strong>: 가족 구성원별 컬러</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 13485 (2023.04.09)</span>
+      <span class="cert cert--purple">CE MDR (2022.11.15)</span>
+      <span class="cert cert--purple">FDA Class I (2023.03.15)</span>
+      <span class="cert cert--gold">KR 10-1924596 · US 11,247,098</span>
+      <span class="cert cert--info">🇺🇸 🇦🇺 🇯🇵 🇨🇿 🇸🇮 🇩🇪 🇭🇰 등 수출</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>08 / 12 · IMT Series</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 9 · Bigbreathe IMT/PEP100 (양방향 기계식 · NEW)
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 06 · New Release</div>
+        <h2 class="sec-head__title">
+          Bigbreathe IMT/PEP100
+          <small>양방향 압력저항식 호흡운동기 · 기계식</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Mechanical<br/>New</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Mechanical · 100 cmH₂O">
+        <span class="new-ribbon">NEW</span>
+        <img src="../assets/prod-imt-pep100-mech.png" alt="Bigbreathe IMT/PEP100 · 기계식 양방향 압력저항식 호흡운동기"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--medical">◆ Medical Device · 의료용 · 신규</span>
+        <p class="product-page__name">Bigbreathe IMT/PEP100</p>
+        <p class="product-page__name-kr">양방향 압력저항식 호흡운동기 · 기계식</p>
+        <div class="product-page__tagline">
+          <strong>IMT · PEP 각각 최대 100 cmH₂O</strong> 범위의 호흡운동을 지원하는 기계식 양방향 호흡근 강화기. <strong>회전식 다이얼</strong>로 1–10단계 저항 조절, 흡기·호기 저항 <strong>독립적 조절</strong> 가능. 전원·앱 불필요한 <strong>수동식 휴대용</strong>.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">100</div><div class="l">IMT · PEP 최대 (cmH₂O)</div></div>
+          <div class="product-page__num"><div class="n">10<sup>단계</sup></div><div class="l">회전 다이얼 조절</div></div>
+          <div class="product-page__num"><div class="n">3<sup>Mode</sup></div><div class="l">IMT · PEP · IMT+PEP</div></div>
+          <div class="product-page__num"><div class="n">Manual</div><div class="l">전원 · 앱 불필요</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Functions</h3>
+        <ul>
+          <li><strong>양방향 훈련</strong>: 흡기근(IMT) · 호기근(PEP) 동시 지원</li>
+          <li><strong>독립적 저항 조절</strong>: 흡기·호기 각각 다이얼 조절</li>
+          <li><strong>3-Mode</strong>: 흡기 / 호기 / 흡기+호기</li>
+          <li><strong>1–10단계 압력저항</strong>: 개인별 강도 설정</li>
+          <li><strong>분리·세척 가능</strong>: 위생적 유지관리</li>
+        </ul>
+      </div>
+      <div>
+        <h3>활용 분야 · Applications</h3>
+        <ul>
+          <li>호흡 재활 · 호흡근 훈련</li>
+          <li>스포츠 · 러닝 · 수영 · <strong>프리다이빙</strong></li>
+          <li>성악 · 보컬 · <strong>발성 훈련</strong></li>
+          <li>휴대용 · 장소 무제한 사용</li>
+          <li>전문가 · 아마추어 모두 대응</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">Bigbreathe IMT/PEP100</div></div>
+      <div><div class="k">Dimensions</div><div class="v">103 × 48 × 82 mm</div></div>
+      <div><div class="k">Material</div><div class="v">PC · ABS · PP · Silicone</div></div>
+      <div><div class="k">Pressure</div><div class="v">IMT/PEP each ≤100 cmH₂O</div></div>
+      <div><div class="k">Adjustment</div><div class="v">Rotary Dial · 10-Step</div></div>
+      <div><div class="k">Type</div><div class="v">Mechanical · Portable</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 13485 (2023.04.09)</span>
+      <span class="cert cert--purple">FDA Class I (2026.01.01)</span>
+      <span class="cert cert--gold">KR 10-2021096 · KR 10-2416723 · US 12,064,663</span>
+      <span class="cert cert--info">Newly released · 2026 launch</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>09 / 12 · Bigbreathe IMT/PEP100</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 10 · Smart IMT/PEP100 (전자식 · 앱 연동 · NEW)
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 07 · Digital · New</div>
+        <h2 class="sec-head__title">
+          Smart IMT/PEP100
+          <small>양방향 압력저항식 호흡운동기 · 전자식 앱 연동</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Digital<br/>New</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Digital · Bluetooth">
+        <span class="new-ribbon">NEW</span>
+        <img src="../assets/prod-imt-pep100-smart.png" alt="Smart IMT/PEP100 · 전자식 양방향 압력저항식 호흡운동기 · Bluetooth 앱 연동"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--digital">◆ Digital Healthcare · 디지털 · 신규</span>
+        <p class="product-page__name">Smart IMT/PEP100</p>
+        <p class="product-page__name-kr">양방향 압력저항식 호흡운동기 · 전자식</p>
+        <div class="product-page__tagline">
+          <strong>측정 → 분석 → 호흡운동 → 데이터 관리</strong>를 하나의 서비스로 통합한 스마트 호흡 헬스케어 제품. MIP/MEP 호흡근 측정과 <strong>FVC·FEV1·PEF 폐활량 지표</strong>를 단일 기기로 지원. <strong>Bluetooth 앱 연동</strong>으로 실시간 데이터 저장·추적.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">MIP<br/>MEP</div><div class="l">호흡근 측정</div></div>
+          <div class="product-page__num"><div class="n">FVC<br/>FEV1</div><div class="l">폐활량 측정</div></div>
+          <div class="product-page__num"><div class="n">BT</div><div class="l">Bluetooth · 앱 연동</div></div>
+          <div class="product-page__num"><div class="n">iOS<br/>AND</div><div class="l">모바일 앱 지원</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Functions</h3>
+        <ul>
+          <li><strong>MIP·MEP 측정</strong>: 호흡근력 정량적 확인</li>
+          <li><strong>폐활량 측정</strong>: FVC · FEV1 · FVC/FEV1 · PEF</li>
+          <li><strong>예측값 · LLN 비교</strong>: 나이·성별 기반</li>
+          <li><strong>양방향 IMT+PEP 운동</strong>: 압력저항식</li>
+          <li><strong>Bluetooth 앱 연동</strong>: iOS/Android 데이터 저장</li>
+          <li><strong>실시간 피드백</strong>: 맞춤형 호흡훈련 프로그램</li>
+        </ul>
+      </div>
+      <div>
+        <h3>주요 특징 · Key Features</h3>
+        <ul>
+          <li><strong>4-in-1 통합</strong>: 측정 + 분석 + 운동 + 관리</li>
+          <li><strong>MIP/MEP + 폐활량</strong> 단일 기기 지원</li>
+          <li><strong>원격관리 기능</strong>: 타사 대비 차별점</li>
+          <li><strong>호흡기능 변화 추적</strong>: 개인별 기록</li>
+          <li><strong>자가 호흡건강 관리</strong>: 지속적 모니터링</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">Smart IMT/PEP100</div></div>
+      <div><div class="k">Dimensions</div><div class="v">103 × 48 × 82 mm</div></div>
+      <div><div class="k">Material</div><div class="v">PC · ABS · PCB · Silicone</div></div>
+      <div><div class="k">Connectivity</div><div class="v">Bluetooth · iOS/Android</div></div>
+      <div><div class="k">Measurement</div><div class="v">MIP · MEP · FVC · FEV1 · PEF</div></div>
+      <div><div class="k">Class</div><div class="v">Medical Digital Device</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">ISO 13485 (2023.04.09)</span>
+      <span class="cert cert--purple">FCC (2025.01.07)</span>
+      <span class="cert cert--purple">KC (2025.01.07)</span>
+      <span class="cert cert--gold">KR 10-2851149 (양방향 호흡운동 및 측정장치)</span>
+      <span class="cert cert--info">🇨🇿 Czech 등 수출</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>10 / 12 · Smart IMT/PEP100</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 11 · BreatheCare MIP/MEP (Digital Measurement)
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">Product 08 · Digital</div>
+        <h2 class="sec-head__title">
+          BreatheCare MIP/MEP
+          <small>호흡 기능 측정기기 · ICT 기반 디지털 측정</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Digital<br/>Measure</div>
+    </header>
+
+    <div class="product-page__hero">
+      <div class="product-page__img" data-tag="Digital · MIP/MEP">
+        <img src="../assets/prod-breathecare.png" alt="BreatheCare MIP/MEP · 호흡 기능 측정기기"/>
+      </div>
+      <div class="product-page__info">
+        <span class="product-page__cat product-page__cat--digital">◆ Digital Healthcare · 디지털 측정</span>
+        <p class="product-page__name">BreatheCare MIP/MEP</p>
+        <p class="product-page__name-kr">호흡 기능 측정기기 · ICT 기반</p>
+        <div class="product-page__tagline">
+          <strong>국내외 최초 단일유로 호흡근·폐활량 측정 기기</strong>. MIP·MEP·폐활량을 하나로 측정하며, 자사 고유 <strong>압력-유량 회귀 알고리즘</strong>으로 정확도 확보. 성별·연령 기반 <strong>LLN 자동 계산</strong>으로 조기 저하 예방 · 병원 내방 유도.
+        </div>
+        <div class="product-page__nums">
+          <div class="product-page__num"><div class="n">MIP<br/>MEP</div><div class="l">호흡근 측정</div></div>
+          <div class="product-page__num"><div class="n">LLN</div><div class="l">자동 계산 알고리즘</div></div>
+          <div class="product-page__num"><div class="n">App</div><div class="l">iOS · Android 앱</div></div>
+          <div class="product-page__num"><div class="n">FCC<br/>KC</div><div class="l">전자파 인증</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <div>
+        <h3>주요 기능 · Key Functions</h3>
+        <ul>
+          <li><strong>3-in-1 측정</strong>: 호흡근 + 폐활량 + 호흡운동</li>
+          <li><strong>ICT 기반 모바일 연동</strong>: iOS/Android 앱</li>
+          <li><strong>압력-유량 회귀 알고리즘</strong>: 정확한 호흡 성능</li>
+          <li><strong>LLN 자동 계산</strong>: 성별·연령 기반 평균 이하 경보</li>
+          <li><strong>낚시 게임 콘텐츠</strong>: 지루하지 않은 호흡운동</li>
+          <li><strong>비대면 모니터링</strong>: 웹·앱 원격 관리</li>
+        </ul>
+      </div>
+      <div>
+        <h3>주요 특징 · Key Features</h3>
+        <ul>
+          <li><strong>가격 경쟁력</strong>: 기존 고가 장비 대비</li>
+          <li><strong>호흡근 나이 표시</strong>: 예측성 높은 선별 진단</li>
+          <li><strong>휴대·접근·확장성</strong>: 유선 제품 대비 우위</li>
+          <li><strong>원격진료 연계</strong>: 비대면 처방 솔루션</li>
+          <li><strong>광범위한 대상</strong>: 고령자·COPD·스포츠</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-spec-mini">
+      <div><div class="k">Model</div><div class="v">BreatheCare MIP/MEP</div></div>
+      <div><div class="k">Dimensions</div><div class="v">40 × 50 × 90 mm</div></div>
+      <div><div class="k">Material</div><div class="v">ABS · PP · PCB</div></div>
+      <div><div class="k">Connectivity</div><div class="v">Wireless (BT) · App</div></div>
+      <div><div class="k">Content</div><div class="v">낚시 게임 · 호흡운동</div></div>
+      <div><div class="k">Class</div><div class="v">Digital Measurement</div></div>
+    </div>
+
+    <div class="product-cert-strip">
+      <span class="cert cert--purple">FCC (2023.02.03)</span>
+      <span class="cert cert--purple">KC (2023.12.22)</span>
+      <span class="cert cert--purple">CE DoC (2023.12.22)</span>
+      <span class="cert cert--purple">PSE 🇯🇵 (2023.02.03)</span>
+      <span class="cert cert--purple">WPC 🇮🇳 (2025.08.27)</span>
+      <span class="cert cert--gold">KR 10-2348292 (휴대용 호흡측정·운동장치)</span>
+      <span class="cert cert--info">🇪🇸 🇸🇮 🇦🇺 🇨🇿 🇻🇳 🇭🇰 🇮🇳 등 수출</span>
+    </div>
+
+    <div class="page__marker">
+      <span class="brand">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+        Medical Japan 2026 · Export Consultation
+      </span>
+      <span>11 / 12 · BreatheCare MIP/MEP</span>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       PAGE 12 · CERTIFICATIONS · IP · EXPORT · CONTACT
+       ================================================================ -->
+  <section class="page">
+    <header class="sec-head">
+      <div>
+        <div class="sec-head__num">03 · Consolidated</div>
+        <h2 class="sec-head__title">
+          인증 · 특허 · 수출 · 상담 문의
+          <small>Consolidated Certifications, IP, Export &amp; Contact</small>
+        </h2>
+      </div>
+      <div class="sec-head__side">Contact<br/>Desk</div>
+    </header>
+
+    <h3 style="margin: 0 0 3mm; font-size: 10.5pt; font-weight: 800;">국제·국내 인증 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">All Certifications</span></h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;margin-bottom:5mm;">
+      <span class="cert cert--purple" style="padding:2mm 3mm;text-align:center;font-size:8pt;">ISO 13485</span>
+      <span class="cert cert--purple" style="padding:2mm 3mm;text-align:center;font-size:8pt;">CE MDR (EU)</span>
+      <span class="cert cert--purple" style="padding:2mm 3mm;text-align:center;font-size:8pt;">FDA Class I (US)</span>
+      <span class="cert cert--purple" style="padding:2mm 3mm;text-align:center;font-size:8pt;">MDA 🇲🇾</span>
+      <span class="cert cert--purple" style="padding:2mm 3mm;text-align:center;font-size:8pt;">CDSCO 🇮🇳</span>
+      <span class="cert cert--purple" style="padding:2mm 3mm;text-align:center;font-size:8pt;">COFEPRIS 🇲🇽</span>
+      <span class="cert cert--purple" style="padding:2mm 3mm;text-align:center;font-size:8pt;">FCC · KC · PSE 🇯🇵</span>
+      <span class="cert cert--gold" style="padding:2mm 3mm;text-align:center;font-size:8pt;">조달청 혁신제품</span>
+    </div>
+
+    <h3 style="margin: 0 0 3mm; font-size: 10.5pt; font-weight: 800;">특허 포트폴리오 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Patent Portfolio</span></h3>
+    <table class="certs" style="margin-bottom: 5mm;">
       <thead>
-        <tr>
-          <th>구분 · Category</th>
-          <th>인증 · Certification</th>
-          <th>인증번호 · Number</th>
-          <th>일자 · Date</th>
-        </tr>
+        <tr><th>구분</th><th>명칭</th><th>등록번호</th><th>일자</th></tr>
       </thead>
       <tbody>
-        
-        <tr>
-          <td class="name">품질 인증</td>
-          <td>ISO 13485 (Medical Device QMS)</td>
-          <td class="code">MDR-QMS-23-04</td>
-          <td class="date">2023.04.09</td>
-        </tr>
-        <tr>
-          <td class="name">유럽 CE</td>
-          <td>CE MDR DoC (EU MDR)</td>
-          <td class="code">CE-MDR-22-11</td>
-          <td class="date">2022.11.15</td>
-        </tr>
-        <tr>
-          <td class="name">미국 FDA</td>
-          <td>FDA Class I Registration</td>
-          <td class="code">FDA-CLS-I-2023</td>
-          <td class="date">2023.03.15</td>
-        </tr>
-        <tr>
-          <td class="name">말레이시아</td>
-          <td>MDA (Medical Device Authority)</td>
-          <td class="code">MDA-21-07</td>
-          <td class="date">2021.07.17</td>
-        </tr>
-        <tr>
-          <td class="name">인도</td>
-          <td>CDSCO Registration</td>
-          <td class="code">CDSCO-IND-22</td>
-          <td class="date">2022</td>
-        </tr>
-        <tr>
-          <td class="name">멕시코</td>
-          <td>COFEPRIS</td>
-          <td class="code">COFEPRIS-MX-22</td>
-          <td class="date">2022</td>
-        </tr>
-        <tr>
-          <td class="name">국내</td>
-          <td>조달청 혁신제품 지정</td>
-          <td class="code">제2021-168호</td>
-          <td class="date">2021</td>
-        </tr>
-        <tr>
-          <td class="name">임상 근거</td>
-          <td>SCI · BMC Geriatrics</td>
-          <td class="code">22:155 (2022)</td>
-          <td class="date">2022</td>
-        </tr>
+        <tr><td class="name">🇰🇷 특허</td><td>호흡 재활 장치</td><td class="code">KR 10-1924596</td><td class="date">2018.11.27</td></tr>
+        <tr><td class="name">🇰🇷 특허</td><td>호흡 재활 장치</td><td class="code">KR 10-2021096</td><td class="date">2019.09.05</td></tr>
+        <tr><td class="name">🇰🇷 특허</td><td>호흡근 강화기기</td><td class="code">KR 10-2416723</td><td class="date">2022.06.30</td></tr>
+        <tr><td class="name">🇰🇷 특허</td><td>휴대용 호흡측정 및 호흡운동장치</td><td class="code">KR 10-2348292</td><td class="date">2022.01.04</td></tr>
+        <tr><td class="name">🇰🇷 특허</td><td>양방향 호흡운동 및 측정장치</td><td class="code">KR 10-2851149</td><td class="date">2022.01.04</td></tr>
+        <tr><td class="name">🇺🇸 US Patent</td><td>Respiratory Rehabilitation Apparatus</td><td class="code">US 11,247,098</td><td class="date">2022.02.15</td></tr>
+        <tr><td class="name">🇺🇸 US Patent</td><td>Respiratory Muscle Strengthening Device</td><td class="code">US 12,064,663</td><td class="date">2024.08.20</td></tr>
       </tbody>
     </table>
 
-    <div class="page__marker">
-      <span class="brand">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
-        Medical Japan 2026 · Export Consultation
-      </span>
-      <span>04 / 06 · 지에이치이노텍</span>
-    </div>
-  </section>
-
-  <!-- ============== PAGE 5 · MARKET & TRACK RECORD ============== -->
-  <section class="page">
-    <header class="sec-head">
-      <div>
-        <div class="sec-head__num">04 · Market</div>
-        <h2 class="sec-head__title">
-          시장 진출 · 실적
-          <small>Market Presence &amp; Track Record</small>
-        </h2>
-      </div>
-      <div class="sec-head__side">Global<br/>Reach</div>
-    </header>
-
-    <p class="body">지에이치이노텍은 미국 · 유럽 · 아시아 · 남미의 <strong>26개국 이상에 수출 실적</strong>을 보유한 K-헬스케어 대표 수출 기업입니다. Amazon(미국/독일), Bird Healthcare(호주), VIETCARE(베트남) 등 국가별 대표 유통망을 확보했으며, 일본 시장은 고령화 진입에 따른 호흡재활 수요 증가를 배경으로 본격 진출을 추진합니다.</p>
-
-    
-      <h3 style="margin: 4mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 수출국 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Export Markets</span></h3>
-      <div class="map">
-        
-        <div class="map__chip">
-          <span class="flag">🇺🇸</span>
-          <span class="name">USA</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇩🇪</span>
-          <span class="name">Germany</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇦🇺</span>
-          <span class="name">Australia</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇨🇿</span>
-          <span class="name">Czech</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇸🇮</span>
-          <span class="name">Slovenia</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇻🇳</span>
-          <span class="name">Vietnam</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇨🇱</span>
-          <span class="name">Chile</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇭🇰</span>
-          <span class="name">Hong Kong</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇮🇳</span>
-          <span class="name">India</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇪🇸</span>
-          <span class="name">Spain</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇧🇷</span>
-          <span class="name">Brazil</span>
-        </div>
-        <div class="map__chip">
-          <span class="flag">🇫🇷</span>
-          <span class="name">France</span>
-        </div>
-      </div>
-
-    <h3 style="margin: 6mm 0 3mm; font-size: 11pt; font-weight: 800;">주요 성과 · 연혁 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Milestones</span></h3>
-    <div class="tl">
-      
-        <div class="tl__item">
-          <div class="tl__date">2021</div>
-          <div class="tl__title">조달청 혁신제품 지정</div>
-          <p class="tl__desc">제2021-168호 · 국내 공공조달 진입</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2022.11</div>
-          <div class="tl__title">CE MDR DoC (EU) 취득</div>
-          <p class="tl__desc">유럽 의료기기 규정 대응 완료</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2022</div>
-          <div class="tl__title">SCI급 임상논문 게재</div>
-          <p class="tl__desc">BMC Geriatrics — MIP +20%, MEP +23% 검증</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2023.03</div>
-          <div class="tl__title">FDA Class I 등록</div>
-          <p class="tl__desc">미국 시장 진출 · Amazon 판매 개시</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2023.04</div>
-          <div class="tl__title">ISO 13485 인증</div>
-          <p class="tl__desc">의료기기 품질경영시스템 확보</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2024–25</div>
-          <div class="tl__title">수출국 26개국 이상 확대</div>
-          <p class="tl__desc">호주 · 베트남 · 중남미 등 유통망 구축</p>
-        </div>
-        <div class="tl__item">
-          <div class="tl__date">2026.10</div>
-          <div class="tl__title">Medical Japan Tokyo 2026 참가</div>
-          <p class="tl__desc">Makuhari Messe · Korea Pavilion KP-01</p>
-        </div>
+    <h3 style="margin: 0 0 3mm; font-size: 10.5pt; font-weight: 800;">수출국 · 국내 실증 <span style="font-family:var(--font-en);font-weight:500;color:var(--ink-500);font-size:9pt;margin-left:6px">Export &amp; Public Procurement</span></h3>
+    <div class="map" style="margin-bottom:4mm;">
+      <div class="map__chip"><span class="flag">🇺🇸</span><span class="name">USA</span></div>
+      <div class="map__chip"><span class="flag">🇦🇺</span><span class="name">Australia</span></div>
+      <div class="map__chip"><span class="flag">🇩🇪</span><span class="name">Germany</span></div>
+      <div class="map__chip"><span class="flag">🇯🇵</span><span class="name">Japan</span></div>
+      <div class="map__chip"><span class="flag">🇨🇿</span><span class="name">Czech</span></div>
+      <div class="map__chip"><span class="flag">🇸🇮</span><span class="name">Slovenia</span></div>
+      <div class="map__chip"><span class="flag">🇻🇳</span><span class="name">Vietnam</span></div>
+      <div class="map__chip"><span class="flag">🇨🇱</span><span class="name">Chile</span></div>
+      <div class="map__chip"><span class="flag">🇭🇰</span><span class="name">Hong Kong</span></div>
+      <div class="map__chip"><span class="flag">🇲🇾</span><span class="name">Malaysia</span></div>
+      <div class="map__chip"><span class="flag">🇮🇳</span><span class="name">India</span></div>
+      <div class="map__chip"><span class="flag">🇪🇸</span><span class="name">Spain</span></div>
     </div>
 
-    <div class="page__marker">
-      <span class="brand">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
-        Medical Japan 2026 · Export Consultation
-      </span>
-      <span>05 / 06 · 지에이치이노텍</span>
-    </div>
-  </section>
-
-  <!-- ============== PAGE 6 · CONTACT & CONSULTATION ============== -->
-  <section class="page">
-    <header class="sec-head">
-      <div>
-        <div class="sec-head__num">05 · Consultation</div>
-        <h2 class="sec-head__title">
-          상담 문의 · 방문
-          <small>Contact &amp; On-site Consultation</small>
-        </h2>
-      </div>
-      <div class="sec-head__side">Get in<br/>Touch</div>
-    </header>
-
-    <p class="body">
-      <strong>지에이치이노텍</strong>는 Medical Japan Tokyo 2026 연계 수출상담회 기간 중 <strong>Korea Pavilion Booth KP-01</strong>에서 해외 바이어 대상 1:1 상담을 진행합니다. 사전 상담 예약 및 자료 요청은 아래 채널을 통해 가능합니다.
-    </p>
-
-    <div class="tags" style="margin: 6mm 0;">
-      <span class="tag tag--purple">주요 관심 시장 · 일본 (호흡재활 · 요양 · 병원)</span>
-      <span class="tag tag--green">상담 매칭 · 기업당 5건 내외</span>
-      <span class="tag">통역 지원 · 한 · 영 · 일</span>
+    <div style="padding:3mm 4mm; background:linear-gradient(135deg, #FEF6E7, #fff); border-left:3px solid #F5A623; border-radius: 0 2mm 2mm 0; font-size: 8.5pt; color:var(--ink-700); margin-bottom:4mm; line-height:1.6; word-break:keep-all;">
+      <strong style="color:#8B5A00;">🏛 조달청 혁신제품 실증 (제2021-168호)</strong><br/>
+      2023 서울시 4개 자치구(광진구 외) 시범사용 → 2024 당진·울산·부산 기장장애인복지관 무상 공급 → <strong>2025 인천 서구 보건서·미추홀구청 실증</strong> → <strong>2025 베트남 국립폐병원·비엣덕 대학병원 실증</strong>
     </div>
 
     <div class="contact-card">
       <h3>지에이치이노텍 · Consultation Desk</h3>
       <div class="c-rows">
-        <div><span>Company</span><b>GH Innotech Co., Ltd.</b></div>
-        <div><span>Category</span><b>호흡재활 의료기기</b></div>
-        <div><span>Booth</span><b>Booth KP-01 · Korea Pavilion</b></div>
+        <div><span>Company</span><b>㈜지에이치이노텍 · GH Innotech Co., Ltd.</b></div>
+        <div><span>CEO</span><b>권유용 · Kwon Yu-Yong</b></div>
+        <div><span>Booth</span><b>KP-01 · Korea Pavilion, Makuhari Messe</b></div>
         <div><span>Date</span><b>2026. 10. 7 – 10. 9 (JST)</b></div>
-        <div><span>Contact</span><b><span class="e-mail" data-b64="ZXhwb3J0QGdoaW5ub3RlY2guY28ua3I="></span></b></div>
-        <div><span>Website</span><b>www.ghinnotech.co.kr</b></div>
+        <div><span>Contact</span><b><span class="e-mail" data-b64="Z2hpdEBnaGl0LmNvLmty"></span> · 051-518-4701</b></div>
+        <div><span>Website</span><b>www.ghit.co.kr · smartstore.naver.com/bigbreathe</b></div>
       </div>
     </div>
-
-    <p class="body" style="margin-top: 8mm; font-size: 9pt; color: var(--ink-500);">
-      본 브로셔의 사양·인증·수치는 발행 시점의 자료를 기준으로 하며 사전 통보 없이 변경될 수 있습니다. 사전 상담 신청 및 통합 안내는
-      <a href="../index.html#register" style="color:var(--purple-700);font-weight:600">Medical Japan 2026 사전등록 페이지</a>에서 가능합니다.
-    </p>
 
     <div class="page__marker">
       <span class="brand">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
         Medical Japan 2026 · Export Consultation
       </span>
-      <span>06 / 06 · 지에이치이노텍</span>
+      <span>12 / 12 · Contact</span>
     </div>
   </section>
 
 </div>
+
 <script>
-  // Auto-open print dialog when opened with ?print=1
   (function(){
     var q = new URLSearchParams(window.location.search);
     if (q.get('print') === '1') {
       window.addEventListener('load', function(){
-        // Wait for fonts + layout
-        setTimeout(function(){ window.print(); }, 600);
+        setTimeout(function(){ window.print(); }, 700);
       });
     }
   })();

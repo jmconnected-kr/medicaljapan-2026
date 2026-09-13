@@ -253,6 +253,10 @@ a{ color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 .hero-visual svg{ width: 40%; height: auto; opacity: .9; }
+.hero-visual img{ width: 70%; height: auto; max-height: 90%; object-fit: contain; }
+.hero-visual--fill img{ width: 100%; height: 100%; max-height: none; object-fit: cover; }
+.hero-visual--product{ background: linear-gradient(135deg, #F6F2FE 0%, #EDE7FB 100%); }
+.hero-visual--product img{ width: 55%; }
 .hero-visual::after{
   content: attr(data-caption);
   position: absolute; bottom: 4mm; left: 4mm;
