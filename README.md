@@ -331,15 +331,14 @@ vercel deploy --prod
 - [x] 404 페이지 (`404.html`)
 - [x] Vercel/Netlify 설정 (캐싱 · 보안 헤더)
 - [x] GitHub Actions Pages 배포 워크플로우
-- [x] `medicaljapan@btp.or.kr` — Cloudflare obfuscation 완전 제거, base64 인코딩된 mailto 링크로 안전 처리
+- [x] `jc@jmconnected.co.kr` — 운영사무국 공식 접수 이메일, base64 인코딩된 mailto 링크로 안전 처리
 - [x] 사전등록 폼 fallback — 백엔드 미연결 시 사용자 메일 클라이언트로 자동 fallback + 데모 안내 배너
 - [x] Sticky 헤더 대응 `scroll-padding-top: 96px`
 - [x] Floor plan 모바일 가로 스크롤 힌트 (900px 이하)
 - [x] 접근성: alt 텍스트, ARIA 라벨, 폼 라벨 연결
 
 ### 🔧 배포자가 확인/설정할 항목
-- [ ] `medicaljapan@btp.or.kr` 이메일 실제 발신 계정 활성화
-- [ ] 전화번호 · 주소 · 담당자명 최종 확인 (`+82-2-3460-7396`, `+81-70-XXXX-XXXX` 등)
+- [x] 운영사무국 이메일 `jc@jmconnected.co.kr` 및 전화 `02-3663-0182` 반영
 - [ ] Google Analytics / GA4 / Naver Analytics 스니펫 삽입 (`</head>` 위)
 - [ ] 참가기업 이미지 저작권 재확인 (또는 자체 촬영본으로 교체)
 - [ ] 실제 부스 번호 (Medical Japan 전용 Floor Map 공개 후) 최종 반영
@@ -347,7 +346,7 @@ vercel deploy --prod
 - [ ] 사전등록 폼 백엔드 연결 (Formspree / Netlify Forms / Google Forms) — HTML 주석 참고
 
 ### 폼 백엔드 옵션
-현재 폼은 백엔드 미연결 시 자동으로 사용자의 이메일 클라이언트를 열어 `medicaljapan@btp.or.kr`로 전송되도록 fallback이 구현되어 있습니다. 배포 시 다음 중 하나로 확장 가능:
+현재 폼은 백엔드 미연결 시 자동으로 사용자의 이메일 클라이언트를 열어 `jc@jmconnected.co.kr`로 전송되도록 fallback이 구현되어 있습니다. 배포 시 다음 중 하나로 확장 가능:
 
 1. **Formspree** (가장 쉬움 · 무료 50건/월)
    ```html
