@@ -19,6 +19,12 @@ services:
       - type: redirect
         source: "/brochures/Medical Japan 2026 Company Brochure.html"
         destination: "/brochures/Medical Japan 2026 - Company Brochure (EN).html"
+      - type: redirect
+        source: "/buyer-guide-kr.pdf"
+        destination: "/buyer-guide.html"
+      - type: redirect
+        source: "/buyer-guide-jp.pdf"
+        destination: "/buyer-guide-jp.html"
 
     headers:
       - path: /*
