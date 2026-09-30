@@ -6,6 +6,20 @@ services:
     staticPublishPath: .
     pullRequestPreviewsEnabled: true
 
+    routes:
+      - type: redirect
+        source: "/brochures/Medical Japan 2026 - 전체 브로셔 합본.html"
+        destination: "/brochures/Medical Japan 2026 - 참가기업 종합브로셔 (KR).html"
+      - type: redirect
+        source: "/brochures/Medical Japan 2026 - 전체 브로셔 합본 (KR).pdf"
+        destination: "/brochures/Medical Japan 2026 - 참가기업 종합브로셔 (KR).html"
+      - type: redirect
+        source: "/brochures/Medical Japan 2026 - 出展企業総合ブロシュア (JP).pdf"
+        destination: "/brochures/Medical Japan 2026 - 出展企業総合ブロシュア (JP).html"
+      - type: redirect
+        source: "/brochures/Medical Japan 2026 Company Brochure.html"
+        destination: "/brochures/Medical Japan 2026 - Company Brochure (EN).html"
+
     headers:
       - path: /*
         name: X-Content-Type-Options
@@ -25,4 +39,3 @@ services:
 
     # Static HTML site: Render automatically serves /404.html for missing pages
     # No rewrite rules needed
-
