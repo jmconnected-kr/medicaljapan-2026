@@ -34,13 +34,9 @@ medicaljapan-2026/
 │
 └── brochures/                    ← 브로셔 7개 파일
     ├── brochure.css              ← 공통 CSS
-    ├── Medical Japan 2026 Company Brochure.html      (요약 6P)
-    ├── Medical Japan 2026 - 전체 브로셔 합본.html    (전체 42P) ★
-    ├── ghinnotech.html           (지에이치이노텍 12P)
-    ├── o2lab.html                (오투랩 8P)
-    ├── carenco.html              (케어엔코 6P)
-    ├── aion.html                 (아이온 10P)
-    └── dail.html                 (다일 6P)
+    ├── Medical Japan 2026 - 참가기업 종합브로셔 (KR).html
+    ├── Medical Japan 2026 - 出展企業総合ブロシュア (JP).html
+    └── Medical Japan 2026 - Company Brochure (EN).html
 ```
 
 **총 파일 수: 53개 · 총 용량: 약 4MB**

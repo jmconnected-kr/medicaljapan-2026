@@ -129,7 +129,7 @@ React/Next.js 등 기존 코드베이스에 통합하려면 아래 "Screens / Vi
 - 지명 일본어 표기 (幕張メッセ · 海浜幕張駅 · 東京駅 · 成田/羽田空港 · 釜山テクノパーク)
 - 상단 툴바에 KR/JP 언어 스위치
 
-### 4. `brochures/Medical Japan 2026 Company Brochure.html` — 참가기업 통합 브로셔 · A4 6페이지
+### 4. `brochures/` — 참가기업 종합 브로셔 · 한국어/일본어/영어 각 A4 31페이지
 
 1. 표지 (네이비 + Medical Japan 대형 타이포 + 5개사 그리드)
 2-6. 각 기업 1페이지 (실사 이미지 + 제품 · 스펙 · 인증 · 컨택트)
@@ -285,12 +285,9 @@ React/Next.js 등 기존 코드베이스에 통합하려면 아래 "Screens / Vi
 - `Medical Japan 2026.html` — 메인 랜딩페이지 (index.html로 이름 변경 권장)
 
 ### 브로셔
-- `brochures/Medical Japan 2026 Company Brochure.html` — 5개사 통합 (A4 6P)
-- `brochures/ghinnotech.html` — 지에이치이노텍 개별
-- `brochures/o2lab.html` — 오투랩 개별
-- `brochures/carenco.html` — 케어엔코 개별
-- `brochures/aion.html` — 아이온 개별
-- `brochures/dail.html` — 다일 개별
+- `brochures/Medical Japan 2026 - 참가기업 종합브로셔 (KR).html` — 한국어 31P
+- `brochures/Medical Japan 2026 - 出展企業総合ブロシュア (JP).html` — 일본어 31P
+- `brochures/Medical Japan 2026 - Company Brochure (EN).html` — 영어 31P
 - `brochures/brochure.css` — 개별 브로셔 공용 스타일
 
 ### 바이어 가이드
