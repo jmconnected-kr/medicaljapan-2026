@@ -1073,6 +1073,12 @@
   /* SVG floorplan styles */
   .fp{ width: 100%; height: auto; min-width: 900px; display:block; }
   .fp text{ font-family: var(--font-en); font-weight: 600; }
+  .floor__layout-img{ width:100%; height:auto; display:block; background:#fff; }
+  .floor__actual-note{ margin-top:18px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:14px; background:var(--line); }
+  .floor__actual-note > div{ padding:16px 18px; background:#fff; }
+  .floor__actual-note b{ display:block; margin-bottom:5px; color:var(--navy-900); font-size:14px; }
+  .floor__actual-note span{ color:var(--ink-600); font-size:12px; line-height:1.55; }
+  @media(max-width:800px){ .floor__actual-note{ grid-template-columns:1fr 1fr; } }
 
   /* Reference booth photos gallery */
   .floor__gallery{
@@ -2479,398 +2485,34 @@
 <section id="floor" class="floor">
   <div class="section-head">
     <div class="section-head__inner">
-      <span class="section-head__kr">상담회장 배치도</span>
-      <span class="section-head__en">| Floor Plan</span>
+      <span class="section-head__kr">상담회장 최종 배치도</span>
+      <span class="section-head__en">| Final Floor Plan</span>
     </div>
     <div class="section-head__badge">Medical Japan <small>2026</small></div>
   </div>
 
   <div class="container">
-    <!-- Reference photos of real B2B consultation booths -->
-    <div class="floor__gallery">
-      <div class="floor__photo">
-        <img src="assets/booth-hvac.jpg" alt="KOTRA 수출상담회 부스 실사"/>
-        <div class="floor__photo__caption">
-          <div class="tag">Reference · KOTRA</div>
-          <div class="txt">해외 바이어 1:1 상담 부스 (참고 이미지)</div>
-        </div>
-      </div>
-      <div class="floor__photo">
-        <img src="assets/booth-boomup.jpg" alt="Korea Trade BoomUp Showcase"/>
-        <div class="floor__photo__caption">
-          <div class="tag">Reference · BoomUp Korea</div>
-          <div class="txt">컬러 배너 파티션 · 개별 상담 부스 스타일</div>
-        </div>
-      </div>
-    </div>
-
     <div class="floor__scroll-hint" role="note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      좌우로 스크롤하여 전체 배치도를 확인하세요
+      모바일에서는 좌우로 이동하여 전체 배치도를 확인하세요
     </div>
 
     <div class="floor__frame">
-      <svg class="fp" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg" aria-label="Korea Pavilion Floor Plan">
-        <defs>
-          <linearGradient id="deskGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#6C46DB"/><stop offset="1" stop-color="#3E1E80"/>
-          </linearGradient>
-          <linearGradient id="navyGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#0F1E5A"/><stop offset="1" stop-color="#0A153F"/>
-          </linearGradient>
-          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#E88E00"/>
-          </linearGradient>
-          <linearGradient id="cyanGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#38B6E0"/><stop offset="1" stop-color="#1F8AC9"/>
-          </linearGradient>
-          <linearGradient id="magentaGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#D93A88"/><stop offset="1" stop-color="#A8266A"/>
-          </linearGradient>
-          <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#3AB77A"/><stop offset="1" stop-color="#1F8A5B"/>
-          </linearGradient>
-          <linearGradient id="tealGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#2AA5B0"/><stop offset="1" stop-color="#1A7A82"/>
-          </linearGradient>
-          <linearGradient id="loungeGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#8562E6"/><stop offset="1" stop-color="#4B27A4"/>
-          </linearGradient>
-          <pattern id="carpetPattern" width="12" height="12" patternUnits="userSpaceOnUse">
-            <rect width="12" height="12" fill="#F9F6FE"/>
-            <circle cx="6" cy="6" r="0.8" fill="#E7DEF7"/>
-          </pattern>
-          <!-- Table shadow -->
-          <filter id="tableShadow" x="-10%" y="-10%" width="120%" height="130%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0A153F" flood-opacity="0.15"/>
-          </filter>
-          <!-- Chair icon symbol -->
-          <symbol id="chair" viewBox="0 0 20 20">
-            <circle cx="10" cy="10" r="7" fill="#fff" stroke="#8B889F" stroke-width="1.2"/>
-            <circle cx="10" cy="10" r="4" fill="#EDE7FB"/>
-          </symbol>
-        </defs>
+      <img class="floor__layout-img" src="assets/medical-japan-2026-consultation-layout-final.png" alt="Medical Japan 2026 마쿠하리 메세 2홀 발코니 수출상담회장 최종 배치도" loading="lazy"/>
+    </div>
 
-        <!-- ============ PAVILION FLOOR (carpeted) ============ -->
-        <rect x="20" y="20" width="1160" height="720" rx="12" fill="url(#carpetPattern)" stroke="#D9D3EA" stroke-width="1.5"/>
+    <div class="floor__actual-note" aria-label="상담회장 배치 핵심 정보">
+      <div><b>공간 규격</b><span>마쿠하리 메세 2홀 발코니 · 전체 폭 11,800mm</span></div>
+      <div><b>기업 상담부스</b><span>KP-01~KP-05 · 동일 규격 3.0m × 2.3m · 4인 상담</span></div>
+      <div><b>공용공간</b><span>바이어 라운지 2테이블 · 통역·운영 스태프 대기 · 종합 접수데스크</span></div>
+      <div><b>바이어 동선</b><span>① 주출입구 → ② 접수 → ③ 라운지 대기 후 지정 부스 상담</span></div>
+    </div>
 
-        <!-- Wall / back panel with pavilion signage -->
-        <rect x="20" y="20" width="1160" height="60" rx="12" fill="url(#navyGrad)"/>
-        <path d="M20 68 h 1160 v 12 h -1160 z" fill="url(#navyGrad)"/>
-        <text x="48" y="48" fill="#F5A623" font-family="Inter" font-size="11" font-weight="800" letter-spacing="2.5">KOREA PAVILION · MEDICAL JAPAN 2026 TOKYO</text>
-        <text x="48" y="72" fill="#fff" font-family="Inter" font-size="18" font-weight="800" letter-spacing="-0.4">한국관 · K-Healthcare Export Consultation Floor Plan</text>
-        <!-- Korea flag mark -->
-        <g transform="translate(1120 50)">
-          <circle cx="0" cy="0" r="20" fill="#fff"/>
-          <path d="M -12 0 A 12 12 0 0 1 12 0 A 6 6 0 0 0 0 0 A 6 6 0 0 1 -12 0 Z" fill="#CD2E3A"/>
-          <path d="M 12 0 A 12 12 0 0 1 -12 0 A 6 6 0 0 1 0 0 A 6 6 0 0 0 12 0 Z" fill="#0047A0"/>
-        </g>
-
-        <!-- Compass -->
-        <g transform="translate(1120 730)">
-          <circle cx="0" cy="0" r="18" fill="#fff" stroke="#8B889F" stroke-width="1"/>
-          <path d="M 0 -14 L 4 0 L 0 14 L -4 0 Z" fill="#F5A623"/>
-          <path d="M 0 -14 L 4 0 L 0 0 Z" fill="#0A153F"/>
-          <text x="0" y="-22" text-anchor="middle" fill="#0A153F" font-family="Inter" font-size="9" font-weight="800">N</text>
-        </g>
-
-        <!-- ============ TOP: STORAGE + CATERING ============ -->
-        <!-- Storage room (top-left) -->
-        <g>
-          <rect x="50" y="110" width="200" height="80" rx="8" fill="#F5F5F7" stroke="#D9D3EA" stroke-width="2" stroke-dasharray="5 3"/>
-          <text x="65" y="135" fill="#5B34C4" font-family="Inter" font-size="9" font-weight="800" letter-spacing="1.5">STORAGE</text>
-          <text x="65" y="156" fill="#141327" font-size="13" font-weight="800">창고 · 샘플 보관</text>
-          <text x="65" y="175" fill="#6E6B84" font-family="Inter" font-size="10">Product samples · Locker</text>
-          <!-- Box icons -->
-          <g transform="translate(220 140)">
-            <rect x="-14" y="-6" width="12" height="12" rx="1" fill="none" stroke="#8B889F" stroke-width="1.5"/>
-            <rect x="0" y="-6" width="12" height="12" rx="1" fill="none" stroke="#8B889F" stroke-width="1.5"/>
-            <path d="M -8 -6 L -8 6 M 6 -6 L 6 6" stroke="#8B889F" stroke-width="1"/>
-          </g>
-        </g>
-
-        <!-- Catering / Coffee corner (top-right) -->
-        <g>
-          <rect x="900" y="110" width="250" height="80" rx="8" fill="url(#goldGrad)"/>
-          <text x="915" y="135" fill="#0A153F" font-family="Inter" font-size="9" font-weight="800" letter-spacing="1.5">CATERING · REFRESHMENTS</text>
-          <text x="915" y="156" fill="#0A153F" font-size="14" font-weight="800">케이터링 · 다과 코너</text>
-          <text x="915" y="175" fill="#0A153F" font-family="Inter" font-size="10" opacity=".8">Coffee · Tea · Snacks · Water</text>
-          <!-- Coffee cup + food icons -->
-          <g transform="translate(1105 148)" fill="none" stroke="#0A153F" stroke-width="1.8" stroke-linecap="round">
-            <rect x="-8" y="-6" width="14" height="14" rx="1"/>
-            <path d="M 6 -3 c 5 0 5 8 0 8"/>
-            <path d="M -5 -10 v -3 M -2 -10 v -3 M 1 -10 v -3"/>
-          </g>
-        </g>
-
-        <!-- ============ RECEPTION & INFO (top-center) ============ -->
-        <g>
-          <rect x="270" y="110" width="610" height="80" rx="8" fill="url(#deskGrad)"/>
-          <text x="290" y="135" fill="#F5A623" font-family="Inter" font-size="10" font-weight="800" letter-spacing="2">RECEPTION · INFO · INTERPRETER · VIP</text>
-          <text x="290" y="160" fill="#fff" font-size="15" font-weight="800">종합 서비스 데스크</text>
-          <text x="290" y="180" fill="#fff" font-family="Inter" font-size="11" opacity=".9">등록 · 명찰 · 안내 · 통역 배정 · VIP 라운지 안내</text>
-          <!-- 4 sub-desk labels -->
-          <g font-family="Inter" font-size="9" font-weight="700" fill="#fff">
-            <rect x="720" y="122" width="70" height="20" rx="4" fill="rgba(255,255,255,.18)"/>
-            <text x="755" y="136" text-anchor="middle">Reception</text>
-            <rect x="720" y="148" width="70" height="20" rx="4" fill="rgba(255,255,255,.18)"/>
-            <text x="755" y="162" text-anchor="middle">Interpreter</text>
-            <rect x="795" y="122" width="70" height="20" rx="4" fill="rgba(255,255,255,.18)"/>
-            <text x="830" y="136" text-anchor="middle">Info Desk</text>
-            <rect x="795" y="148" width="70" height="20" rx="4" fill="rgba(255,255,255,.18)"/>
-            <text x="830" y="162" text-anchor="middle">VIP Lounge</text>
-          </g>
-        </g>
-
-        <!-- Aisle label -->
-        <text x="600" y="215" text-anchor="middle" fill="#8B889F" font-family="Inter" font-size="10" font-weight="700" letter-spacing="2">— MAIN AISLE / 중앙 통로 (3m) —</text>
-        <path d="M 40 220 h 1120" stroke="#EDE7FB" stroke-width="3" stroke-dasharray="8 6"/>
-
-        <!-- ============ ROW 1 · EXHIBITOR BOOTHS with tables ============ -->
-
-        <!-- KP-01 · 지에이치이노텍 (Feature booth · larger 6m x 3m) -->
-        <g>
-          <!-- Booth partition -->
-          <rect x="50" y="250" width="290" height="180" rx="6" fill="#fff" stroke="#D9D3EA" stroke-width="1.5"/>
-          <!-- Back wall banner (magenta) -->
-          <rect x="50" y="250" width="290" height="42" rx="6" fill="url(#magentaGrad)"/>
-          <path d="M50 286 h 290 v 6 h -290 z" fill="url(#magentaGrad)"/>
-          <text x="65" y="275" fill="#F5A623" font-family="Inter" font-size="11" font-weight="800" letter-spacing="2">KP-01 · FEATURE BOOTH</text>
-          <text x="65" y="290" fill="#fff" font-family="Inter" font-size="9" font-weight="600" opacity=".85">6m × 3m · 18m²</text>
-          <!-- Company info -->
-          <text x="65" y="315" fill="#141327" font-size="15" font-weight="800" letter-spacing="-0.3">지에이치이노텍 · GH Innotech</text>
-          <text x="65" y="333" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="600">호흡재활 · Bigbreathe IMT/PEP</text>
-          <text x="65" y="348" fill="#8B889F" font-family="Inter" font-size="9">ISO 13485 · CE MDR · FDA</text>
-          <!-- Meeting table (long) -->
-          <rect x="70" y="360" width="180" height="42" rx="4" fill="#141327" filter="url(#tableShadow)"/>
-          <text x="160" y="386" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1">MEETING TABLE · 6 PAX</text>
-          <!-- Chairs -->
-          <use href="#chair" x="80" y="345" width="16" height="16"/>
-          <use href="#chair" x="115" y="345" width="16" height="16"/>
-          <use href="#chair" x="150" y="345" width="16" height="16"/>
-          <use href="#chair" x="185" y="345" width="16" height="16"/>
-          <use href="#chair" x="220" y="345" width="16" height="16"/>
-          <use href="#chair" x="80" y="405" width="16" height="16"/>
-          <use href="#chair" x="115" y="405" width="16" height="16"/>
-          <use href="#chair" x="150" y="405" width="16" height="16"/>
-          <use href="#chair" x="185" y="405" width="16" height="16"/>
-          <use href="#chair" x="220" y="405" width="16" height="16"/>
-          <!-- Product display shelf -->
-          <rect x="265" y="360" width="60" height="42" rx="3" fill="#EDE7FB" stroke="#A98EEF" stroke-width="1"/>
-          <text x="295" y="378" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="8" font-weight="700">PRODUCT</text>
-          <text x="295" y="390" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="8" font-weight="700">DISPLAY</text>
-        </g>
-
-        <!-- KP-02 · 오투랩 (3m x 3m) -->
-        <g>
-          <rect x="360" y="250" width="200" height="180" rx="6" fill="#fff" stroke="#D9D3EA" stroke-width="1.5"/>
-          <rect x="360" y="250" width="200" height="42" rx="6" fill="url(#cyanGrad)"/>
-          <path d="M360 286 h 200 v 6 h -200 z" fill="url(#cyanGrad)"/>
-          <text x="375" y="275" fill="#F5A623" font-family="Inter" font-size="11" font-weight="800" letter-spacing="2">KP-02</text>
-          <text x="375" y="290" fill="#fff" font-family="Inter" font-size="9" font-weight="600" opacity=".85">3m × 3m · 9m²</text>
-          <text x="375" y="315" fill="#141327" font-size="14" font-weight="800" letter-spacing="-0.3">(주)오투랩 · O2Lab</text>
-          <text x="375" y="333" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="600">균형측정 · Dynamic Balance</text>
-          <text x="375" y="348" fill="#8B889F" font-family="Inter" font-size="9">Class I · GS 1등급</text>
-          <!-- Meeting table (square) -->
-          <rect x="385" y="365" width="120" height="42" rx="4" fill="#141327" filter="url(#tableShadow)"/>
-          <text x="445" y="391" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1">TABLE · 4 PAX</text>
-          <use href="#chair" x="395" y="350" width="16" height="16"/>
-          <use href="#chair" x="430" y="350" width="16" height="16"/>
-          <use href="#chair" x="465" y="350" width="16" height="16"/>
-          <use href="#chair" x="395" y="410" width="16" height="16"/>
-          <use href="#chair" x="430" y="410" width="16" height="16"/>
-          <use href="#chair" x="465" y="410" width="16" height="16"/>
-          <!-- Product spot -->
-          <rect x="518" y="365" width="30" height="42" rx="3" fill="#EDE7FB" stroke="#A98EEF" stroke-width="1"/>
-          <text x="533" y="392" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="7" font-weight="700">DEMO</text>
-        </g>
-
-        <!-- KP-03 · 케어엔코 (3m x 3m) -->
-        <g>
-          <rect x="580" y="250" width="200" height="180" rx="6" fill="#fff" stroke="#D9D3EA" stroke-width="1.5"/>
-          <rect x="580" y="250" width="200" height="42" rx="6" fill="url(#greenGrad)"/>
-          <path d="M580 286 h 200 v 6 h -200 z" fill="url(#greenGrad)"/>
-          <text x="595" y="275" fill="#F5A623" font-family="Inter" font-size="11" font-weight="800" letter-spacing="2">KP-03</text>
-          <text x="595" y="290" fill="#fff" font-family="Inter" font-size="9" font-weight="600" opacity=".85">3m × 3m · 9m²</text>
-          <text x="595" y="315" fill="#141327" font-size="14" font-weight="800" letter-spacing="-0.3">(주)케어엔코 · Care&amp;Co</text>
-          <text x="595" y="333" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="600">AI 체형분석 · Fisica</text>
-          <text x="595" y="348" fill="#8B889F" font-family="Inter" font-size="9">VCCI · CE · FCC (일본 EMC 완료)</text>
-          <rect x="605" y="365" width="120" height="42" rx="4" fill="#141327" filter="url(#tableShadow)"/>
-          <text x="665" y="391" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1">TABLE · 4 PAX</text>
-          <use href="#chair" x="615" y="350" width="16" height="16"/>
-          <use href="#chair" x="650" y="350" width="16" height="16"/>
-          <use href="#chair" x="685" y="350" width="16" height="16"/>
-          <use href="#chair" x="615" y="410" width="16" height="16"/>
-          <use href="#chair" x="650" y="410" width="16" height="16"/>
-          <use href="#chair" x="685" y="410" width="16" height="16"/>
-          <rect x="738" y="365" width="30" height="42" rx="3" fill="#EDE7FB" stroke="#A98EEF" stroke-width="1"/>
-          <text x="753" y="392" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="7" font-weight="700">DEMO</text>
-        </g>
-
-        <!-- Product Demo Zone (right of Row 1) -->
-        <g>
-          <rect x="800" y="250" width="180" height="180" rx="6" fill="url(#goldGrad)"/>
-          <rect x="800" y="250" width="180" height="42" rx="6" fill="rgba(10,21,63,.9)"/>
-          <path d="M800 286 h 180 v 6 h -180 z" fill="rgba(10,21,63,.9)"/>
-          <text x="815" y="275" fill="#F5A623" font-family="Inter" font-size="11" font-weight="800" letter-spacing="2">DEMO ZONE</text>
-          <text x="815" y="290" fill="#fff" font-family="Inter" font-size="9" font-weight="600" opacity=".85">Live Product Showcase</text>
-          <text x="815" y="315" fill="#0A153F" font-size="14" font-weight="800" letter-spacing="-0.3">제품 시연 존</text>
-          <text x="815" y="332" fill="#0A153F" font-family="Inter" font-size="10" font-weight="700" opacity=".8">Product Demo Stage</text>
-          <text x="815" y="352" fill="#0A153F" font-family="Inter" font-size="9" opacity=".7">상시 운영 · Full-day Demo</text>
-          <!-- Presentation area -->
-          <rect x="815" y="365" width="150" height="42" rx="3" fill="rgba(255,255,255,.35)" stroke="rgba(10,21,63,.6)" stroke-width="1.5" stroke-dasharray="3 3"/>
-          <text x="890" y="391" text-anchor="middle" fill="#0A153F" font-family="Inter" font-size="9" font-weight="800" letter-spacing="1">STAGE · SCREEN</text>
-          <!-- Star -->
-          <path d="M 965 262 l 3 6 l 7 1 l -5 5 l 1 7 l -6 -3 l -6 3 l 1 -7 l -5 -5 l 7 -1 z" fill="#fff" opacity=".9"/>
-        </g>
-
-        <!-- Aisle between rows -->
-        <text x="600" y="455" text-anchor="middle" fill="#8B889F" font-family="Inter" font-size="10" font-weight="700" letter-spacing="2">— CROSS AISLE / 횡단 통로 (2m) —</text>
-        <path d="M 40 460 h 1120" stroke="#EDE7FB" stroke-width="3" stroke-dasharray="8 6"/>
-
-        <!-- ============ ROW 2 · KP-04 · KP-05 · BUYER LOUNGE ============ -->
-
-        <!-- KP-04 · 아이온 -->
-        <g>
-          <rect x="50" y="490" width="200" height="180" rx="6" fill="#fff" stroke="#D9D3EA" stroke-width="1.5"/>
-          <rect x="50" y="490" width="200" height="42" rx="6" fill="url(#loungeGrad)"/>
-          <path d="M50 526 h 200 v 6 h -200 z" fill="url(#loungeGrad)"/>
-          <text x="65" y="515" fill="#F5A623" font-family="Inter" font-size="11" font-weight="800" letter-spacing="2">KP-04</text>
-          <text x="65" y="530" fill="#fff" font-family="Inter" font-size="9" font-weight="600" opacity=".85">3m × 3m · 9m²</text>
-          <text x="65" y="555" fill="#141327" font-size="14" font-weight="800" letter-spacing="-0.3">아이온 · I'ON</text>
-          <text x="65" y="573" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="600">고령친화 · BINATTI 지팡이</text>
-          <text x="65" y="588" fill="#8B889F" font-family="Inter" font-size="9">고령친화우수제품 · NHIS 복지용구</text>
-          <rect x="75" y="605" width="120" height="42" rx="4" fill="#141327" filter="url(#tableShadow)"/>
-          <text x="135" y="631" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1">TABLE · 4 PAX</text>
-          <use href="#chair" x="85" y="590" width="16" height="16"/>
-          <use href="#chair" x="120" y="590" width="16" height="16"/>
-          <use href="#chair" x="155" y="590" width="16" height="16"/>
-          <use href="#chair" x="85" y="650" width="16" height="16"/>
-          <use href="#chair" x="120" y="650" width="16" height="16"/>
-          <use href="#chair" x="155" y="650" width="16" height="16"/>
-          <rect x="208" y="605" width="30" height="42" rx="3" fill="#EDE7FB" stroke="#A98EEF" stroke-width="1"/>
-          <text x="223" y="632" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="7" font-weight="700">DEMO</text>
-        </g>
-
-        <!-- KP-05 · 다일 -->
-        <g>
-          <rect x="270" y="490" width="200" height="180" rx="6" fill="#fff" stroke="#D9D3EA" stroke-width="1.5"/>
-          <rect x="270" y="490" width="200" height="42" rx="6" fill="url(#tealGrad)"/>
-          <path d="M270 526 h 200 v 6 h -200 z" fill="url(#tealGrad)"/>
-          <text x="285" y="515" fill="#F5A623" font-family="Inter" font-size="11" font-weight="800" letter-spacing="2">KP-05</text>
-          <text x="285" y="530" fill="#fff" font-family="Inter" font-size="9" font-weight="600" opacity=".85">3m × 3m · 9m²</text>
-          <text x="285" y="555" fill="#141327" font-size="14" font-weight="800" letter-spacing="-0.3">다일 · DAIL</text>
-          <text x="285" y="573" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="600">헬스뷰티 · 기능성 슈즈·인솔</text>
-          <text x="285" y="588" fill="#8B889F" font-family="Inter" font-size="9">WHELPS+ ARMO · ManoLouis</text>
-          <rect x="295" y="605" width="120" height="42" rx="4" fill="#141327" filter="url(#tableShadow)"/>
-          <text x="355" y="631" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="700" letter-spacing="1">TABLE · 4 PAX</text>
-          <use href="#chair" x="305" y="590" width="16" height="16"/>
-          <use href="#chair" x="340" y="590" width="16" height="16"/>
-          <use href="#chair" x="375" y="590" width="16" height="16"/>
-          <use href="#chair" x="305" y="650" width="16" height="16"/>
-          <use href="#chair" x="340" y="650" width="16" height="16"/>
-          <use href="#chair" x="375" y="650" width="16" height="16"/>
-          <rect x="428" y="605" width="30" height="42" rx="3" fill="#EDE7FB" stroke="#A98EEF" stroke-width="1"/>
-          <text x="443" y="632" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="7" font-weight="700">DEMO</text>
-        </g>
-
-        <!-- ============ BUYER WAITING LOUNGE (right of Row 2) ============ -->
-        <g>
-          <rect x="490" y="490" width="490" height="180" rx="8" fill="#FBF9FF" stroke="#A98EEF" stroke-width="2" stroke-dasharray="5 3"/>
-          <text x="510" y="515" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="800" letter-spacing="2">BUYER WAITING LOUNGE · 바이어 대기 라운지</text>
-          <text x="510" y="533" fill="#8B889F" font-family="Inter" font-size="10">4 round tables · 16 seats · Free Wi-Fi · Refreshments</text>
-
-          <!-- 4 round tables with chairs -->
-          <!-- Table 1 -->
-          <g transform="translate(575 605)">
-            <circle cx="0" cy="0" r="28" fill="#fff" stroke="#8B889F" stroke-width="1.5" filter="url(#tableShadow)"/>
-            <text x="0" y="4" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="800">T1</text>
-            <use href="#chair" x="-8" y="-40" width="16" height="16"/>
-            <use href="#chair" x="24" y="-8" width="16" height="16"/>
-            <use href="#chair" x="-8" y="24" width="16" height="16"/>
-            <use href="#chair" x="-40" y="-8" width="16" height="16"/>
-          </g>
-          <!-- Table 2 -->
-          <g transform="translate(675 605)">
-            <circle cx="0" cy="0" r="28" fill="#fff" stroke="#8B889F" stroke-width="1.5" filter="url(#tableShadow)"/>
-            <text x="0" y="4" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="800">T2</text>
-            <use href="#chair" x="-8" y="-40" width="16" height="16"/>
-            <use href="#chair" x="24" y="-8" width="16" height="16"/>
-            <use href="#chair" x="-8" y="24" width="16" height="16"/>
-            <use href="#chair" x="-40" y="-8" width="16" height="16"/>
-          </g>
-          <!-- Table 3 -->
-          <g transform="translate(775 605)">
-            <circle cx="0" cy="0" r="28" fill="#fff" stroke="#8B889F" stroke-width="1.5" filter="url(#tableShadow)"/>
-            <text x="0" y="4" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="800">T3</text>
-            <use href="#chair" x="-8" y="-40" width="16" height="16"/>
-            <use href="#chair" x="24" y="-8" width="16" height="16"/>
-            <use href="#chair" x="-8" y="24" width="16" height="16"/>
-            <use href="#chair" x="-40" y="-8" width="16" height="16"/>
-          </g>
-          <!-- Table 4 -->
-          <g transform="translate(895 605)">
-            <circle cx="0" cy="0" r="28" fill="#fff" stroke="#8B889F" stroke-width="1.5" filter="url(#tableShadow)"/>
-            <text x="0" y="4" text-anchor="middle" fill="#5B34C4" font-family="Inter" font-size="10" font-weight="800">T4</text>
-            <use href="#chair" x="-8" y="-40" width="16" height="16"/>
-            <use href="#chair" x="24" y="-8" width="16" height="16"/>
-            <use href="#chair" x="-8" y="24" width="16" height="16"/>
-            <use href="#chair" x="-40" y="-8" width="16" height="16"/>
-          </g>
-        </g>
-
-        <!-- ============ TRAFFIC FLOW ARROWS (buyer flow) ============ -->
-        <!-- Arrow 1: Entrance → Reception -->
-        <g>
-          <path d="M 600 720 L 600 200" stroke="#F5A623" stroke-width="2" stroke-dasharray="6 4" opacity=".6" fill="none"/>
-          <path d="M 595 210 L 600 200 L 605 210" stroke="#F5A623" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <rect x="565" y="712" width="70" height="18" rx="9" fill="#F5A623"/>
-          <text x="600" y="725" text-anchor="middle" fill="#0A153F" font-family="Inter" font-size="10" font-weight="800">① 입장</text>
-        </g>
-
-        <!-- Arrow 2: to Waiting lounge -->
-        <g>
-          <path d="M 600 440 L 735 460 L 735 490" stroke="#38B6E0" stroke-width="2" stroke-dasharray="6 4" opacity=".7" fill="none"/>
-          <path d="M 730 483 L 735 490 L 740 483" stroke="#38B6E0" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <rect x="700" y="470" width="80" height="16" rx="8" fill="#38B6E0"/>
-          <text x="740" y="482" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="800">② 대기 라운지</text>
-        </g>
-
-        <!-- Arrow 3: to Booth -->
-        <g>
-          <path d="M 500 460 L 400 440 L 400 250" stroke="#D93A88" stroke-width="2" stroke-dasharray="6 4" opacity=".7" fill="none"/>
-          <path d="M 395 260 L 400 250 L 405 260" stroke="#D93A88" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <rect x="360" y="446" width="80" height="16" rx="8" fill="#D93A88"/>
-          <text x="400" y="458" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="800">③ 부스 상담</text>
-        </g>
-
-        <!-- ============ ENTRANCE (bottom-center) ============ -->
-        <g>
-          <rect x="560" y="700" width="80" height="10" rx="3" fill="#0A153F"/>
-          <path d="M 560 700 v -20 h 80 v 20" fill="none" stroke="#0A153F" stroke-width="2"/>
-          <rect x="560" y="676" width="80" height="10" rx="2" fill="#F5A623"/>
-          <text x="600" y="694" text-anchor="middle" fill="#F5A623" font-family="Inter" font-size="10" font-weight="800" letter-spacing="1.5">ENTRANCE / 입구</text>
-        </g>
-      </svg>
-
-      <div class="floor__legend">
-        <div class="item"><span class="sw" style="background:#fff;border:1.5px solid #D9D3EA"></span> 참가기업 부스 (KP-01 ~ KP-05)</div>
-        <div class="item"><span class="sw" style="background:#141327"></span> 상담 테이블 (4~6인용)</div>
-        <div class="item"><span class="sw" style="background:#fff;border:1.5px solid #8B889F;border-radius:50%"></span> 원형 대기 테이블 (T1~T4)</div>
-        <div class="item"><span class="sw" style="background:linear-gradient(90deg,#F5A623,#E88E00)"></span> 케이터링 · 제품 시연 존</div>
-        <div class="item"><span class="sw" style="background:linear-gradient(135deg,#6C46DB,#3E1E80)"></span> 종합 서비스 데스크</div>
-        <div class="item"><span class="sw" style="background:#EDE7FB"></span> 제품 데모 · 디스플레이</div>
-        <div class="item"><span class="sw" style="background:linear-gradient(90deg,#F5A623,#E88E00);border-radius:50%;height:6px;margin-top:4px"></span> 바이어 동선 (Buyer Flow)</div>
-      </div>
-
-      <div class="floor__note">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C46DB" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>
-        <div>
-          <b>* 배치도 구성 시안 (실사 참고 이미지 기반)</b><br/>
-          <b>참가기업 5개사</b>: KP-01 지에이치이노텍(6m×3m Feature) · KP-02 오투랩 · KP-03 케어엔코 · KP-04 아이온 · KP-05 다일 <b>· 각 부스당 상담 테이블 4~6인 + 제품 데모 스팟 구비</b><br/>
-          <b>바이어 대기 라운지</b>: 4개 원형 테이블(T1~T4, 각 4인) 총 16석 · Wi-Fi 무료 · 다과 제공<br/>
-          <b>케이터링 코너</b>: 상단 우측 · 커피/차/스낵/물 상시 제공 · <b>동선</b>: ① 입장(입구) → ② 대기 라운지 → ③ 지정 부스 상담
-        </div>
+    <div class="floor__note">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C46DB" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>
+      <div>
+        <b>* 마쿠하리 메세 공식 대관 레이아웃을 기준으로 확정한 상담회장 배치도</b><br/>
+        상단 KP-01 지에이치이노텍 · KP-02 오투랩 · KP-03 케어엔코 / 하단 KP-04 아이온 · KP-05 다일 · 중앙 상담 통로 790mm · 부스별 디스플레이 데스크 1,800mm 및 카탈로그 스탠드 구성
       </div>
     </div>
   </div>
