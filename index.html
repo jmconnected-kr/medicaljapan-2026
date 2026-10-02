@@ -1080,6 +1080,46 @@
   .floor__actual-note span{ color:var(--ink-600); font-size:12px; line-height:1.55; }
   @media(max-width:800px){ .floor__actual-note{ grid-template-columns:1fr 1fr; } }
 
+  /* ========== VEHICLE MOVE-IN / OUT GUIDE ========== */
+  .vehicle-sec{ padding-bottom:72px; background:linear-gradient(180deg,#fff 0%,var(--lilac-25) 100%); }
+  .vehicle-grid{ display:grid; grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr); gap:28px; align-items:start; }
+  .vehicle-panel{ padding:28px; background:#fff; border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow-md); }
+  .vehicle-alert{ display:flex; gap:14px; align-items:flex-start; padding:18px 20px; margin-bottom:22px; border:1px solid #F5A7A7; border-radius:14px; background:#FFF1F1; }
+  .vehicle-alert__icon{ flex:0 0 36px; width:36px; height:36px; display:grid; place-items:center; border-radius:50%; background:#C81E1E; color:#fff; font-weight:800; }
+  .vehicle-alert strong{ display:block; color:#B91C1C; font-size:16px; margin-bottom:4px; }
+  .vehicle-alert p{ margin:0; color:var(--ink-700); font-size:13px; }
+  .vehicle-title{ margin:0 0 14px; color:var(--navy-900); font-size:22px; }
+  .vehicle-title .en{ display:block; margin-top:2px; color:var(--purple-600); font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+  .vehicle-schedule{ display:grid; gap:10px; }
+  .vehicle-row{ display:grid; grid-template-columns:130px 170px 1fr; gap:16px; align-items:center; padding:15px 16px; border:1px solid var(--line); border-radius:12px; }
+  .vehicle-row time{ font-weight:800; color:var(--ink-900); }
+  .vehicle-row b{ color:var(--ink-700); font-size:13px; }
+  .vehicle-row span{ color:var(--ink-500); font-size:12.5px; line-height:1.5; }
+  .vehicle-row.is-blocked{ background:#FFF7F7; border-color:#F0C4C4; }
+  .vehicle-procedure{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px; }
+  .vehicle-step{ padding:16px; background:var(--lilac-50); border-radius:14px; }
+  .vehicle-step em{ display:inline-grid; place-items:center; width:32px; height:32px; margin-bottom:10px; border-radius:50%; background:var(--purple-600); color:#fff; font-family:var(--font-en); font-style:normal; font-weight:800; font-size:12px; }
+  .vehicle-step b{ display:block; margin-bottom:4px; color:var(--ink-900); font-size:14px; }
+  .vehicle-step span{ color:var(--ink-500); font-size:12px; line-height:1.5; }
+  .vehicle-pass{ overflow:hidden; padding:0; }
+  .vehicle-pass img{ width:100%; height:auto; display:block; background:#ececec; }
+  .vehicle-pass__body{ padding:22px; }
+  .vehicle-pass__body h3{ margin:0 0 8px; color:var(--navy-900); font-size:19px; }
+  .vehicle-pass__body p{ margin:0 0 16px; color:var(--ink-500); font-size:13px; line-height:1.6; }
+  .vehicle-actions{ display:grid; gap:9px; }
+  .vehicle-btn{ display:flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:10px 14px; border-radius:10px; background:var(--navy-900); color:#fff; font-weight:800; font-size:13px; }
+  .vehicle-btn--sub{ background:var(--lilac-50); color:var(--purple-700); border:1px solid var(--purple-400); }
+  .vehicle-use{ margin-top:16px; padding:14px 16px; border-radius:12px; background:var(--gray-50); color:var(--ink-700); font-size:12.5px; line-height:1.6; }
+  @media(max-width:900px){
+    .vehicle-grid{ grid-template-columns:1fr; }
+    .vehicle-procedure{ grid-template-columns:1fr; }
+  }
+  @media(max-width:620px){
+    .vehicle-panel{ padding:20px; }
+    .vehicle-row{ grid-template-columns:1fr; gap:5px; }
+    .vehicle-row b{ margin-top:3px; }
+  }
+
   /* Reference booth photos gallery */
   .floor__gallery{
     display: grid;
@@ -1843,6 +1883,7 @@
       <a href="#overview">행사 개요</a>
       <a href="#program">프로그램</a>
       <a href="#floor">상담회장</a>
+      <a href="#vehicle">차량 반입</a>
       <a href="#exhibitors">참가기업</a>
       <a href="buyer-guide.html" target="_blank">바이어 가이드</a>
       <a href="#register" class="cta">바이어 참가 문의 →</a>
@@ -1955,7 +1996,7 @@
                 <p>정적·동적 균형 측정 의료기기 · 밸런스 인덱스 알고리즘</p>
               </div>
             </div>
-            <!-- Slide 6: Care&Co -->
+            <!-- Slide 6: Care&Co. -->
             <div class="carousel__slide">
               <img src="assets/co-carenco.jpg" alt="Fisica app"/>
               <div class="carousel__caption">
@@ -2518,6 +2559,75 @@
   </div>
 </section>
 
+<!-- =========================== VEHICLE MOVE-IN / OUT =========================== -->
+<section id="vehicle" class="vehicle-sec">
+  <div class="section-head">
+    <div class="section-head__inner">
+      <span class="section-head__kr">차량 반입·반출 안내</span>
+      <span class="section-head__en">| Vehicle Move-in / Move-out Guide</span>
+    </div>
+    <div class="section-head__badge">Medical Japan <small>2026</small></div>
+  </div>
+
+  <div class="container vehicle-grid">
+    <div class="vehicle-panel">
+      <div class="vehicle-alert" role="alert">
+        <span class="vehicle-alert__icon" aria-hidden="true">!</span>
+        <div>
+          <strong>차량증만으로 홀 또는 트럭야드에 직접 진입할 수 없습니다.</strong>
+          <p>먼저 차량 대기소(Waiting Spot)에서 경비원에게 번호표를 받은 뒤, 현장 안내에 따라 이동해야 합니다.</p>
+        </div>
+      </div>
+
+      <h3 class="vehicle-title">반입·반출 일정 <span class="en">Move-in / Out Schedule</span></h3>
+      <div class="vehicle-schedule" aria-label="차량 반입 및 반출 일정">
+        <div class="vehicle-row">
+          <time datetime="2026-10-05">10월 5일(월)</time>
+          <b>반입·반출 08:00–20:00</b>
+          <span>전시장 내부 차량 진입 가능시간 08:00–20:00</span>
+        </div>
+        <div class="vehicle-row">
+          <time datetime="2026-10-06">10월 6일(화)</time>
+          <b>반입·반출 08:00–20:00</b>
+          <span>홀 내부 차량 진입 08:00–13:00 · 13:00 이후 홀 진입 금지, 트럭야드는 20:00까지 진입 가능</span>
+        </div>
+        <div class="vehicle-row is-blocked">
+          <time>10월 7일(수)–8일(목)</time>
+          <b>전시 개최 기간</b>
+          <span>홀과 게이트를 포함해 모든 차량 진입 금지</span>
+        </div>
+        <div class="vehicle-row">
+          <time datetime="2026-10-09">10월 9일(금)</time>
+          <b>반출 17:00–22:00</b>
+          <span>차량 진입 18:00–22:00 · 18:00 이전에는 차량 대기소에서 대기</span>
+        </div>
+      </div>
+
+      <div class="vehicle-procedure" aria-label="차량 진입 절차">
+        <div class="vehicle-step"><em>01</em><b>차량 대기소 이동</b><span>현장 화살표 방향을 따라 Waiting Spot으로 이동합니다.</span></div>
+        <div class="vehicle-step"><em>02</em><b>차량 번호표 수령</b><span>경비원이 배부하는 번호표를 반드시 수령합니다.</span></div>
+        <div class="vehicle-step"><em>03</em><b>남문 2번 게이트 진입</b><span>경비 안내에 따라 South Gate 2를 통해 트럭야드로 이동합니다.</span></div>
+      </div>
+
+      <div class="vehicle-use">
+        <strong>차량증 사용:</strong> HALL 1·2·3용 차량증이며, 출전사·작업사명과 휴대전화번호를 기재한 뒤 차량 전면 유리 안쪽에 게시합니다. 번호표가 없는 차량은 남문 2번 게이트로 진입할 수 없습니다.
+      </div>
+    </div>
+
+    <aside class="vehicle-panel vehicle-pass">
+      <img src="assets/MEDICALT26_VEHICLE_PASS_page-0001.jpg" alt="Medical Japan 2026 반입·반출 차량증 원본 미리보기" loading="lazy"/>
+      <div class="vehicle-pass__body">
+        <h3>공식 반입·반출 차량증</h3>
+        <p>원본 PDF를 출력한 뒤 모든 필수 항목을 기재하여 사용하세요. 차량 앞유리에서 외부로 잘 보이도록 게시해야 합니다.</p>
+        <div class="vehicle-actions">
+          <a class="vehicle-btn" href="assets/MEDICALT26_VEHICLE_PASS.pdf" target="_blank" download>차량증 PDF 다운로드</a>
+          <a class="vehicle-btn vehicle-btn--sub" href="https://www.figma.com/design/spUgADyE0kliAn9x8bF9P8" target="_blank" rel="noopener">Figma 편집본 열기</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
 <!-- =========================== EXHIBITOR / BUYER =========================== -->
 <section id="exhibitors" class="list-sec">
   <div class="section-head">
@@ -2550,7 +2660,7 @@
         <div class="brochure-banner__eyebrow">Company Brochure · 31-page Web Edition</div>
         <h3 class="brochure-banner__title">5개 참가기업 종합 브로셔 · 한국어 / 日本語 / English</h3>
         <p class="brochure-banner__desc">
-          Medical Japan Tokyo 2026 Korea Pavilion 참가기업 <strong>GH INNOTECH · O2LAB · CARE &amp; CO. · I'ON · DAIL</strong>의 제품·인증·수출 상담 정보를 31페이지로 정리했습니다. 세 언어 모두 브라우저에서 바로 열람하거나 PDF로 인쇄할 수 있습니다.
+          Medical Japan Tokyo 2026 Korea Pavilion 참가기업 <strong>GH INNOTECH · O2LAB · Care&amp;Co. · I'ON · DAIL</strong>의 제품·인증·수출 상담 정보를 31페이지로 정리했습니다. 세 언어 모두 브라우저에서 바로 열람하거나 PDF로 인쇄할 수 있습니다.
         </p>
       </div>
 
@@ -2667,7 +2777,7 @@
             <div class="ex-card__head">
               <div>
                 <p class="ex-card__name">(주)케어엔코</p>
-                <p class="ex-card__en">Care&amp;Co Corp.</p>
+                <p class="ex-card__en">Care&amp;Co.</p>
               </div>
               <span class="ex-card__no">Booth KP-03</span>
             </div>
@@ -2681,7 +2791,7 @@
               <div><span class="k">Category</span><span class="v">디지털 헬스 · AI 진단</span></div>
               <div><span class="k">Sensors</span><span class="v">634개 고성능 센서</span></div>
               <div><span class="k">Accuracy</span><span class="v">체형 분석 96% 정확도</span></div>
-              <div><span class="k">Price</span><span class="v">가정용 38.5만원</span></div>
+              <div><span class="k">CEO</span><span class="v">조병우 · Cho Byungwoo</span></div>
             </div>
             <p class="ex-card__desc">
               10초 이내에 체중 측정하듯 족저압(Plantar Pressure)과 자세(Posture) 데이터를 멀티모달로 분석하는 AI 헬스케어 솔루션. 방사선 노출 없이 3D 디지털 트윈 기술로 골반·척추 비대칭 등 체형 이슈를 시각화하며, 스마트폰 앱으로 초개인화된 관리 방법을 제안합니다.
